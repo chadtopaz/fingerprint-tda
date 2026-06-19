@@ -1,0 +1,34 @@
+cff-version: 1.2.0
+message: "If you use this code, please cite both the paper (preferred-citation) and this repository."
+title: "Fingerprint verification via topological data analysis: replication code"
+type: software
+authors:
+  - family-names: Topaz
+    given-names: Chad M.
+  - family-names: Arcila-Maya
+    given-names: Niny
+  - family-names: Munch
+    given-names: Elizabeth
+  - family-names: Stanley
+    given-names: Zofia
+  - family-names: Ziegelmeier
+    given-names: Lori
+license: MIT
+# repository-code: "https://github.com/<owner>/<repo>"   # fill in after creating the repo
+# doi: "10.5281/zenodo.XXXXXXX"                            # fill in after the Zenodo deposit
+preferred-citation:
+  type: article
+  title: "Topological summaries of fingerprint ridge patterns carry identity information"
+  authors:
+    - family-names: Topaz
+      given-names: Chad M.
+    - family-names: Arcila-Maya
+      given-names: Niny
+    - family-names: Munch
+      given-names: Elizabeth
+    - family-names: Stanley
+      given-names: Zofia
+    - family-names: Ziegelmeier
+      given-names: Lori
+  year: 2026
+  notes: "Manuscript in submission."
