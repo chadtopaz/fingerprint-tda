@@ -29,7 +29,12 @@
 # in the same R session runs the full pipeline as expected.
 .old_fp_suppress <- getOption("fp.suppress_main")
 options(fp.suppress_main = TRUE)
-source("Code/fingerprintTDA.R")  # for helpers; main run is suppressed
+fp_src <- if (file.exists(file.path("Code", "fingerprintTDA.R"))) {
+  file.path("Code", "fingerprintTDA.R")
+} else {
+  file.path("code", "fingerprintTDA.R")
+}
+source(fp_src)  # for helpers; main run is suppressed
 options(fp.suppress_main = .old_fp_suppress)
 rm(.old_fp_suppress)
 
