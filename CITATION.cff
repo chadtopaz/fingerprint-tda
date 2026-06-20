@@ -14,7 +14,7 @@ authors:
   - family-names: Ziegelmeier
     given-names: Lori
 license: MIT
-# repository-code: "https://github.com/<owner>/<repo>"   # fill in after creating the repo
+repository-code: "https://github.com/chadtopaz/fingerprint-tda"
 # doi: "10.5281/zenodo.XXXXXXX"                            # fill in after the Zenodo deposit
 preferred-citation:
   type: article
