@@ -99,7 +99,7 @@ All random seeds and iteration counts are fixed (`CONFIG$cv_seed`, the TopoLR SG
 
 ## Citation
 
-If you use this code, please cite the paper and this repository; see `CITATION.cff`. An archived release DOI will be added here once the repository is deposited on Zenodo.
+If you use this code, please cite the paper and this repository; see `CITATION.cff`. This release (v1.0.0) is archived on Zenodo: https://doi.org/10.5281/zenodo.20772749 (DOI: 10.5281/zenodo.20772749).
 
 ## License
 
