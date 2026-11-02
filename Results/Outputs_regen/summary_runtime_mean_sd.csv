@@ -1,0 +1,17 @@
+method,seconds_mean,seconds_sd,measures,shared_precompute_minutes
+DT_L2,5.64516282081604,0.7407179133400973,per-fold scoring (incl. training where applicable),NA
+DT_L2_150,34.22935700416565,0.5387229328486659,per-fold scoring (incl. training where applicable),NA
+DT_L2_150_aligned,0.003484964370727539,0.0012617710166707185,score lookup only (shared alignment search: see aligned_runtime.csv),141.53399153153103
+Fusion,0.21816043853759765,0.02002248204268032,per-fold scoring (incl. training where applicable),NA
+Fusion_eq,0.022150373458862303,0.002692297974082557,per-fold scoring (incl. training where applicable),NA
+GlobalBetti_L1,0.1122352123260498,0.00940012878095343,per-fold scoring (incl. training where applicable),NA
+GlobalPI_L2,1.6209023475646973,0.23433015436203336,per-fold scoring (incl. training where applicable),NA
+OT,138.86267800331115,4.368818309880538,per-fold scoring (incl. training where applicable),NA
+OT_noDustbin,137.5014847278595,3.1853579575794155,per-fold scoring (incl. training where applicable),NA
+OT_noGeo,138.02700600624084,5.085787523165805,per-fold scoring (incl. training where applicable),NA
+OT_ridgeOnly,118.16147303581238,2.901965946489474,per-fold scoring (incl. training where applicable),NA
+OT_valleyOnly,118.28400554656983,2.4609163955341704,per-fold scoring (incl. training where applicable),NA
+V23_full,81.71519041061401,0.9613574747105565,per-fold scoring (incl. training where applicable),NA
+V23_globalOnly,17.821088600158692,0.6949870099558981,per-fold scoring (incl. training where applicable),NA
+V23_localOnly,58.45158767700195,2.2190364376210967,per-fold scoring (incl. training where applicable),NA
+V23_noTopK,58.652617835998534,2.793452866189602,per-fold scoring (incl. training where applicable),NA

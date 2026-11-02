@@ -1,0 +1,6 @@
+# Python GUDHI for the cubical construction (Code_cubical/*, reached from R through reticulate).
+# The triangulated construction of the paper needs none of this: it uses the GUDHI bundled in the R package TDA.
+#     .venv-preprocess/bin/pip install -r Code/requirements-cubical.txt
+# then point R at that interpreter:  options(fp.python = ".venv-preprocess/bin/python")  or  export FP_PYTHON=...
+gudhi>=3.9
+numpy

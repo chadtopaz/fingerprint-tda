@@ -1,0 +1,15 @@
+# Exact environment for Code/preprocess.py (revision step 0.3) — the reference environment in
+# which Pattern Recognition/Revision/STEP_0.3_sandbox_reference_manifest.json was produced
+# (Python 3.10.12, Linux aarch64). Install into a fresh virtual environment:
+#     python3 -m venv .venv-preprocess && .venv-preprocess/bin/pip install -r Code/requirements-preprocess.txt
+fingerprint-enhancer==0.0.14
+numpy==2.2.6
+scipy==1.15.3
+opencv-python-headless==5.0.0.93
+#
+# The enhancement gave bit-identical outputs in two further tested environments
+# (Python 3.10.12 / numpy 1.23.5 / scipy 1.9.3 / opencv 4.6.0.66 and
+#  Python 3.14.7 / numpy 2.5.4 / scipy 1.18.1 / opencv 5.0.0.93); numpy 2.2.6 needs Python <= 3.13.
+# sha256 of the enhancement source actually executed (fingerprint_enhancer/fingerprint_image_enhancer.py, 0.0.14):
+#   44e7ac050dbfa90ba7766904a85a8971b2ba029579a2d4bd16fe4ce11ff90e7d
+# Every run records its own versions and this hash in <output>/preprocess_manifest.json.

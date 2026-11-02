@@ -1,0 +1,2 @@
+# Python for the block diagram of Figure 1 (Code/make_block_diagram.py).
+matplotlib>=3.7

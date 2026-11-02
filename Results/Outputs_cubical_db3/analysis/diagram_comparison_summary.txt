@@ -1,0 +1,18 @@
+Global H1 diagrams, 800 images, filtration range 0..20 px (distance transform, 150x150 grid).
+Bottleneck distance delta between the triangulated and cubical H1 diagram of the SAME image and channel.
+A point matched to the diagonal in an optimal bottleneck matching has persistence <= 2*delta, so n_le_2delta_* and
+pers_share_le_2delta_* are UPPER BOUNDS on the diagonal-matched contributions of each diagram; they do not measure
+construction-specific contributions (matched points, long-lived ones included, may move by up to delta).
+pers_share_le_2delta_*_median = median over images of the per-image share of total persistence in features with persistence <= 2*delta.
+ channel   n mean_h1_tri mean_h1_cub ratio_cub_tri identical_counts bottleneck_median
+   ridge 800    808.1738    1124.686        1.3897                0               0.6
+  valley 800    845.9562    1138.142        1.3425                0               0.6
+ bottleneck_q90 bottleneck_max two_delta_max max_pers_tri_median excess_cub_mean
+              1            1.4           2.8                 3.6        316.5125
+              1            1.0           2.0                 3.2        292.1862
+ n_le_2delta_cub_mean n_le_2delta_tri_mean pers_share_le_2delta_cub_median
+             1023.210             731.7325                          0.8062
+             1040.432             765.6000                          0.8134
+ pers_share_le_2delta_tri_median
+                          0.7821
+                          0.7893

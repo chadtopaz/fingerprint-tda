@@ -1,0 +1,8 @@
+# Exact environment for Code/preprocess.py on Python 3.14 (revision step 0.3).
+# Tested 11-12 Oct 2026: bit-identical output to the Python 3.10 reference environment
+# (requirements-preprocess.txt) on all FVC2000 DB1 test images.
+#     python3 -m venv .venv-preprocess && .venv-preprocess/bin/pip install -r Code/requirements-preprocess-py314.txt
+fingerprint-enhancer==0.0.14
+numpy==2.5.4
+scipy==1.18.1
+opencv-python-headless==5.0.0.93

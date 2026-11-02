@@ -1,0 +1,2 @@
+method,aligned_key,cache_file,computed_this_run,shared_search_minutes,n_workers_if_computed_this_run,n_images,n_pairs,canvas,theta_max,theta_step,refine_half,t_max,min_overlap_frac,scorer_version,created,note
+DT_L2_150_aligned,d2e50de50c2d3e4f1ea53c508c12801fd7490996c02e1576a93171fc14fbd678,aligned_d2e50de50c2d.rds,FALSE,141.53399153153103,NA,800,319600,256,50,3,2,40,0.6,1.0,2026-10-12T20:27:08Z,fold_runtimes_seconds.csv rows for this method are score LOOKUP time only

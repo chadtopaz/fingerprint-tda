@@ -1,0 +1,483 @@
+label,status,note
+"ties          m=(2,1,0) AUC",TOLERANCE,max|diff| = 1.11e-16
+"ties          m=(2,1,0) EER",EXACT,
+"ties          m=(2,1,0) TAR",EXACT,
+"ties          m=(2,1,0) realised FAR",EXACT,
+"ties          m=(1,0,3) AUC",EXACT,
+"ties          m=(1,0,3) EER",EXACT,
+"ties          m=(1,0,3) TAR",EXACT,
+"ties          m=(1,0,3) realised FAR",EXACT,
+"ties          m=(1,1,1) AUC",EXACT,
+"ties          m=(1,1,1) EER",EXACT,
+"ties          m=(1,1,1) TAR",EXACT,
+"ties          m=(1,1,1) realised FAR",EXACT,
+"ties          m=(3,2,1) AUC",TOLERANCE,max|diff| = 1.11e-16
+"ties          m=(3,2,1) EER",EXACT,
+"ties          m=(3,2,1) TAR",EXACT,
+"ties          m=(3,2,1) realised FAR",EXACT,
+"QA-regression m=(2,1,0) AUC",EXACT,
+"QA-regression m=(2,1,0) EER",EXACT,
+"QA-regression m=(2,1,0) TAR",EXACT,
+"QA-regression m=(2,1,0) realised FAR",EXACT,
+"QA-regression m=(1,0,3) AUC",EXACT,
+"QA-regression m=(1,0,3) EER",EXACT,
+"QA-regression m=(1,0,3) TAR",EXACT,
+"QA-regression m=(1,0,3) realised FAR",EXACT,
+"QA-regression m=(1,1,1) AUC",EXACT,
+"QA-regression m=(1,1,1) EER",EXACT,
+"QA-regression m=(1,1,1) TAR",EXACT,
+"QA-regression m=(1,1,1) realised FAR",EXACT,
+"QA-regression m=(3,2,1) AUC",TOLERANCE,max|diff| = 5.55e-17
+"QA-regression m=(3,2,1) EER",EXACT,
+"QA-regression m=(3,2,1) TAR",EXACT,
+"QA-regression m=(3,2,1) realised FAR",EXACT,
+fold 1 DT_L2             y_test == genuine mask from manifest,EXACT,
+fold 1 DT_L2             stored thresholds,EXACT,
+fold 1 DT_L2_150         y_test == genuine mask from manifest,EXACT,
+fold 1 DT_L2_150         stored thresholds,EXACT,
+fold 1 DT_L2_150_clamped y_test == genuine mask from manifest,EXACT,
+fold 1 DT_L2_150_clamped stored thresholds,EXACT,
+fold 1 DT_L2_150_aligned y_test == genuine mask from manifest,EXACT,
+fold 1 DT_L2_150_aligned stored thresholds,EXACT,
+fold 1 GlobalBetti_L1    y_test == genuine mask from manifest,EXACT,
+fold 1 GlobalBetti_L1    stored thresholds,EXACT,
+fold 1 GlobalPI_L2       y_test == genuine mask from manifest,EXACT,
+fold 1 GlobalPI_L2       stored thresholds,EXACT,
+fold 1 V23_full          y_test == genuine mask from manifest,EXACT,
+fold 1 V23_full          stored thresholds,EXACT,
+fold 1 V23_noTopK        y_test == genuine mask from manifest,EXACT,
+fold 1 V23_noTopK        stored thresholds,EXACT,
+fold 1 V23_globalOnly    y_test == genuine mask from manifest,EXACT,
+fold 1 V23_globalOnly    stored thresholds,EXACT,
+fold 1 V23_localOnly     y_test == genuine mask from manifest,EXACT,
+fold 1 V23_localOnly     stored thresholds,EXACT,
+fold 1 OT                y_test == genuine mask from manifest,EXACT,
+fold 1 OT                stored thresholds,EXACT,
+fold 1 OT_noGeo          y_test == genuine mask from manifest,EXACT,
+fold 1 OT_noGeo          stored thresholds,EXACT,
+fold 1 OT_noDustbin      y_test == genuine mask from manifest,EXACT,
+fold 1 OT_noDustbin      stored thresholds,EXACT,
+fold 1 OT_ridgeOnly      y_test == genuine mask from manifest,EXACT,
+fold 1 OT_ridgeOnly      stored thresholds,EXACT,
+fold 1 OT_valleyOnly     y_test == genuine mask from manifest,EXACT,
+fold 1 OT_valleyOnly     stored thresholds,EXACT,
+fold 1 Fusion            y_test == genuine mask from manifest,EXACT,
+fold 1 Fusion            stored thresholds,EXACT,
+fold 1 Fusion_eq         y_test == genuine mask from manifest,EXACT,
+fold 1 Fusion_eq         stored thresholds,EXACT,
+fold 1 Fusion_eq s_train == 0.5-fusion of components,EXACT,
+fold 1 Fusion_eq s_test  == 0.5-fusion of components,EXACT,
+fold 1 Fusion_eq zfit_ot == Fusion zfit_ot,EXACT,
+fold 1 Fusion_eq zfit_v  == Fusion zfit_v,EXACT,
+fold 1 Fusion_eq vs frozen reference,SKIPPED,no snapshot_before_new_methods/analysis/fusion_eq_scores.rds
+fold 2 DT_L2             y_test == genuine mask from manifest,EXACT,
+fold 2 DT_L2             stored thresholds,EXACT,
+fold 2 DT_L2_150         y_test == genuine mask from manifest,EXACT,
+fold 2 DT_L2_150         stored thresholds,EXACT,
+fold 2 DT_L2_150_clamped y_test == genuine mask from manifest,EXACT,
+fold 2 DT_L2_150_clamped stored thresholds,EXACT,
+fold 2 DT_L2_150_aligned y_test == genuine mask from manifest,EXACT,
+fold 2 DT_L2_150_aligned stored thresholds,EXACT,
+fold 2 GlobalBetti_L1    y_test == genuine mask from manifest,EXACT,
+fold 2 GlobalBetti_L1    stored thresholds,EXACT,
+fold 2 GlobalPI_L2       y_test == genuine mask from manifest,EXACT,
+fold 2 GlobalPI_L2       stored thresholds,EXACT,
+fold 2 V23_full          y_test == genuine mask from manifest,EXACT,
+fold 2 V23_full          stored thresholds,EXACT,
+fold 2 V23_noTopK        y_test == genuine mask from manifest,EXACT,
+fold 2 V23_noTopK        stored thresholds,EXACT,
+fold 2 V23_globalOnly    y_test == genuine mask from manifest,EXACT,
+fold 2 V23_globalOnly    stored thresholds,EXACT,
+fold 2 V23_localOnly     y_test == genuine mask from manifest,EXACT,
+fold 2 V23_localOnly     stored thresholds,EXACT,
+fold 2 OT                y_test == genuine mask from manifest,EXACT,
+fold 2 OT                stored thresholds,EXACT,
+fold 2 OT_noGeo          y_test == genuine mask from manifest,EXACT,
+fold 2 OT_noGeo          stored thresholds,EXACT,
+fold 2 OT_noDustbin      y_test == genuine mask from manifest,EXACT,
+fold 2 OT_noDustbin      stored thresholds,EXACT,
+fold 2 OT_ridgeOnly      y_test == genuine mask from manifest,EXACT,
+fold 2 OT_ridgeOnly      stored thresholds,EXACT,
+fold 2 OT_valleyOnly     y_test == genuine mask from manifest,EXACT,
+fold 2 OT_valleyOnly     stored thresholds,EXACT,
+fold 2 Fusion            y_test == genuine mask from manifest,EXACT,
+fold 2 Fusion            stored thresholds,EXACT,
+fold 2 Fusion_eq         y_test == genuine mask from manifest,EXACT,
+fold 2 Fusion_eq         stored thresholds,EXACT,
+fold 2 Fusion_eq s_train == 0.5-fusion of components,EXACT,
+fold 2 Fusion_eq s_test  == 0.5-fusion of components,EXACT,
+fold 2 Fusion_eq zfit_ot == Fusion zfit_ot,EXACT,
+fold 2 Fusion_eq zfit_v  == Fusion zfit_v,EXACT,
+fold 2 Fusion_eq vs frozen reference,SKIPPED,no snapshot_before_new_methods/analysis/fusion_eq_scores.rds
+fold 3 DT_L2             y_test == genuine mask from manifest,EXACT,
+fold 3 DT_L2             stored thresholds,EXACT,
+fold 3 DT_L2_150         y_test == genuine mask from manifest,EXACT,
+fold 3 DT_L2_150         stored thresholds,EXACT,
+fold 3 DT_L2_150_clamped y_test == genuine mask from manifest,EXACT,
+fold 3 DT_L2_150_clamped stored thresholds,EXACT,
+fold 3 DT_L2_150_aligned y_test == genuine mask from manifest,EXACT,
+fold 3 DT_L2_150_aligned stored thresholds,EXACT,
+fold 3 GlobalBetti_L1    y_test == genuine mask from manifest,EXACT,
+fold 3 GlobalBetti_L1    stored thresholds,EXACT,
+fold 3 GlobalPI_L2       y_test == genuine mask from manifest,EXACT,
+fold 3 GlobalPI_L2       stored thresholds,EXACT,
+fold 3 V23_full          y_test == genuine mask from manifest,EXACT,
+fold 3 V23_full          stored thresholds,EXACT,
+fold 3 V23_noTopK        y_test == genuine mask from manifest,EXACT,
+fold 3 V23_noTopK        stored thresholds,EXACT,
+fold 3 V23_globalOnly    y_test == genuine mask from manifest,EXACT,
+fold 3 V23_globalOnly    stored thresholds,EXACT,
+fold 3 V23_localOnly     y_test == genuine mask from manifest,EXACT,
+fold 3 V23_localOnly     stored thresholds,EXACT,
+fold 3 OT                y_test == genuine mask from manifest,EXACT,
+fold 3 OT                stored thresholds,EXACT,
+fold 3 OT_noGeo          y_test == genuine mask from manifest,EXACT,
+fold 3 OT_noGeo          stored thresholds,EXACT,
+fold 3 OT_noDustbin      y_test == genuine mask from manifest,EXACT,
+fold 3 OT_noDustbin      stored thresholds,EXACT,
+fold 3 OT_ridgeOnly      y_test == genuine mask from manifest,EXACT,
+fold 3 OT_ridgeOnly      stored thresholds,EXACT,
+fold 3 OT_valleyOnly     y_test == genuine mask from manifest,EXACT,
+fold 3 OT_valleyOnly     stored thresholds,EXACT,
+fold 3 Fusion            y_test == genuine mask from manifest,EXACT,
+fold 3 Fusion            stored thresholds,EXACT,
+fold 3 Fusion_eq         y_test == genuine mask from manifest,EXACT,
+fold 3 Fusion_eq         stored thresholds,EXACT,
+fold 3 Fusion_eq s_train == 0.5-fusion of components,EXACT,
+fold 3 Fusion_eq s_test  == 0.5-fusion of components,EXACT,
+fold 3 Fusion_eq zfit_ot == Fusion zfit_ot,EXACT,
+fold 3 Fusion_eq zfit_v  == Fusion zfit_v,EXACT,
+fold 3 Fusion_eq vs frozen reference,SKIPPED,no snapshot_before_new_methods/analysis/fusion_eq_scores.rds
+fold 4 DT_L2             y_test == genuine mask from manifest,EXACT,
+fold 4 DT_L2             stored thresholds,EXACT,
+fold 4 DT_L2_150         y_test == genuine mask from manifest,EXACT,
+fold 4 DT_L2_150         stored thresholds,EXACT,
+fold 4 DT_L2_150_clamped y_test == genuine mask from manifest,EXACT,
+fold 4 DT_L2_150_clamped stored thresholds,EXACT,
+fold 4 DT_L2_150_aligned y_test == genuine mask from manifest,EXACT,
+fold 4 DT_L2_150_aligned stored thresholds,EXACT,
+fold 4 GlobalBetti_L1    y_test == genuine mask from manifest,EXACT,
+fold 4 GlobalBetti_L1    stored thresholds,EXACT,
+fold 4 GlobalPI_L2       y_test == genuine mask from manifest,EXACT,
+fold 4 GlobalPI_L2       stored thresholds,EXACT,
+fold 4 V23_full          y_test == genuine mask from manifest,EXACT,
+fold 4 V23_full          stored thresholds,EXACT,
+fold 4 V23_noTopK        y_test == genuine mask from manifest,EXACT,
+fold 4 V23_noTopK        stored thresholds,EXACT,
+fold 4 V23_globalOnly    y_test == genuine mask from manifest,EXACT,
+fold 4 V23_globalOnly    stored thresholds,EXACT,
+fold 4 V23_localOnly     y_test == genuine mask from manifest,EXACT,
+fold 4 V23_localOnly     stored thresholds,EXACT,
+fold 4 OT                y_test == genuine mask from manifest,EXACT,
+fold 4 OT                stored thresholds,EXACT,
+fold 4 OT_noGeo          y_test == genuine mask from manifest,EXACT,
+fold 4 OT_noGeo          stored thresholds,EXACT,
+fold 4 OT_noDustbin      y_test == genuine mask from manifest,EXACT,
+fold 4 OT_noDustbin      stored thresholds,EXACT,
+fold 4 OT_ridgeOnly      y_test == genuine mask from manifest,EXACT,
+fold 4 OT_ridgeOnly      stored thresholds,EXACT,
+fold 4 OT_valleyOnly     y_test == genuine mask from manifest,EXACT,
+fold 4 OT_valleyOnly     stored thresholds,EXACT,
+fold 4 Fusion            y_test == genuine mask from manifest,EXACT,
+fold 4 Fusion            stored thresholds,EXACT,
+fold 4 Fusion_eq         y_test == genuine mask from manifest,EXACT,
+fold 4 Fusion_eq         stored thresholds,EXACT,
+fold 4 Fusion_eq s_train == 0.5-fusion of components,EXACT,
+fold 4 Fusion_eq s_test  == 0.5-fusion of components,EXACT,
+fold 4 Fusion_eq zfit_ot == Fusion zfit_ot,EXACT,
+fold 4 Fusion_eq zfit_v  == Fusion zfit_v,EXACT,
+fold 4 Fusion_eq vs frozen reference,SKIPPED,no snapshot_before_new_methods/analysis/fusion_eq_scores.rds
+fold 5 DT_L2             y_test == genuine mask from manifest,EXACT,
+fold 5 DT_L2             stored thresholds,EXACT,
+fold 5 DT_L2_150         y_test == genuine mask from manifest,EXACT,
+fold 5 DT_L2_150         stored thresholds,EXACT,
+fold 5 DT_L2_150_clamped y_test == genuine mask from manifest,EXACT,
+fold 5 DT_L2_150_clamped stored thresholds,EXACT,
+fold 5 DT_L2_150_aligned y_test == genuine mask from manifest,EXACT,
+fold 5 DT_L2_150_aligned stored thresholds,EXACT,
+fold 5 GlobalBetti_L1    y_test == genuine mask from manifest,EXACT,
+fold 5 GlobalBetti_L1    stored thresholds,EXACT,
+fold 5 GlobalPI_L2       y_test == genuine mask from manifest,EXACT,
+fold 5 GlobalPI_L2       stored thresholds,EXACT,
+fold 5 V23_full          y_test == genuine mask from manifest,EXACT,
+fold 5 V23_full          stored thresholds,EXACT,
+fold 5 V23_noTopK        y_test == genuine mask from manifest,EXACT,
+fold 5 V23_noTopK        stored thresholds,EXACT,
+fold 5 V23_globalOnly    y_test == genuine mask from manifest,EXACT,
+fold 5 V23_globalOnly    stored thresholds,EXACT,
+fold 5 V23_localOnly     y_test == genuine mask from manifest,EXACT,
+fold 5 V23_localOnly     stored thresholds,EXACT,
+fold 5 OT                y_test == genuine mask from manifest,EXACT,
+fold 5 OT                stored thresholds,EXACT,
+fold 5 OT_noGeo          y_test == genuine mask from manifest,EXACT,
+fold 5 OT_noGeo          stored thresholds,EXACT,
+fold 5 OT_noDustbin      y_test == genuine mask from manifest,EXACT,
+fold 5 OT_noDustbin      stored thresholds,EXACT,
+fold 5 OT_ridgeOnly      y_test == genuine mask from manifest,EXACT,
+fold 5 OT_ridgeOnly      stored thresholds,EXACT,
+fold 5 OT_valleyOnly     y_test == genuine mask from manifest,EXACT,
+fold 5 OT_valleyOnly     stored thresholds,EXACT,
+fold 5 Fusion            y_test == genuine mask from manifest,EXACT,
+fold 5 Fusion            stored thresholds,EXACT,
+fold 5 Fusion_eq         y_test == genuine mask from manifest,EXACT,
+fold 5 Fusion_eq         stored thresholds,EXACT,
+fold 5 Fusion_eq s_train == 0.5-fusion of components,EXACT,
+fold 5 Fusion_eq s_test  == 0.5-fusion of components,EXACT,
+fold 5 Fusion_eq zfit_ot == Fusion zfit_ot,EXACT,
+fold 5 Fusion_eq zfit_v  == Fusion zfit_v,EXACT,
+fold 5 Fusion_eq vs frozen reference,SKIPPED,no snapshot_before_new_methods/analysis/fusion_eq_scores.rds
+fold 1 DT_L2           AUC vs archived,TOLERANCE,max|diff| = 5.33e-15
+fold 1 DT_L2           EER vs archived,EXACT,
+fold 1 DT_L2           TAR vs archived,TOLERANCE,max|diff| = 6.94e-18
+fold 1 DT_L2_150       AUC vs archived,TOLERANCE,max|diff| = 5e-15
+fold 1 DT_L2_150       EER vs archived,EXACT,
+fold 1 DT_L2_150       TAR vs archived,TOLERANCE,max|diff| = 6.94e-18
+fold 1 DT_L2_150_clamped AUC vs archived,TOLERANCE,max|diff| = 1.3e-14
+fold 1 DT_L2_150_clamped EER vs archived,EXACT,
+fold 1 DT_L2_150_clamped TAR vs archived,TOLERANCE,max|diff| = 6.94e-18
+fold 1 DT_L2_150_aligned AUC vs archived,TOLERANCE,max|diff| = 3.33e-16
+fold 1 DT_L2_150_aligned EER vs archived,EXACT,
+fold 1 DT_L2_150_aligned TAR vs archived,TOLERANCE,max|diff| = 5.2e-18
+fold 1 GlobalBetti_L1  AUC vs archived,TOLERANCE,max|diff| = 1.04e-14
+fold 1 GlobalBetti_L1  EER vs archived,EXACT,
+fold 1 GlobalBetti_L1  TAR vs archived,TOLERANCE,max|diff| = 1.39e-17
+fold 1 GlobalPI_L2     AUC vs archived,TOLERANCE,max|diff| = 1.07e-14
+fold 1 GlobalPI_L2     EER vs archived,EXACT,
+fold 1 GlobalPI_L2     TAR vs archived,TOLERANCE,max|diff| = 8.67e-18
+fold 1 V23_full        AUC vs archived,TOLERANCE,max|diff| = 8.22e-15
+fold 1 V23_full        EER vs archived,TOLERANCE,max|diff| = 2.78e-17
+fold 1 V23_full        TAR vs archived,TOLERANCE,max|diff| = 1.39e-17
+fold 1 V23_noTopK      AUC vs archived,TOLERANCE,max|diff| = 1.97e-14
+fold 1 V23_noTopK      EER vs archived,EXACT,
+fold 1 V23_noTopK      TAR vs archived,TOLERANCE,max|diff| = 6.94e-18
+fold 1 V23_globalOnly  AUC vs archived,TOLERANCE,max|diff| = 1.92e-14
+fold 1 V23_globalOnly  EER vs archived,EXACT,
+fold 1 V23_globalOnly  TAR vs archived,TOLERANCE,max|diff| = 1.39e-17
+fold 1 V23_localOnly   AUC vs archived,TOLERANCE,max|diff| = 2.22e-16
+fold 1 V23_localOnly   EER vs archived,TOLERANCE,max|diff| = 2.78e-17
+fold 1 V23_localOnly   TAR vs archived,EXACT,
+fold 1 OT              AUC vs archived,TOLERANCE,max|diff| = 1.09e-14
+fold 1 OT              EER vs archived,EXACT,
+fold 1 OT              TAR vs archived,TOLERANCE,max|diff| = 8.67e-18
+fold 1 OT_noGeo        AUC vs archived,TOLERANCE,max|diff| = 1.27e-14
+fold 1 OT_noGeo        EER vs archived,EXACT,
+fold 1 OT_noGeo        TAR vs archived,TOLERANCE,max|diff| = 6.94e-18
+fold 1 OT_noDustbin    AUC vs archived,TOLERANCE,max|diff| = 1.1e-14
+fold 1 OT_noDustbin    EER vs archived,EXACT,
+fold 1 OT_noDustbin    TAR vs archived,TOLERANCE,max|diff| = 3.47e-18
+fold 1 OT_ridgeOnly    AUC vs archived,TOLERANCE,max|diff| = 2.76e-14
+fold 1 OT_ridgeOnly    EER vs archived,EXACT,
+fold 1 OT_ridgeOnly    TAR vs archived,TOLERANCE,max|diff| = 5.64e-18
+fold 1 OT_valleyOnly   AUC vs archived,TOLERANCE,max|diff| = 4.88e-15
+fold 1 OT_valleyOnly   EER vs archived,EXACT,
+fold 1 OT_valleyOnly   TAR vs archived,EXACT,
+fold 1 Fusion          AUC vs archived,TOLERANCE,max|diff| = 2.46e-14
+fold 1 Fusion          EER vs archived,EXACT,
+fold 1 Fusion          TAR vs archived,TOLERANCE,max|diff| = 6.94e-18
+fold 1 Fusion_eq       AUC vs archived,TOLERANCE,max|diff| = 1.58e-14
+fold 1 Fusion_eq       EER vs archived,EXACT,
+fold 1 Fusion_eq       TAR vs archived,TOLERANCE,max|diff| = 1.39e-17
+fold 2 DT_L2           AUC vs archived,TOLERANCE,max|diff| = 1.02e-14
+fold 2 DT_L2           EER vs archived,EXACT,
+fold 2 DT_L2           TAR vs archived,TOLERANCE,max|diff| = 3.47e-18
+fold 2 DT_L2_150       AUC vs archived,TOLERANCE,max|diff| = 7.77e-15
+fold 2 DT_L2_150       EER vs archived,EXACT,
+fold 2 DT_L2_150       TAR vs archived,TOLERANCE,max|diff| = 6.94e-18
+fold 2 DT_L2_150_clamped AUC vs archived,TOLERANCE,max|diff| = 3.89e-15
+fold 2 DT_L2_150_clamped EER vs archived,EXACT,
+fold 2 DT_L2_150_clamped TAR vs archived,TOLERANCE,max|diff| = 3.47e-18
+fold 2 DT_L2_150_aligned AUC vs archived,TOLERANCE,max|diff| = 2.44e-15
+fold 2 DT_L2_150_aligned EER vs archived,EXACT,
+fold 2 DT_L2_150_aligned TAR vs archived,TOLERANCE,max|diff| = 6.94e-18
+fold 2 GlobalBetti_L1  AUC vs archived,TOLERANCE,max|diff| = 9.88e-15
+fold 2 GlobalBetti_L1  EER vs archived,EXACT,
+fold 2 GlobalBetti_L1  TAR vs archived,TOLERANCE,max|diff| = 6.94e-18
+fold 2 GlobalPI_L2     AUC vs archived,TOLERANCE,max|diff| = 5.22e-15
+fold 2 GlobalPI_L2     EER vs archived,EXACT,
+fold 2 GlobalPI_L2     TAR vs archived,TOLERANCE,max|diff| = 6.94e-18
+fold 2 V23_full        AUC vs archived,TOLERANCE,max|diff| = 1.09e-14
+fold 2 V23_full        EER vs archived,TOLERANCE,max|diff| = 2.78e-17
+fold 2 V23_full        TAR vs archived,TOLERANCE,max|diff| = 2.78e-17
+fold 2 V23_noTopK      AUC vs archived,TOLERANCE,max|diff| = 1.22e-15
+fold 2 V23_noTopK      EER vs archived,EXACT,
+fold 2 V23_noTopK      TAR vs archived,TOLERANCE,max|diff| = 2.78e-17
+fold 2 V23_globalOnly  AUC vs archived,TOLERANCE,max|diff| = 1.15e-14
+fold 2 V23_globalOnly  EER vs archived,EXACT,
+fold 2 V23_globalOnly  TAR vs archived,TOLERANCE,max|diff| = 2.78e-17
+fold 2 V23_localOnly   AUC vs archived,TOLERANCE,max|diff| = 1.48e-14
+fold 2 V23_localOnly   EER vs archived,EXACT,
+fold 2 V23_localOnly   TAR vs archived,TOLERANCE,max|diff| = 2.78e-17
+fold 2 OT              AUC vs archived,TOLERANCE,max|diff| = 9.66e-15
+fold 2 OT              EER vs archived,EXACT,
+fold 2 OT              TAR vs archived,TOLERANCE,max|diff| = 1.39e-17
+fold 2 OT_noGeo        AUC vs archived,TOLERANCE,max|diff| = 7.44e-15
+fold 2 OT_noGeo        EER vs archived,EXACT,
+fold 2 OT_noGeo        TAR vs archived,TOLERANCE,max|diff| = 3.47e-18
+fold 2 OT_noDustbin    AUC vs archived,TOLERANCE,max|diff| = 6.77e-15
+fold 2 OT_noDustbin    EER vs archived,EXACT,
+fold 2 OT_noDustbin    TAR vs archived,TOLERANCE,max|diff| = 3.47e-18
+fold 2 OT_ridgeOnly    AUC vs archived,TOLERANCE,max|diff| = 1.35e-14
+fold 2 OT_ridgeOnly    EER vs archived,EXACT,
+fold 2 OT_ridgeOnly    TAR vs archived,TOLERANCE,max|diff| = 1.39e-17
+fold 2 OT_valleyOnly   AUC vs archived,TOLERANCE,max|diff| = 4.66e-15
+fold 2 OT_valleyOnly   EER vs archived,EXACT,
+fold 2 OT_valleyOnly   TAR vs archived,TOLERANCE,max|diff| = 5.2e-18
+fold 2 Fusion          AUC vs archived,TOLERANCE,max|diff| = 1.04e-14
+fold 2 Fusion          EER vs archived,EXACT,
+fold 2 Fusion          TAR vs archived,EXACT,
+fold 2 Fusion_eq       AUC vs archived,TOLERANCE,max|diff| = 1.08e-14
+fold 2 Fusion_eq       EER vs archived,TOLERANCE,max|diff| = 2.78e-17
+fold 2 Fusion_eq       TAR vs archived,EXACT,
+fold 3 DT_L2           AUC vs archived,TOLERANCE,max|diff| = 2.22e-15
+fold 3 DT_L2           EER vs archived,EXACT,
+fold 3 DT_L2           TAR vs archived,TOLERANCE,max|diff| = 6.94e-18
+fold 3 DT_L2_150       AUC vs archived,TOLERANCE,max|diff| = 6.55e-15
+fold 3 DT_L2_150       EER vs archived,EXACT,
+fold 3 DT_L2_150       TAR vs archived,TOLERANCE,max|diff| = 6.94e-18
+fold 3 DT_L2_150_clamped AUC vs archived,TOLERANCE,max|diff| = 2.02e-14
+fold 3 DT_L2_150_clamped EER vs archived,TOLERANCE,max|diff| = 5.55e-17
+fold 3 DT_L2_150_clamped TAR vs archived,TOLERANCE,max|diff| = 5.2e-18
+fold 3 DT_L2_150_aligned AUC vs archived,TOLERANCE,max|diff| = 6.99e-15
+fold 3 DT_L2_150_aligned EER vs archived,EXACT,
+fold 3 DT_L2_150_aligned TAR vs archived,TOLERANCE,max|diff| = 3.47e-18
+fold 3 GlobalBetti_L1  AUC vs archived,TOLERANCE,max|diff| = 1.23e-14
+fold 3 GlobalBetti_L1  EER vs archived,EXACT,
+fold 3 GlobalBetti_L1  TAR vs archived,TOLERANCE,max|diff| = 6.94e-18
+fold 3 GlobalPI_L2     AUC vs archived,TOLERANCE,max|diff| = 3.1e-14
+fold 3 GlobalPI_L2     EER vs archived,EXACT,
+fold 3 GlobalPI_L2     TAR vs archived,TOLERANCE,max|diff| = 6.94e-18
+fold 3 V23_full        AUC vs archived,TOLERANCE,max|diff| = 1.04e-14
+fold 3 V23_full        EER vs archived,EXACT,
+fold 3 V23_full        TAR vs archived,TOLERANCE,max|diff| = 2.78e-17
+fold 3 V23_noTopK      AUC vs archived,TOLERANCE,max|diff| = 1.38e-14
+fold 3 V23_noTopK      EER vs archived,EXACT,
+fold 3 V23_noTopK      TAR vs archived,EXACT,
+fold 3 V23_globalOnly  AUC vs archived,TOLERANCE,max|diff| = 2.93e-14
+fold 3 V23_globalOnly  EER vs archived,EXACT,
+fold 3 V23_globalOnly  TAR vs archived,TOLERANCE,max|diff| = 1.39e-17
+fold 3 V23_localOnly   AUC vs archived,TOLERANCE,max|diff| = 2.73e-14
+fold 3 V23_localOnly   EER vs archived,EXACT,
+fold 3 V23_localOnly   TAR vs archived,EXACT,
+fold 3 OT              AUC vs archived,TOLERANCE,max|diff| = 3.22e-15
+fold 3 OT              EER vs archived,EXACT,
+fold 3 OT              TAR vs archived,TOLERANCE,max|diff| = 1.39e-17
+fold 3 OT_noGeo        AUC vs archived,TOLERANCE,max|diff| = 2.38e-14
+fold 3 OT_noGeo        EER vs archived,EXACT,
+fold 3 OT_noGeo        TAR vs archived,TOLERANCE,max|diff| = 1.39e-17
+fold 3 OT_noDustbin    AUC vs archived,TOLERANCE,max|diff| = 2.44e-15
+fold 3 OT_noDustbin    EER vs archived,EXACT,
+fold 3 OT_noDustbin    TAR vs archived,TOLERANCE,max|diff| = 1.39e-17
+fold 3 OT_ridgeOnly    AUC vs archived,TOLERANCE,max|diff| = 1.1e-14
+fold 3 OT_ridgeOnly    EER vs archived,EXACT,
+fold 3 OT_ridgeOnly    TAR vs archived,EXACT,
+fold 3 OT_valleyOnly   AUC vs archived,TOLERANCE,max|diff| = 9.99e-16
+fold 3 OT_valleyOnly   EER vs archived,EXACT,
+fold 3 OT_valleyOnly   TAR vs archived,EXACT,
+fold 3 Fusion          AUC vs archived,TOLERANCE,max|diff| = 2.38e-14
+fold 3 Fusion          EER vs archived,TOLERANCE,max|diff| = 2.78e-17
+fold 3 Fusion          TAR vs archived,TOLERANCE,max|diff| = 2.78e-17
+fold 3 Fusion_eq       AUC vs archived,TOLERANCE,max|diff| = 8.44e-15
+fold 3 Fusion_eq       EER vs archived,EXACT,
+fold 3 Fusion_eq       TAR vs archived,TOLERANCE,max|diff| = 1.39e-17
+fold 4 DT_L2           AUC vs archived,TOLERANCE,max|diff| = 1.29e-14
+fold 4 DT_L2           EER vs archived,EXACT,
+fold 4 DT_L2           TAR vs archived,TOLERANCE,max|diff| = 6.94e-18
+fold 4 DT_L2_150       AUC vs archived,TOLERANCE,max|diff| = 2.44e-15
+fold 4 DT_L2_150       EER vs archived,EXACT,
+fold 4 DT_L2_150       TAR vs archived,TOLERANCE,max|diff| = 6.94e-18
+fold 4 DT_L2_150_clamped AUC vs archived,TOLERANCE,max|diff| = 1.22e-15
+fold 4 DT_L2_150_clamped EER vs archived,EXACT,
+fold 4 DT_L2_150_clamped TAR vs archived,TOLERANCE,max|diff| = 3.47e-18
+fold 4 DT_L2_150_aligned AUC vs archived,TOLERANCE,max|diff| = 3.66e-15
+fold 4 DT_L2_150_aligned EER vs archived,EXACT,
+fold 4 DT_L2_150_aligned TAR vs archived,TOLERANCE,max|diff| = 8.67e-18
+fold 4 GlobalBetti_L1  AUC vs archived,TOLERANCE,max|diff| = 2.33e-15
+fold 4 GlobalBetti_L1  EER vs archived,EXACT,
+fold 4 GlobalBetti_L1  TAR vs archived,EXACT,
+fold 4 GlobalPI_L2     AUC vs archived,TOLERANCE,max|diff| = 9.55e-15
+fold 4 GlobalPI_L2     EER vs archived,EXACT,
+fold 4 GlobalPI_L2     TAR vs archived,EXACT,
+fold 4 V23_full        AUC vs archived,TOLERANCE,max|diff| = 1.82e-14
+fold 4 V23_full        EER vs archived,EXACT,
+fold 4 V23_full        TAR vs archived,TOLERANCE,max|diff| = 6.94e-18
+fold 4 V23_noTopK      AUC vs archived,TOLERANCE,max|diff| = 6.44e-15
+fold 4 V23_noTopK      EER vs archived,EXACT,
+fold 4 V23_noTopK      TAR vs archived,TOLERANCE,max|diff| = 8.67e-18
+fold 4 V23_globalOnly  AUC vs archived,TOLERANCE,max|diff| = 1.22e-15
+fold 4 V23_globalOnly  EER vs archived,EXACT,
+fold 4 V23_globalOnly  TAR vs archived,TOLERANCE,max|diff| = 6.94e-18
+fold 4 V23_localOnly   AUC vs archived,TOLERANCE,max|diff| = 1.57e-14
+fold 4 V23_localOnly   EER vs archived,EXACT,
+fold 4 V23_localOnly   TAR vs archived,TOLERANCE,max|diff| = 8.67e-18
+fold 4 OT              AUC vs archived,TOLERANCE,max|diff| = 1.1e-14
+fold 4 OT              EER vs archived,EXACT,
+fold 4 OT              TAR vs archived,TOLERANCE,max|diff| = 2.78e-17
+fold 4 OT_noGeo        AUC vs archived,EXACT,
+fold 4 OT_noGeo        EER vs archived,EXACT,
+fold 4 OT_noGeo        TAR vs archived,TOLERANCE,max|diff| = 1.39e-17
+fold 4 OT_noDustbin    AUC vs archived,TOLERANCE,max|diff| = 7.33e-15
+fold 4 OT_noDustbin    EER vs archived,EXACT,
+fold 4 OT_noDustbin    TAR vs archived,EXACT,
+fold 4 OT_ridgeOnly    AUC vs archived,TOLERANCE,max|diff| = 1.89e-15
+fold 4 OT_ridgeOnly    EER vs archived,EXACT,
+fold 4 OT_ridgeOnly    TAR vs archived,TOLERANCE,max|diff| = 6.94e-18
+fold 4 OT_valleyOnly   AUC vs archived,TOLERANCE,max|diff| = 1.99e-14
+fold 4 OT_valleyOnly   EER vs archived,EXACT,
+fold 4 OT_valleyOnly   TAR vs archived,TOLERANCE,max|diff| = 6.94e-18
+fold 4 Fusion          AUC vs archived,TOLERANCE,max|diff| = 2.89e-15
+fold 4 Fusion          EER vs archived,EXACT,
+fold 4 Fusion          TAR vs archived,EXACT,
+fold 4 Fusion_eq       AUC vs archived,TOLERANCE,max|diff| = 2.66e-15
+fold 4 Fusion_eq       EER vs archived,EXACT,
+fold 4 Fusion_eq       TAR vs archived,TOLERANCE,max|diff| = 2.78e-17
+fold 5 DT_L2           AUC vs archived,TOLERANCE,max|diff| = 1.02e-14
+fold 5 DT_L2           EER vs archived,EXACT,
+fold 5 DT_L2           TAR vs archived,TOLERANCE,max|diff| = 6.94e-18
+fold 5 DT_L2_150       AUC vs archived,TOLERANCE,max|diff| = 2.55e-15
+fold 5 DT_L2_150       EER vs archived,EXACT,
+fold 5 DT_L2_150       TAR vs archived,TOLERANCE,max|diff| = 6.94e-18
+fold 5 DT_L2_150_clamped AUC vs archived,TOLERANCE,max|diff| = 3.11e-15
+fold 5 DT_L2_150_clamped EER vs archived,EXACT,
+fold 5 DT_L2_150_clamped TAR vs archived,EXACT,
+fold 5 DT_L2_150_aligned AUC vs archived,TOLERANCE,max|diff| = 9.99e-16
+fold 5 DT_L2_150_aligned EER vs archived,EXACT,
+fold 5 DT_L2_150_aligned TAR vs archived,TOLERANCE,max|diff| = 5.2e-18
+fold 5 GlobalBetti_L1  AUC vs archived,TOLERANCE,max|diff| = 1.87e-14
+fold 5 GlobalBetti_L1  EER vs archived,EXACT,
+fold 5 GlobalBetti_L1  TAR vs archived,TOLERANCE,max|diff| = 1.39e-17
+fold 5 GlobalPI_L2     AUC vs archived,TOLERANCE,max|diff| = 1.42e-14
+fold 5 GlobalPI_L2     EER vs archived,EXACT,
+fold 5 GlobalPI_L2     TAR vs archived,TOLERANCE,max|diff| = 1.39e-17
+fold 5 V23_full        AUC vs archived,TOLERANCE,max|diff| = 1.4e-14
+fold 5 V23_full        EER vs archived,EXACT,
+fold 5 V23_full        TAR vs archived,TOLERANCE,max|diff| = 6.94e-18
+fold 5 V23_noTopK      AUC vs archived,TOLERANCE,max|diff| = 5.77e-15
+fold 5 V23_noTopK      EER vs archived,TOLERANCE,max|diff| = 2.78e-17
+fold 5 V23_noTopK      TAR vs archived,TOLERANCE,max|diff| = 6.94e-18
+fold 5 V23_globalOnly  AUC vs archived,TOLERANCE,max|diff| = 7.77e-15
+fold 5 V23_globalOnly  EER vs archived,EXACT,
+fold 5 V23_globalOnly  TAR vs archived,TOLERANCE,max|diff| = 1.39e-17
+fold 5 V23_localOnly   AUC vs archived,TOLERANCE,max|diff| = 1.22e-15
+fold 5 V23_localOnly   EER vs archived,EXACT,
+fold 5 V23_localOnly   TAR vs archived,TOLERANCE,max|diff| = 8.67e-18
+fold 5 OT              AUC vs archived,EXACT,
+fold 5 OT              EER vs archived,EXACT,
+fold 5 OT              TAR vs archived,EXACT,
+fold 5 OT_noGeo        AUC vs archived,TOLERANCE,max|diff| = 9.88e-15
+fold 5 OT_noGeo        EER vs archived,EXACT,
+fold 5 OT_noGeo        TAR vs archived,TOLERANCE,max|diff| = 2.6e-18
+fold 5 OT_noDustbin    AUC vs archived,TOLERANCE,max|diff| = 5.88e-15
+fold 5 OT_noDustbin    EER vs archived,EXACT,
+fold 5 OT_noDustbin    TAR vs archived,TOLERANCE,max|diff| = 6.94e-18
+fold 5 OT_ridgeOnly    AUC vs archived,TOLERANCE,max|diff| = 2.78e-15
+fold 5 OT_ridgeOnly    EER vs archived,EXACT,
+fold 5 OT_ridgeOnly    TAR vs archived,TOLERANCE,max|diff| = 6.94e-18
+fold 5 OT_valleyOnly   AUC vs archived,TOLERANCE,max|diff| = 8.44e-15
+fold 5 OT_valleyOnly   EER vs archived,TOLERANCE,max|diff| = 5.55e-17
+fold 5 OT_valleyOnly   TAR vs archived,EXACT,
+fold 5 Fusion          AUC vs archived,TOLERANCE,max|diff| = 9.21e-15
+fold 5 Fusion          EER vs archived,EXACT,
+fold 5 Fusion          TAR vs archived,TOLERANCE,max|diff| = 2.6e-18
+fold 5 Fusion_eq       AUC vs archived,TOLERANCE,max|diff| = 1.63e-14
+fold 5 Fusion_eq       EER vs archived,TOLERANCE,max|diff| = 2.78e-17
+fold 5 Fusion_eq       TAR vs archived,TOLERANCE,max|diff| = 1.39e-17

@@ -1,0 +1,11 @@
+B = 2000 replicates; seed = 20261010; 95% percentile intervals, POINTWISE (not simultaneous)
+Resampling unit: finger (20 per test fold), drawn with replacement; multiplicities m_i.
+Weights: genuine pair of finger i -> m_i; impostor pair (i != j) -> m_i * m_j; m_i = 0 -> dropped.
+No pair invented; copies of one finger never form an impostor pair; metrics normalised by total weight.
+Thresholds FIXED at training-calibrated values: quantile(train impostor scores, 1 - FAR), type 7; accept if score >= threshold.
+Same multiplicities for all methods (paired differences on identical resamples).
+Intervals are conditional on fitted models, thresholds and the fold split; headline interval is on the 5-fold mean.
+All methods, including Fusion_eq and DT_L2_150_aligned, are read from the pipeline's per-fold caches via fold_cache_index.csv.
+Fusion_eq: pipeline method, w = 0.5 with the training-impostor robust-z normalisation; checked against its components and the frozen pre-integration reference.
+DT_L2_150_aligned: rigid-search geometric baseline (coarse angular search with local refinement and exhaustive translation search); score = -d_sym.
+Tuned fusion weights optimise training TAR at nominal FAR 1e-3; held-out effects assessed empirically.

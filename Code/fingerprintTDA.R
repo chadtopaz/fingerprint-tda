@@ -10,10 +10,26 @@ library(parallel)
 library(matrixStats)
 library(digest)
 
+# Aligned geometry baseline engine (revision step 1.2). Like every other path in
+# this file, resolved relative to the PROJECT ROOT (the working directory); the
+# lowercase fallback mirrors pca_match_analysis.R / validate_downsampling.R.
+.aligned_src <- if (file.exists(file.path("Code", "aligned_baseline.R"))) file.path("Code", "aligned_baseline.R") else file.path("code", "aligned_baseline.R")
+if (!file.exists(.aligned_src)) stop("aligned_baseline.R not found under Code/ (or code/): source this file from the project root.", call. = FALSE)
+source(.aligned_src)
+rm(.aligned_src)
+
 ############################################################
-# TDA FINGERPRINT — MERGED V2 (PRL-READY, NO LEAKAGE)
-# OPTIMIZED VERSION — Speedups 1-6 implemented
+# TDA FINGERPRINT PIPELINE (Pattern Recognition revision, 2026)
 #
+# Entry points: Code/run_canonical.R (canonical DB1 / DB3 runs on the regenerated binaries, frozen
+# alignment grid), then Code/bootstrap_ci.R. The main entry at the end of this file is the legacy
+# single-call driver and is suppressed with options(fp.suppress_main = TRUE) by every driver.
+#
+# Audit patch (31 Oct 2026): persistence failures are propagated (never vectorised as zero features);
+# anchors are drawn under an explicitly set RNG kind; ot$geo_scale enters the bank key when changed;
+# matched-transformation geometry baseline DT_L2_150_clamped added (bank field dt_vec_150_clamped).
+#
+# Historical note (first version): "MERGED V2 (PRL-READY, NO LEAKAGE); speedups 1-6":
 # Changes from original:
 #  1. Vectorized baseline pair scoring (score_pairs_l2, score_pairs_l1)
 #  2. Increased OT chunk size (300 -> 5000)
@@ -31,8 +47,18 @@ library(digest)
 # CONFIG
 # ============================================================
 
+# Release 1.1.0 (1 Nov 2026): the defaults below are the reported configuration — the regenerated
+# binaries (Code/preprocess.py), the frozen alignment grid (Code/frozen_grid.R) and no manuscript export —
+# so that Code/run_canonical.R reproduces the paper without hidden overrides. The drivers still set the
+# directories explicitly; Code/test_release_config.R asserts that the effective configuration and every
+# cache key of the reported runs are unchanged by these defaults.
+.frozen_src <- if (file.exists(file.path("Code", "frozen_grid.R"))) file.path("Code", "frozen_grid.R") else file.path("code", "frozen_grid.R")
+if (!file.exists(.frozen_src)) stop("frozen_grid.R not found under Code/ (or code/): source this file from the project root.", call. = FALSE)
+source(.frozen_src)
+rm(.frozen_src)
+
 CONFIG <- list(
-  binary_dir = "Data/FVC2000_binary",
+  binary_dir = "Data/FVC2000_binary_regen",
   n_id = 100,
   
   # CV
@@ -104,12 +130,39 @@ CONFIG <- list(
   fars_report = c(1e-3, 2e-3, 5e-3, 1e-2),
   
   # Parallel
-  n_workers = max(1, parallel::detectCores() - 2),
+  n_workers = { nc <- suppressWarnings(parallel::detectCores()); if (is.na(nc)) 4L else max(1L, as.integer(nc) - 2L) },   # operational, not scientific; NA-safe
   future_globals_gb = 32,
-  
+
+  # Aligned geometry baseline (revision step 1.2): rigid-search grid for
+  # DT_L2_150_aligned. Developed on DB1 under the pre-specified expansion rule,
+  # then FROZEN before any other database is run (Code/frozen_grid.R: theta_max 50,
+  # t_max 40; the engine's own default stays +-30 degrees). Not part of fold_cache_key():
+  # the aligned method's fold caches carry their own identity (the pair-cache key).
+  aligned = apply_frozen_grid(list(aligned = aligned_default_config()))$aligned,
+
   # Output
   output_dir = "Outputs",
-  
+  # Copy roc_pooled.pdf into Manuscript/ at the end of a run. FALSE: reproduction and
+  # experimental runs never touch a manuscript figure (the figures come from make_figures.R).
+  export_to_manuscript = FALSE,
+  # Bump to invalidate per-fold score caches. v2: caches carry fitted objects
+  # (TopoLR model, fusion normalisation, thresholds) for fixed-model reuse.
+  fold_cache_version = 2L,
+
+  # Filtration complex for sublevel-set persistence (revision step 1.5, D2/D3):
+  #   "triangulated" (default; every reported result) -> TDA::gridDiag, which builds a
+  #                   lower-star filtration on the triangulated pixel grid;
+  #   "cubical"      -> GUDHI Bitmap_cubical_complex (pixels as top cells, lower cells take
+  #                   the minimum), via Code_cubical/cubical_ph.R + reticulate; supplementary
+  #                   side-by-side only. Enters bank_cache_key() only when not "triangulated",
+  #                   so every existing cache key is unchanged.
+  complex_type = "triangulated",
+
+  # Polarity rule of the binary reader (revision step 1.4): "auto" (default; every reported run)
+  # inverts an image with > 50 % white pixels; "ridge255" trusts white = ridge and never inverts
+  # (used only by the sensitivity experiment). Enters bank_cache_key() only when not "auto".
+  polarity = "auto",
+
   # Debug
   debug_fast = FALSE,
   debug_n_id = 20,
@@ -137,14 +190,21 @@ seed_from_string <- function(s) {
   as.integer((strtoi(substr(h, 1, 7), base = 16L) %% 2147483646L) + 1L)
 }
 
-read_binary_fingerprint <- function(path) {
+read_binary_fingerprint <- function(path, polarity = "auto") {
   img <- EBImage::readImage(path)
   if (length(dim(img)) == 3) img <- EBImage::channel(img, "gray")
   mat <- as.matrix(img)
   mat[!is.finite(mat)] <- 0
   bin <- as.integer(mat >= 0.5)
   dim(bin) <- dim(mat)
-  if (mean(bin) > 0.5) bin <- 1L - bin
+  # polarity (revision step 1.4): "auto" (default; every reported run) inverts an image whose
+  # white fraction exceeds 0.5, a guard against inverted inputs; "ridge255" trusts the fixed
+  # convention white = ridge and never inverts. The sensitivity experiment uses "ridge255"
+  # because dilation pushes 113 of 800 canonical images past 0.5 white, which under "auto"
+  # would silently swap ridge and valley (QA, 13 Oct). No canonical image exceeds 0.5, so the
+  # two settings coincide on clean inputs (asserted by the sensitivity scorer).
+  if (identical(polarity, "auto")) { if (mean(bin) > 0.5) bin <- 1L - bin }
+  else if (!identical(polarity, "ridge255")) stop("unknown polarity: ", polarity, call. = FALSE)
   bin
 }
 
@@ -198,7 +258,25 @@ extract_patch_with_mask <- function(mat, cx, cy, r, mask_full) {
   list(patch = patch, mask = mask)
 }
 
+# Anchor RNG kind (audit patch, 31 Oct 2026). The feature bank is computed inside
+# future_lapply(..., future.seed = TRUE), whose workers run under L'Ecuyer-CMRG, so every reported
+# bank drew its anchors with set.seed(seed) under THAT kind. A serial call (figure script, validators,
+# tests) used to run under the session default (Mersenne-Twister) and drew DIFFERENT anchors from the
+# same seed. The kind is now set explicitly (and restored afterwards), so the draw no longer depends
+# on the caller's RNG state; production banks are unchanged because the kind is the one they used.
+# The normal and sample kinds are pinned too ("Inversion", "Rejection": R's defaults, in force in the workers).
+ANCHOR_RNG_KIND <- "L'Ecuyer-CMRG"
+
 sample_anchor_points <- function(bin_ds, n_anchors, seed) {
+  had_seed <- exists(".Random.seed", envir = globalenv(), inherits = FALSE)
+  old_seed <- if (had_seed) get(".Random.seed", envir = globalenv()) else NULL
+  old_kind <- RNGkind()
+  on.exit({
+    do.call(RNGkind, as.list(old_kind))
+    if (had_seed) assign(".Random.seed", old_seed, envir = globalenv())
+    else if (exists(".Random.seed", envir = globalenv(), inherits = FALSE)) rm(".Random.seed", envir = globalenv())
+  }, add = TRUE)
+  suppressWarnings(RNGkind(ANCHOR_RNG_KIND, "Inversion", "Rejection"))   # kind, normal.kind AND sample.kind pinned (a caller's sample.kind = "Rounding" would change the draw)
   set.seed(seed)
   idx <- which(bin_ds == 1L, arr.ind = TRUE)
   if (nrow(idx) == 0) return(matrix(numeric(0), ncol = 2))
@@ -206,12 +284,40 @@ sample_anchor_points <- function(bin_ds, n_anchors, seed) {
   idx[pick, , drop = FALSE]
 }
 
-compute_persistence <- function(filt_mat, maxdim = 1, maxscale = 20) {
+# The anchors of a cached bank entry, recovered from its stored OT coordinates (centred on the
+# anchor mean and divided by target_size under the default geo_scale): rows = (row, col) on the
+# downsampled grid. Used by the figure script so that illustrations show the analysis anchors.
+anchors_from_bank_entry <- function(entry, config) {
+  Z <- entry$ot_Z; ctr <- attr(Z, "scaled:center")
+  if (is.null(ctr)) stop("bank entry has no anchor centre attribute", call. = FALSE)
+  scale_by <- if (identical(config$ot$geo_scale %||% "target", "target")) config$target_size else config$ot$radius
+  A <- sweep(Z * scale_by, 2, ctr, "+")
+  if (max(abs(A - round(A))) > 1e-6) stop("recovered anchor coordinates are not integers (geo_scale or centre mismatch?)", call. = FALSE)
+  matrix(as.integer(round(A)), ncol = 2L)      # a plain matrix: no dimnames, no scaled:center attribute
+}
+
+compute_persistence <- function(filt_mat, maxdim = 1, maxscale = 20, complex_type = "triangulated") {
   x <- pmin(pmax(filt_mat, 0), maxscale)
   x[!is.finite(x)] <- maxscale
   x <- round(x, 1)
-  
-  tryCatch({
+
+  # A backend failure is PROPAGATED on BOTH constructions (cubical since QA 13 Oct; triangulated
+  # since the audit patch of 31 Oct 2026 — before that the triangulated path returned NULL, which
+  # the vectorisers turned into all-zero features, indistinguishable from an image without
+  # features). precompute_feature_bank() reports the failing image and stops; no bank is written.
+  # A valid diagram with no H1 features is not an error and is accepted as such.
+  # Revision step 1.5: optional cubical construction (same clipped, rounded input; same P x 3
+  # diagram layout). cubical_diagram() comes from Code_cubical/cubical_ph.R, which the cubical
+  # driver sources.
+  if (identical(complex_type, "cubical")) {
+    if (!exists("cubical_diagram", mode = "function"))
+      stop("complex_type = 'cubical' requires Code_cubical/cubical_ph.R to be sourced first.", call. = FALSE)
+    return(tryCatch(cubical_diagram(x, maxdim = maxdim, inf_replace = maxscale),
+                    error = function(e) stop("cubical persistence failed: ", conditionMessage(e), call. = FALSE)))
+  }
+  if (!identical(complex_type, "triangulated")) stop("unknown complex_type: ", complex_type, call. = FALSE)
+
+  d <- tryCatch({
     TDA::gridDiag(
       FUNvalues = x,
       maxdimension = maxdim,
@@ -219,12 +325,16 @@ compute_persistence <- function(filt_mat, maxdim = 1, maxscale = 20) {
       library = "GUDHI",
       printProgress = FALSE
     )$diagram
-  }, error = function(e) NULL)
+  }, error = function(e) stop("triangulated persistence (TDA::gridDiag) failed: ", conditionMessage(e), call. = FALSE))
+  if (is.null(d)) stop("triangulated persistence (TDA::gridDiag) returned no diagram", call. = FALSE)
+  d
 }
 
 compute_betti_curve <- function(diag, hom_dim, n_points, maxscale) {
   curve <- rep(0, n_points)
-  if (is.null(diag)) return(curve)
+  # A NULL diagram is a propagated-failure marker, never a valid empty diagram (gridDiag always
+  # returns at least the H0 class); it must not be vectorised as a zero curve (audit, 31 Oct 2026).
+  if (is.null(diag)) stop("compute_betti_curve: NULL diagram (a persistence failure was not propagated)", call. = FALSE)
   
   mat <- as.matrix(diag)
   idx <- mat[, 1] == hom_dim & is.finite(mat[, 2]) & is.finite(mat[, 3])
@@ -240,7 +350,7 @@ compute_betti_curve <- function(diag, hom_dim, n_points, maxscale) {
 
 diag_to_pi_vec <- function(diag, hom_dim, maxscale, pi_res, pi_sigma) {
   n_pix <- pi_res * pi_res
-  if (is.null(diag)) return(rep(0, n_pix))
+  if (is.null(diag)) stop("diag_to_pi_vec: NULL diagram (a persistence failure was not propagated)", call. = FALSE)
   
   M <- as.matrix(diag)
   if (ncol(M) < 3) return(rep(0, n_pix))
@@ -390,7 +500,7 @@ pool_curves_no_topk <- function(curves_mat) {
 }
 
 extract_feature_bank_one <- function(path, config, disk_mask) {
-  bin <- read_binary_fingerprint(path)
+  bin <- read_binary_fingerprint(path, polarity = config$polarity %||% "auto")
   ridge_area <- mean(bin)
   norm_factor <- max(ridge_area, 0.01)
   
@@ -418,14 +528,24 @@ extract_feature_bank_one <- function(path, config, disk_mask) {
   rms150 <- sqrt(mean(dt_vec_150^2))
   dt_vec_150 <- dt_vec_150 / if (is.finite(rms150) && rms150 > 1e-12) rms150 else 1
 
+  # Matched-transformation geometry baseline (audit, 31 Oct 2026): the SAME 150x150 fields, but
+  # clamped to [0, maxscale], non-finite -> maxscale, rounded to 0.1 BEFORE the RMS normalisation —
+  # exactly what compute_persistence() does to the fields the topological methods see — so that
+  # DT_L2_150_clamped and the topological methods start from identical values. dt_vec_150 (the
+  # original baseline, unclamped) is kept unchanged.
+  clamp_round <- function(m, T) { x <- pmin(pmax(m, 0), T); x[!is.finite(x)] <- T; round(x, 1) }
+  dt_vec_150_clamped <- c(as.numeric(clamp_round(ridge_fixed_150, config$maxscale)), as.numeric(clamp_round(valley_fixed_150, config$maxscale)))
+  rms150c <- sqrt(mean(dt_vec_150_clamped^2))
+  dt_vec_150_clamped <- dt_vec_150_clamped / if (is.finite(rms150c) && rms150c > 1e-12) rms150c else 1
+
   # Common downsample for PH computations (reuse the 150x150 DTs)
   dt_ridge_dsT  <- ridge_ds150
   dt_valley_dsT <- valley_ds150
   bin_dsT       <- downsample_matrix(bin,       config$target_size)
   
   # Global persistence for Betti & PI
-  diag_ridge_global  <- compute_persistence(dt_ridge_dsT,  maxdim = 1, maxscale = config$maxscale)
-  diag_valley_global <- compute_persistence(dt_valley_dsT, maxdim = 1, maxscale = config$maxscale)
+  diag_ridge_global  <- compute_persistence(dt_ridge_dsT,  maxdim = 1, maxscale = config$maxscale, complex_type = config$complex_type %||% "triangulated")
+  diag_valley_global <- compute_persistence(dt_valley_dsT, maxdim = 1, maxscale = config$maxscale, complex_type = config$complex_type %||% "triangulated")
   
   # Global Betti (100d)
   betti_ridge  <- compute_betti_curve(diag_ridge_global,  1, config$v23$n_points, config$maxscale)
@@ -464,7 +584,7 @@ extract_feature_bank_one <- function(path, config, disk_mask) {
     rp <- pr$patch
     if (nrow(rp) >= 5 && ncol(rp) >= 5) {
       rp[!pr$mask] <- config$maxscale
-      diag_r <- compute_persistence(rp, maxdim = 1, maxscale = config$maxscale)
+      diag_r <- compute_persistence(rp, maxdim = 1, maxscale = config$maxscale, complex_type = config$complex_type %||% "triangulated")
       ridge_curves[k, ] <- compute_betti_curve(diag_r, 1, config$v23$n_points, config$maxscale)
       X_ridge[k, ] <- diag_to_pi_vec(diag_r, 1, config$maxscale, config$ot$pi_res, config$ot$pi_sigma)
     }
@@ -473,7 +593,7 @@ extract_feature_bank_one <- function(path, config, disk_mask) {
     vp <- pv$patch
     if (nrow(vp) >= 5 && ncol(vp) >= 5) {
       vp[!pv$mask] <- config$maxscale
-      diag_v <- compute_persistence(vp, maxdim = 1, maxscale = config$maxscale)
+      diag_v <- compute_persistence(vp, maxdim = 1, maxscale = config$maxscale, complex_type = config$complex_type %||% "triangulated")
       valley_curves[k, ] <- compute_betti_curve(diag_v, 1, config$v23$n_points, config$maxscale)
       X_valley[k, ] <- diag_to_pi_vec(diag_v, 1, config$maxscale, config$ot$pi_res, config$ot$pi_sigma)
     }
@@ -525,6 +645,7 @@ extract_feature_bank_one <- function(path, config, disk_mask) {
   list(
     dt_vec = dt_vec,
     dt_vec_150 = dt_vec_150,
+    dt_vec_150_clamped = dt_vec_150_clamped,
     betti_global_100 = betti_global_100,
     pi_global = pi_global,
     v23_global_100 = betti_global_100,
@@ -560,16 +681,22 @@ precompute_feature_bank <- function(paths, config) {
   bank <- progressr::with_progress({
     p <- progressr::progressor(steps = length(paths))
     future.apply::future_lapply(paths, function(fp) {
-      out <- tryCatch(extract_feature_bank_one(fp, config, disk_mask), error = function(e) NULL)
+      # A failed image is recorded WITH its error message (revision step 1.5; previously NULL),
+      # so the stop below can say why. Successful entries are unchanged.
+      out <- tryCatch(extract_feature_bank_one(fp, config, disk_mask),
+                      error = function(e) structure(list(error = conditionMessage(e)), class = "fp_precompute_error"))
       p()
       out
     }, future.seed = TRUE)
   })
   cat("Done. Time:", round(difftime(Sys.time(), t0, units = "secs"), 1), "s\n\n")
-  
-  if (any(map_lgl(bank, is.null))) {
-    bad <- which(map_lgl(bank, is.null))
-    stop("Some images failed precompute. First bad indices: ", paste(head(bad, 5), collapse = ", "))
+
+  failed <- map_lgl(bank, function(b) is.null(b) || inherits(b, "fp_precompute_error"))
+  if (any(failed)) {
+    bad  <- which(failed)
+    msgs <- vapply(bank[head(bad, 3)], function(b) if (inherits(b, "fp_precompute_error")) b$error else "NULL", character(1))
+    stop("Some images failed precompute. First bad indices: ", paste(head(bad, 5), collapse = ", "),
+         " (", paste(basename(paths[head(bad, 3)]), collapse = ", "), "); first error(s): ", paste(unique(msgs), collapse = " | "))
   }
   
   bank
@@ -600,7 +727,31 @@ bank_cache_key <- function(config) {
     # invalidates the cached feature bank automatically (anchors depend on it).
     seed_fn_hash     = digest::digest(deparse(seed_from_string), algo = "sha256")
   )
+  # Revision step 1.5: the complex enters the key ONLY for the non-default construction, so
+  # the key (and hence every existing bank and fold cache) of a triangulated run is unchanged.
+  ct <- config$complex_type %||% "triangulated"
+  if (!identical(ct, "triangulated")) key_parts$complex_type <- ct
+  # Revision step 1.4: likewise the polarity rule enters the key only when it is not the default.
+  pol <- config$polarity %||% "auto"
+  if (!identical(pol, "auto")) key_parts$polarity <- pol
+  # Audit patch (31 Oct 2026): ot$geo_scale changes the stored anchor coordinates (ot_Z) and was
+  # not in the key, so a changed scale could reuse a stale bank; it enters the key when not default.
+  gs <- config$ot$geo_scale %||% "target"
+  if (!identical(gs, "target")) key_parts$ot_geo_scale <- gs
   digest::digest(key_parts, algo = "sha256")
+}
+
+# Every field a bank entry must carry for the current method set (audit patch, 31 Oct 2026). A bank
+# computed before a field existed cannot be reused silently: run_prl_suite_v2() stops if one is missing.
+BANK_REQUIRED_FIELDS <- c("dt_vec", "dt_vec_150", "dt_vec_150_clamped", "betti_global_100", "pi_global",
+                          "v23_global_100", "v23_local_full_300", "v23_local_noTopK_200",
+                          "ot_X_ridge", "ot_X_valley", "ot_Z", "ot_X_both", "ot_n2_ridge", "ot_n2_valley", "ot_n2_both", "ot_z2")
+check_bank_fields <- function(bank, where = "") {
+  miss <- setdiff(BANK_REQUIRED_FIELDS, names(bank[[1]]))
+  if (length(miss))
+    stop("feature bank", if (nzchar(where)) paste0(" (", where, ")") else "", " lacks field(s) ", paste(miss, collapse = ", "),
+         ": it predates the current method set. Use a fresh output directory so the bank is recomputed.", call. = FALSE)
+  invisible(TRUE)
 }
 
 # Fold-score cache key: hashes the feature-bank key AND the training/scoring/
@@ -609,6 +760,7 @@ bank_cache_key <- function(config) {
 # old feature bank would silently load stale fold scores from cache.
 fold_cache_key <- function(config) {
   digest::digest(list(
+    fold_cache_version = config$fold_cache_version %||% 1L,
     feature_bank   = bank_cache_key(config),
     cv_seed        = config$cv_seed,
     n_folds        = config$n_folds,
@@ -628,26 +780,83 @@ load_or_compute_bank <- function(paths, config) {
   key <- bank_cache_key(config)
   cache_file <- file.path(cache_dir, paste0("bank_", substr(key, 1, 12), ".rds"))
 
+  # Input sidecar (revision step 1.2 integration): the ordered basenames and md5
+  # sums of the images the cached bank was computed from. A cached bank is reused
+  # only if this sidecar exists and matches the current images exactly (the old
+  # check compared image COUNTS only). The sidecar is named so that it does NOT
+  # match the bank discovery pattern ^bank_.*\.rds$ used by verify_reproduction.R
+  # and validate_aligned_baseline.R.
+  inputs_file <- file.path(cache_dir, paste0("inputs_bank_", substr(key, 1, 12), ".rds"))
+  inputs_now  <- list(files = basename(paths), md5 = unname(tools::md5sum(paths)))
+
+  # Per-fold score caches in cache/folds were computed from whatever bank was in force
+  # then; any recompute of the bank that is not shown to be identical must not proceed
+  # while such caches exist (they would be reused by configuration key).
+  legacy_fold_caches <- list.files(file.path(cache_dir, "folds"), pattern = "\\.rds$")
+  stop_if_fold_caches <- function(why) {
+    if (length(legacy_fold_caches) > 0)
+      stop(why, " ", length(legacy_fold_caches), " per-fold caches exist in ", file.path(cache_dir, "folds"),
+           " and would be reused with a bank they were not computed from. Use a fresh output directory ",
+           "for new inputs, or investigate before deleting anything.", call. = FALSE)
+  }
+
+  # Guard (revision step 1.1, QA follow-up to 1.2): per-fold caches whose bank file is
+  # absent. The bank would be recomputed and the fold caches reused by configuration key,
+  # without any check that they were computed from this bank. An output directory holds
+  # one run; a missing bank next to fold caches means that run is no longer intact.
+  if (!file.exists(cache_file))
+    stop_if_fold_caches(paste0("No cached feature bank for this configuration (", basename(cache_file), ") exists, yet"))
+
+  old_bank <- NULL   # a sidecar-less (pre-1.2) cached bank, kept for comparison after recompute
   if (file.exists(cache_file)) {
     cat("============================================\n")
     cat("LOADING CACHED FEATURE BANK\n")
     cat("  ", cache_file, "\n")
     cat("============================================\n\n")
-    bank <- readRDS(cache_file)
-    # Verify cache matches current image set
-    if (length(bank) == length(paths)) {
-      cat("Cache valid:", length(bank), "images.\n\n")
-      return(bank)
+    if (file.exists(inputs_file)) {
+      if (identical(readRDS(inputs_file), inputs_now)) {
+        bank <- readRDS(cache_file)
+        if (length(bank) == length(paths)) {
+          cat("Cache valid: input manifest matches (", length(bank), "images ).\n\n")
+          return(bank)
+        }
+        stop_if_fold_caches("Cached bank size mismatch despite a matching input manifest (corrupt cache?).")
+        cat("Cache size mismatch (", length(bank), "vs", length(paths), ") despite a matching input manifest. Recomputing.\n\n")
+      } else {
+        stop_if_fold_caches("Cached bank was computed from DIFFERENT images (input manifest mismatch).")
+        cat("Cached bank was computed from DIFFERENT images (input manifest mismatch). Recomputing.\n\n")
+      }
     } else {
-      cat("Cache size mismatch (", length(bank), "vs", length(paths), "). Recomputing.\n\n")
+      cat("Cached bank has no input manifest (pre-1.2 cache). Recomputing and comparing with the cached bank.\n\n")
+      old_bank <- tryCatch(readRDS(cache_file), error = function(e) NULL)
+      if (is.null(old_bank)) stop_if_fold_caches("Sidecar-less cached bank could not be read, so it cannot be compared with a recompute.")
     }
   }
 
   bank <- precompute_feature_bank(paths, config)
 
+  if (!is.null(old_bank)) {
+    same <- identical(bank, old_bank)
+    cat("Recomputed bank identical to the sidecar-less cached bank:", same, "\n")
+    if (!same) {
+      # Per-field report, then stop if anything downstream could reuse the old bank.
+      fields <- union(names(bank[[1]]), names(old_bank[[1]]))
+      for (fn in fields) {
+        d <- tryCatch(max(vapply(seq_along(bank), function(i) {
+          a <- bank[[i]][[fn]]; b <- old_bank[[i]][[fn]]
+          if (is.null(a) || is.null(b) || length(a) != length(b)) Inf else max(abs(as.numeric(a) - as.numeric(b)))
+        }, numeric(1))), error = function(e) NA_real_)
+        cat(sprintf("   field %-22s max |new - cached| = %s\n", fn, format(d)))
+      }
+      stop_if_fold_caches("Recomputed feature bank differs from the sidecar-less cached bank (differences printed above).")
+      cat("No per-fold caches present; proceeding with the recomputed bank.\n\n")
+    }
+  }
+
   cat("Saving feature bank cache to", cache_file, "\n")
   saveRDS(bank, cache_file)
-  cat("Cache saved.\n\n")
+  saveRDS(inputs_now, inputs_file)
+  cat("Cache and input manifest saved.\n\n")
 
   bank
 }
@@ -1109,6 +1318,73 @@ run_prl_suite_v2 <- function(config = CONFIG) {
   stopifnot(all(!is.na(ids)))
   
   folds <- make_identity_folds(observed_ids = ids, n_folds = config$n_folds, seed = config$cv_seed)
+
+  # ---- Run manifest: records exactly which images, identities, fold memberships
+  # and pair orderings this run used, so outputs can be compared positionally.
+  # Pair matrices are recorded BEFORE any debug_fast subsampling.
+  dir.create(config$output_dir, showWarnings = FALSE, recursive = TRUE)
+  manifest_folds <- lapply(seq_along(folds), function(f) {
+    test_ids  <- folds[[f]]
+    train_ids <- setdiff(unique(ids), test_ids)
+    train_idx <- which(ids %in% train_ids)
+    test_idx  <- which(ids %in% test_ids)
+    list(fold = f, test_ids = test_ids, train_ids = train_ids,
+         train_idx = train_idx, test_idx = test_idx,
+         pair_train = build_pair_mat_global(train_idx),
+         pair_test  = build_pair_mat_global(test_idx))
+  })
+  run_manifest <- list(
+    created      = Sys.time(),
+    paths        = paths,
+    files        = basename(paths),
+    md5          = unname(tools::md5sum(paths)),
+    ids          = ids,
+    folds        = manifest_folds,
+    pairs_are_pre_subsampling = TRUE,
+    acceptance_rule = "score >= threshold; threshold = quantile(train impostor scores, 1 - FAR), type 7",
+    config       = config,
+    locale       = Sys.getlocale(),
+    session_info = utils::sessionInfo()
+  )
+
+  # ---- Input-change guard (revision step 1.2 integration). Per-fold score caches are
+  # keyed by CONFIGURATION (fold_cache_key) but not by image identity, so if the images,
+  # their order, the identities or the fold/pair assignments changed since the previous
+  # run in this output directory, reusing the existing caches would silently mix inputs.
+  # Compare with the previous manifest BEFORE overwriting it; stop on mismatch whenever
+  # legacy per-fold caches are present.
+  manifest_file      <- file.path(config$output_dir, "run_manifest.rds")
+  legacy_fold_caches <- list.files(file.path(config$output_dir, "cache", "folds"), pattern = "\\.rds$")
+  if (file.exists(manifest_file)) {
+    prev <- readRDS(manifest_file)
+    same_inputs <- identical(prev$files, run_manifest$files) &&
+                   identical(prev$md5,   run_manifest$md5)   &&
+                   identical(prev$ids,   run_manifest$ids)   &&
+                   identical(prev$folds, run_manifest$folds)
+    if (same_inputs) {
+      cat("Previous run manifest found (", format(prev$created), "): identical images, md5s, identities, folds and pair orderings.\n",
+          "  ", length(legacy_fold_caches), " existing per-fold caches may be reused (by configuration key).\n", sep = "")
+    } else if (length(legacy_fold_caches) > 0) {
+      stop("Inputs differ from the previous run manifest in '", config$output_dir, "' (files, md5, identities, ",
+           "folds or pair orderings), but ", length(legacy_fold_caches), " per-fold caches from that run are present ",
+           "and would be reused. Use a fresh output directory for the new inputs (or move the old caches away).",
+           call. = FALSE)
+    } else {
+      cat("Previous run manifest differs from the current inputs; no per-fold caches present, proceeding fresh.\n")
+    }
+    run_manifest$previous_manifest_created <- prev$created
+    run_manifest$inputs_identical_to_previous <- same_inputs
+  } else if (length(legacy_fold_caches) > 0) {
+    # Guard (revision step 1.1, QA follow-up to 1.2): without a manifest the images these
+    # caches were computed from cannot be verified, so they must not be reused.
+    stop(length(legacy_fold_caches), " per-fold caches are present in '", file.path(config$output_dir, "cache", "folds"),
+         "' but '", config$output_dir, "' has no run manifest, so the images they were computed from cannot be ",
+         "verified (they would be reused by configuration key alone). Use a fresh output directory for this run, ",
+         "or restore the manifest of the run that produced them.", call. = FALSE)
+  }
+
+  saveRDS(run_manifest, manifest_file)
+  cat("Run manifest written to", manifest_file, "\n\n")
   
   cat("============================================\n")
   cat("DATA SUMMARY\n")
@@ -1136,8 +1412,10 @@ run_prl_suite_v2 <- function(config = CONFIG) {
   bank <- load_or_compute_bank(paths, config)
 
   # Feature matrices
+  check_bank_fields(bank, config$output_dir)
   dt_mat <- bank_to_matrix(bank, "dt_vec")
   dt_mat_150 <- bank_to_matrix(bank, "dt_vec_150")
+  dt_mat_150_clamped <- bank_to_matrix(bank, "dt_vec_150_clamped")
   betti_mat <- bank_to_matrix(bank, "betti_global_100")
   gpi_mat <- bank_to_matrix(bank, "pi_global")
   
@@ -1145,10 +1423,61 @@ run_prl_suite_v2 <- function(config = CONFIG) {
     lapply(config$v23_variants, function(vv) get_v23_feature_matrix(bank, vv)),
     config$v23_variants
   )
-  
+
+  # ---- Aligned geometry baseline (revision step 1.2): the all-pairs rigid search is a
+  # SHARED, training-free computation (~2 h on DB1), done once per (grid, images) identity
+  # and cached in cache/aligned_<key12>.rds; the fold loop below only LOOKS UP scores.
+  # Its elapsed time is therefore recorded here (aligned_runtime.csv), not in the per-fold
+  # runtime rows, which for this method measure lookup only.
+  aligned_key_now    <- aligned_cache_key(config$aligned, paths)
+  aligned_cache_file <- file.path(config$output_dir, "cache", paste0("aligned_", substr(aligned_key_now, 1, 12), ".rds"))
+  aligned_run_start  <- Sys.time()
+  aligned <- load_or_compute_aligned(bank, paths, config)
+  stopifnot(identical(aligned$key, aligned_key_now), identical(aligned$files, basename(paths)))
+  # The engine stamps `created` only when it computes, so this is TRUE exactly when the search
+  # ran in this call (including the recompute-on-identity-mismatch path inside the engine).
+  aligned_computed_now <- isTRUE(aligned$created >= aligned_run_start)
+  aligned_pidx <- pair_index_matrix(length(paths), aligned$pairs)
+
+  write_csv(tibble(
+    method = "DT_L2_150_aligned", aligned_key = aligned$key, cache_file = basename(aligned_cache_file),
+    computed_this_run = aligned_computed_now, shared_search_minutes = aligned$elapsed_min,
+    n_workers_if_computed_this_run = if (aligned_computed_now) as.integer(config$n_workers) else NA_integer_,
+    n_images = length(aligned$files), n_pairs = nrow(aligned$pairs), canvas = aligned$canvas,
+    theta_max = aligned$config$theta_max, theta_step = aligned$config$theta_step, refine_half = aligned$config$refine_half,
+    t_max = aligned$config$t_max, min_overlap_frac = aligned$config$min_overlap_frac, scorer_version = aligned$config$scorer_version,
+    created = aligned$created,
+    note = "fold_runtimes_seconds.csv rows for this method are score LOOKUP time only"),
+    file.path(config$output_dir, "aligned_runtime.csv"))
+
+  # Per-pair diagnostics and the boundary-hit rates used by the pre-specified expansion
+  # rule (which is evaluated on GENUINE pairs only; impostor rows are context).
+  aligned_pair_type <- ifelse(ids[aligned$pairs$i] == ids[aligned$pairs$j], "genuine", "impostor")
+  aligned_diag <- cbind(aligned$diag, pair_type = aligned_pair_type, stringsAsFactors = FALSE)
+  write_csv(aligned_diag, file.path(config$output_dir, "aligned_pair_diagnostics.csv"))
+  aligned_boundary <- aligned_diag %>%
+    group_by(pair_type) %>%
+    summarize(n = n(),
+              theta_boundary_rate = mean(theta_at_bound),
+              t_boundary_rate     = mean(t_at_bound),
+              content_min_lt_0.5  = mean(content_min < 0.5),
+              median_omega_frac   = median(omega) / config$aligned$frame^2,
+              median_abs_theta    = median(abs(theta)),
+              median_max_abs_t    = median(pmax(abs(tx), abs(ty))),
+              median_d_sym        = median(d_sym),
+              median_d_unaligned  = median(d_unaligned),
+              frac_d_improved     = mean(d_sym < d_unaligned),
+              .groups = "drop") %>%
+    mutate(theta_max = config$aligned$theta_max, t_max = config$aligned$t_max, aligned_key = aligned$key)
+  write_csv(aligned_boundary, file.path(config$output_dir, "aligned_boundary_rates.csv"))
+  cat("Aligned baseline boundary-hit rates (expansion rule applies to genuine pairs only):\n")
+  print(as.data.frame(aligned_boundary[, c("pair_type", "n", "theta_boundary_rate", "t_boundary_rate", "content_min_lt_0.5", "median_omega_frac")]), row.names = FALSE)
+  cat("\n")
+
   runtime_rows <- list()
   fold_records <- list()
   plot_scores <- list()
+  fold_cache_index <- list()   # (fold, method, cache file, extra key) for every method touched in this run
 
   # Fold-level score caching helpers
   fold_cache_dir <- file.path(config$output_dir, "cache", "folds")
@@ -1159,30 +1488,43 @@ run_prl_suite_v2 <- function(config = CONFIG) {
   # stale per-fold score caches.
   fold_key <- substr(fold_cache_key(config), 1, 8)
 
-  fold_cache_path <- function(fold_id, method) {
-    file.path(fold_cache_dir, sprintf("fold%d_%s_%s.rds", fold_id, method, fold_key))
+  # Optional method-specific identity (revision step 1.2): a method may pass an
+  # `extra_key` whose first 8 characters are appended to its cache file name, so that
+  # a change in ITS OWN inputs (e.g. the aligned search grid) invalidates its caches
+  # and nobody else's. Only DT_L2_150_aligned uses this (its full pair-cache key).
+  fold_cache_path <- function(fold_id, method, extra_key = NULL) {
+    suffix <- if (is.null(extra_key)) "" else paste0("_", substr(extra_key, 1, 8))
+    file.path(fold_cache_dir, sprintf("fold%d_%s_%s%s.rds", fold_id, method, fold_key, suffix))
   }
 
-  save_fold_cache <- function(fold_id, method, s_train, s_test, y_train, y_test, elapsed, extras = list()) {
+  save_fold_cache <- function(fold_id, method, s_train, s_test, y_train, y_test, elapsed, extras = list(), extra_key = NULL) {
     obj <- c(list(s_train = s_train, s_test = s_test,
                   y_train = y_train, y_test = y_test, elapsed = elapsed), extras)
-    saveRDS(obj, fold_cache_path(fold_id, method))
+    saveRDS(obj, fold_cache_path(fold_id, method, extra_key))
   }
 
-  load_fold_cache <- function(fold_id, method) {
-    fp <- fold_cache_path(fold_id, method)
+  load_fold_cache <- function(fold_id, method, extra_key = NULL) {
+    fp <- fold_cache_path(fold_id, method, extra_key)
     if (file.exists(fp)) readRDS(fp) else NULL
   }
 
+  record_fold_cache <- function(fold_id, method, extra_key, from_cache) {
+    fold_cache_index[[length(fold_cache_index) + 1]] <<- tibble(
+      fold = fold_id, method = method,
+      file = basename(fold_cache_path(fold_id, method, extra_key)),
+      fold_key = fold_key, extra_key = extra_key %||% NA_character_, loaded_from_cache = from_cache)
+  }
+
   # Helper: run or load a method for a fold
-  run_or_load_method <- function(fold_id, method, compute_fn, y_train, y_test) {
-    cached <- load_fold_cache(fold_id, method)
+  run_or_load_method <- function(fold_id, method, compute_fn, y_train, y_test, extra_key = NULL) {
+    cached <- load_fold_cache(fold_id, method, extra_key)
     if (!is.null(cached)) {
       cat(sprintf("  [cached] %s\n", method))
       res <- eval_fold_method(method, cached$y_train, cached$s_train, cached$y_test, cached$s_test, config$fars_report)
       runtime_rows[[length(runtime_rows) + 1]] <<- tibble(fold = fold_id, method = method, seconds = cached$elapsed)
       fold_records[[length(fold_records) + 1]] <<- list(fold = fold_id, res = res)
       plot_scores[[length(plot_scores) + 1]] <<- tibble(fold = fold_id, method = method, y = cached$y_test, score = cached$s_test)
+      record_fold_cache(fold_id, method, extra_key, TRUE)
       return(list(s_train = cached$s_train, s_test = cached$s_test))
     }
 
@@ -1191,7 +1533,17 @@ run_prl_suite_v2 <- function(config = CONFIG) {
     elapsed <- as.numeric(difftime(Sys.time(), t0, units = "secs"))
 
     extras <- scores[setdiff(names(scores), c("s_train", "s_test"))]
-    save_fold_cache(fold_id, method, scores$s_train, scores$s_test, y_train, y_test, elapsed, extras)
+    # Training-calibrated thresholds at each reported FAR, for fixed-model reuse.
+    # Identical to tar_at_far_train_threshold(); acceptance rule is score >= threshold,
+    # threshold = quantile(training impostor scores, 1 - FAR), R default type 7.
+    imp_train <- scores$s_train[y_train == 0]
+    extras$thresholds <- setNames(
+      vapply(config$fars_report,
+             function(f) as.numeric(quantile(imp_train, probs = 1 - f, na.rm = TRUE)),
+             numeric(1)),
+      paste0("far_", config$fars_report))
+    save_fold_cache(fold_id, method, scores$s_train, scores$s_test, y_train, y_test, elapsed, extras, extra_key)
+    record_fold_cache(fold_id, method, extra_key, FALSE)
 
     runtime_rows[[length(runtime_rows) + 1]] <<- tibble(fold = fold_id, method = method, seconds = elapsed)
     res <- eval_fold_method(method, y_train, scores$s_train, y_test, scores$s_test, config$fars_report)
@@ -1237,6 +1589,32 @@ run_prl_suite_v2 <- function(config = CONFIG) {
            s_test  = score_pairs_l2(pair_test,  dt_mat_150))
     }, y_train, y_test)
 
+    # ---------------- Baseline: DT_L2_150_clamped (matched transformation; audit, 31 Oct 2026) ----------------
+    # The 150x150 fields clamped to [0, 20] and rounded to 0.1 before RMS normalisation, as the
+    # topological methods receive them; otherwise identical to DT_L2_150. Training-free.
+    run_or_load_method(fold_id, "DT_L2_150_clamped", function() {
+      list(s_train = score_pairs_l2(pair_train, dt_mat_150_clamped),
+           s_test  = score_pairs_l2(pair_test,  dt_mat_150_clamped))
+    }, y_train, y_test)
+
+    # ---------------- Baseline: DT_L2_150_aligned (rigid search; revision step 1.2) ----------------
+    # Same inputs as DT_L2_150; score = -d_sym from the shared pair cache computed above
+    # (coarse angular search with local refinement and exhaustive translation search).
+    # Training-free; thresholds come from training-impostor quantiles like every method.
+    # The cache file name carries the pair-cache key, and the cache itself records the
+    # full key and configuration (large diagnostics stay in the pair cache).
+    run_or_load_method(fold_id, "DT_L2_150_aligned", function() {
+      list(s_train = score_pairs_aligned(pair_train, aligned, aligned_pidx),
+           s_test  = score_pairs_aligned(pair_test,  aligned, aligned_pidx),
+           aligned_key        = aligned$key,
+           aligned_config     = aligned$config,
+           aligned_cache_file = basename(aligned_cache_file),
+           canvas             = aligned$canvas,
+           coarse_angles      = aligned$coarse_angles,
+           shared_search_minutes = aligned$elapsed_min,
+           timing_note = "elapsed = score lookup only; the shared alignment search time is in aligned_runtime.csv")
+    }, y_train, y_test, extra_key = aligned$key)
+
     # ---------------- Baseline: GlobalBetti_L1 ----------------
     run_or_load_method(fold_id, "GlobalBetti_L1", function() {
       list(s_train = score_pairs_l1(pair_train, betti_mat),
@@ -1271,7 +1649,8 @@ run_prl_suite_v2 <- function(config = CONFIG) {
           verbose = FALSE
         )
         list(s_train = predict_logistic_pairs(pair_train, feats_v23, model, chunk_size = 8000),
-             s_test  = predict_logistic_pairs(pair_test,  feats_v23, model, chunk_size = 8000))
+             s_test  = predict_logistic_pairs(pair_test,  feats_v23, model, chunk_size = 8000),
+             model   = model)
       }, y_train, y_test)
 
       if (vvar == "V23_full") {
@@ -1306,16 +1685,37 @@ run_prl_suite_v2 <- function(config = CONFIG) {
       cat(sprintf("    Fusion weight (fold %d): w = %.2f\n", fold_id, tune$best_w))
       list(s_train = apply_fusion(ot_main_train, v23_full_train, tune$best_w, tune$zfit_ot, tune$zfit_v),
            s_test  = apply_fusion(ot_main_test,  v23_full_test,  tune$best_w, tune$zfit_ot, tune$zfit_v),
-           best_w  = tune$best_w)
+           best_w  = tune$best_w,
+           zfit_ot = tune$zfit_ot,
+           zfit_v  = tune$zfit_v)
+    }, y_train, y_test)
+
+    # ---------------- Fusion_eq: equal weighting, w = 0.5 (revision step 2.2b) ----------------
+    # Same robust-z normalisation (training-impostor median/MAD) as the tuned Fusion;
+    # the only difference is the fixed weight. No tuning, hence no selection on training TAR.
+    run_or_load_method(fold_id, "Fusion_eq", function() {
+      zfit_ot <- robust_z_fit_train_impostors(ot_main_train, y_train)
+      zfit_v  <- robust_z_fit_train_impostors(v23_full_train, y_train)
+      list(s_train = apply_fusion(ot_main_train, v23_full_train, 0.5, zfit_ot, zfit_v),
+           s_test  = apply_fusion(ot_main_test,  v23_full_test,  0.5, zfit_ot, zfit_v),
+           best_w  = 0.5,
+           zfit_ot = zfit_ot,
+           zfit_v  = zfit_v)
     }, y_train, y_test)
 
     cat(sprintf("  Fold %d done.\n\n", fold_id))
   }
-  
+
+  # Which cache file each (fold, method) was read from or written to in THIS run.
+  # Downstream scripts (bootstrap_ci.R, verify_integration.R) resolve caches through
+  # this index rather than rebuilding file names (method-specific suffixes).
+  fold_cache_index_df <- bind_rows(fold_cache_index)
+  write_csv(fold_cache_index_df, file.path(config$output_dir, "fold_cache_index.csv"))
+
   # ============================================================
   # AGGREGATE RESULTS
   # ============================================================
-  
+
   perf_rows <- list()
   tar_rows <- list()
   
@@ -1368,25 +1768,39 @@ run_prl_suite_v2 <- function(config = CONFIG) {
       .groups = "drop"
     )
   
+  # Per-fold runtime rows measure what happened INSIDE run_or_load_method(). For
+  # DT_L2_150_aligned that is a score lookup from the shared pair cache, so its rows
+  # are labelled as such here and in the summary; the alignment search time itself is
+  # in aligned_runtime.csv (shared_search_minutes) and in each aligned fold cache.
+  runtime_df <- runtime_df %>%
+    mutate(measures = ifelse(method == "DT_L2_150_aligned",
+                             "score lookup only (shared alignment search: see aligned_runtime.csv)",
+                             "per-fold scoring (incl. training where applicable)"))
   runtime_summary <- runtime_df %>%
     group_by(method) %>%
     summarize(
       seconds_mean = mean(seconds, na.rm = TRUE),
       seconds_sd   = sd(seconds, na.rm = TRUE),
+      measures     = first(measures),
       .groups = "drop"
     )
-  
+  if ("DT_L2_150_aligned" %in% runtime_summary$method) {
+    runtime_summary$shared_precompute_minutes <- ifelse(runtime_summary$method == "DT_L2_150_aligned",
+                                                        aligned$elapsed_min, NA_real_)
+  }
+
   # Write outputs
   write_csv(perf_df, file.path(config$output_dir, "fold_metrics_auc_eer.csv"))
   write_csv(tar_df,  file.path(config$output_dir, "fold_metrics_tar.csv"))
   write_csv(runtime_df, file.path(config$output_dir, "fold_runtimes_seconds.csv"))
-  
+
   write_csv(perf_summary, file.path(config$output_dir, "summary_auc_eer_mean_sd.csv"))
   write_csv(tar_summary,  file.path(config$output_dir, "summary_tar_mean_sd.csv"))
   write_csv(runtime_summary, file.path(config$output_dir, "summary_runtime_mean_sd.csv"))
-  
-  # Publication-friendly display table
-  main_methods <- c("DT_L2", "DT_L2_150", "GlobalBetti_L1", "GlobalPI_L2", "V23_full", "OT", "Fusion")
+
+  # Publication-friendly display table (order; all other methods follow alphabetically)
+  main_methods <- c("DT_L2", "DT_L2_150", "DT_L2_150_clamped", "DT_L2_150_aligned", "GlobalBetti_L1", "GlobalPI_L2",
+                    "V23_full", "OT", "Fusion", "Fusion_eq")
   
   tar_wide <- tar_summary %>%
     mutate(FAR_label = paste0("TAR@", format(FAR, scientific = TRUE))) %>%
@@ -1421,17 +1835,22 @@ run_prl_suite_v2 <- function(config = CONFIG) {
 
   # Publication-ready method labels and colorblind-friendly palette
   method_labels <- c(
-    "DT_L2"          = "DT L2 (50\u00b2)",
-    "DT_L2_150"      = "DT L2 (150\u00b2)",
-    "GlobalBetti_L1" = "Betti L1",
-    "GlobalPI_L2"    = "PI L2",
-    "V23_full"       = "TopoLR",
-    "OT"             = "LPOT",
-    "Fusion"         = "Fusion"
+    "DT_L2"             = "DT L2 (50\u00b2)",
+    "DT_L2_150"         = "DT L2 (150\u00b2)",
+    "DT_L2_150_clamped" = "DT L2 (150\u00b2, clamped)",
+    "DT_L2_150_aligned" = "DT L2 (150\u00b2, aligned)",
+    "GlobalBetti_L1"    = "Betti L1",
+    "GlobalPI_L2"       = "PI L2",
+    "V23_full"          = "TopoLR",
+    "OT"                = "LPOT",
+    "Fusion"            = "Fusion",
+    "Fusion_eq"         = "Fusion (equal)"
   )
 
-  # Compute pooled AUCs for legend
-  roc_plot_methods <- c("DT_L2", "DT_L2_150", "GlobalBetti_L1", "GlobalPI_L2", "V23_full", "OT", "Fusion")
+  # Compute pooled AUCs for legend. (Figure COMPOSITION for the revised paper is a later,
+  # separate decision; the new methods are included here so they can be judged.)
+  roc_plot_methods <- c("DT_L2", "DT_L2_150", "DT_L2_150_aligned", "GlobalBetti_L1", "GlobalPI_L2",
+                        "V23_full", "OT", "Fusion", "Fusion_eq")
   pooled_aucs <- scores_df %>%
     filter(method %in% roc_plot_methods) %>%
     group_by(method) %>%
@@ -1443,15 +1862,17 @@ run_prl_suite_v2 <- function(config = CONFIG) {
     pooled_aucs$method
   )
 
-  # Wong (2011) colorblind-safe palette (7 colors)
+  # Wong (2011) / Okabe-Ito colorblind-safe palette (the 8 colours, plus black)
   cb_palette <- c(
-    "DT_L2"          = "#999999",
-    "DT_L2_150"      = "#E69F00",
-    "GlobalBetti_L1" = "#56B4E9",
-    "GlobalPI_L2"    = "#009E73",
-    "V23_full"       = "#CC79A7",
-    "OT"             = "#0072B2",
-    "Fusion"         = "#D55E00"
+    "DT_L2"             = "#999999",
+    "DT_L2_150"         = "#E69F00",
+    "DT_L2_150_aligned" = "#F0E442",
+    "GlobalBetti_L1"    = "#56B4E9",
+    "GlobalPI_L2"       = "#009E73",
+    "V23_full"          = "#CC79A7",
+    "OT"                = "#0072B2",
+    "Fusion"            = "#D55E00",
+    "Fusion_eq"         = "#000000"
   )
 
   roc_long <- scores_df %>%
@@ -1475,6 +1896,7 @@ run_prl_suite_v2 <- function(config = CONFIG) {
   roc_labels    <- c(auc_legend, "Chance" = "Chance")
   roc_linetypes <- c(setNames(rep("solid", length(roc_plot_methods)), roc_plot_methods),
                      "Chance" = "22")  # short on/off dash so it reads as dashed in the short legend key
+  legend_rows   <- if (length(roc_levels) > 8) 3 else 2
 
   p_roc <- ggplot(roc_long, aes(x = FPR, y = TPR, color = method, linetype = method)) +
     geom_line(linewidth = 0.8) +
@@ -1493,14 +1915,18 @@ run_prl_suite_v2 <- function(config = CONFIG) {
           legend.text = element_text(size = 8),
           legend.key.width = grid::unit(0.9, "cm"),
           panel.grid.minor.y = element_blank()) +
-    guides(color = guide_legend(nrow = 2), linetype = guide_legend(nrow = 2))
+    guides(color = guide_legend(nrow = legend_rows), linetype = guide_legend(nrow = legend_rows))
 
   ggsave(file.path(config$output_dir, "roc_pooled.png"), p_roc, width = 6.151, height = 4.5, dpi = 300)
   ggsave(file.path(config$output_dir, "roc_pooled.pdf"), p_roc, width = 6.151, height = 4.5)
-  file.copy(file.path(config$output_dir, "roc_pooled.pdf"), "Manuscript/roc_pooled.pdf", overwrite = TRUE)
-  cat("  ROC figure (PDF) copied to Manuscript/\n")
+  if (isTRUE(config$export_to_manuscript %||% TRUE)) {
+    file.copy(file.path(config$output_dir, "roc_pooled.pdf"), "Manuscript/roc_pooled.pdf", overwrite = TRUE)
+    cat("  ROC figure (PDF) copied to Manuscript/\n")
+  } else {
+    cat("  (export_to_manuscript = FALSE: Manuscript/roc_pooled.pdf left untouched)\n")
+  }
 
-  tar_plot_methods <- c("GlobalBetti_L1", "V23_full", "OT", "Fusion")
+  tar_plot_methods <- c("GlobalBetti_L1", "V23_full", "OT", "Fusion", "Fusion_eq")
   tar_plot_df <- tar_summary %>% filter(method %in% tar_plot_methods)
 
   p_tar <- ggplot(tar_plot_df, aes(x = FAR, y = TAR_mean, color = method)) +

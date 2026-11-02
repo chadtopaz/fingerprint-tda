@@ -1,31 +1,34 @@
 # Data
 
-This directory is intentionally **empty** in the repository. The study uses a third-party benchmark that we do not redistribute; you must obtain it and prepare it locally.
+This directory is intentionally empty in the repository except for this file. The study uses two third-party benchmarks that we do not redistribute; obtain them, lay them out as below, and run the preprocessing script. Nothing under `Data/` other than this README is tracked (`.gitignore`); the released manifests under `Results/Data/` let you check your preprocessing against ours.
 
-## Dataset
+## Benchmarks
 
-**FVC2000 DB1**, full set ("DB1_A"): 100 fingers x 8 impressions = **800 images**, acquired at 500 dpi with a low-cost optical sensor (300 x 300 px). Cite as:
+- **FVC2000 DB1** (set A: 100 fingers × 8 impressions = 800 images, optical sensor, 300 × 300 pixels, 500 dpi). Maio, D., Maltoni, D., Cappelli, R., Wayman, J. L., and Jain, A. K. (2002). FVC2000: Fingerprint verification competition. *IEEE TPAMI* 24(3), 402–412.
+- **FVC2002 DB3** (set A: 100 × 8, capacitive sensor, 300 × 300 pixels). Maio, D., Maltoni, D., Cappelli, R., Wayman, J. L., and Jain, A. K. (2002). FVC2002: Second fingerprint verification competition. *Proc. ICPR*, 811–814.
 
-> Maio, D., Maltoni, D., Cappelli, R., Wayman, J. L., and Jain, A. K. (2002). FVC2000: Fingerprint verification competition. *IEEE Transactions on Pattern Analysis and Machine Intelligence*, 24(3), 402-412.
+The full 100-finger sets are distributed on the DVD accompanying the *Handbook of Fingerprint Recognition* (Maltoni, Maio, Jain, and Feng; Springer, 3rd ed., 2022); the competition sites (<http://bias.csr.unibo.it/fvc2000/>, <http://bias.csr.unibo.it/fvc2002/>) host the competition details and the small free subsets (set B, 10 fingers), which are *not* the sets used in the paper.
 
-### Where to get it
+## Layout
 
-- The **full 100-finger DB1** is distributed on the DVD accompanying the *Handbook of Fingerprint Recognition* (Maltoni, Maio, Jain, and Feng; Springer, 3rd ed., 2022).
-- The FVC2000 competition site, <http://bias.csr.unibo.it/fvc2000/>, hosts competition details and a small free subset (**DB1_B**, 10 fingers x 8 = 80 images). DB1_B is *not* the 100-finger set used in the paper.
+```
+Data/FVC2000_raw/<finger>_<impression>.tif       1_1.tif ... 100_8.tif   (800 raw 8-bit grayscale TIFFs)
+Data/FVC2002_DB3_raw/<finger>_<impression>.tif   same naming
+```
 
-## Preparing the binary images the code reads
+## Preprocessing (the binary maps the pipeline reads)
 
-The pipeline does not read raw FVC2000 images directly; it reads **enhanced binary** ridge/valley segmentations.
+`Code/preprocess.py` applies the Hong–Wan–Jain enhancement as packaged in Fingerprint-Enhancement-Python 0.0.14 (library defaults) and writes 0/255 PNGs, ridge = 255, plus a manifest:
 
-1. Apply Hong-Wan-Jain enhancement, as implemented in the **Fingerprint-Enhancement-Python** library (Utkarsh Deshmukh, <https://github.com/Utkarsh-Deshmukh/Fingerprint-Enhancement-Python>), with default parameters, to each raw image.
-2. Save the results as PNGs in this directory under `FVC2000_binary/`, named:
+```bash
+python3 -m venv .venv-preprocess && .venv-preprocess/bin/pip install -r Code/requirements-preprocess.txt
+.venv-preprocess/bin/python Code/preprocess.py --input Data/FVC2000_raw     --output Data/FVC2000_binary_regen
+.venv-preprocess/bin/python Code/preprocess.py --input Data/FVC2002_DB3_raw --output Data/FVC2002_DB3_binary
+.venv-preprocess/bin/python Code/check_binary_set.py --binary Data/FVC2000_binary_regen --raw Data/FVC2000_raw --out Outputs_preprocess_check/db1
+```
 
-   ```
-   Data/FVC2000_binary/<finger>_<impression>_bin.png
-   ```
+The procedure is deterministic and gave bit-identical output across the tested library and Python versions (see the requirement files). Each output directory's `preprocess_manifest.json` records the environment, the parameters and, per image, the input md5, the output md5 and the ridge fraction. Compare it with the released `Results/Data/FVC2000_binary_regen/preprocess_manifest.json` (and the DB3 one): equal output md5s for all 800 images mean your binary maps are the ones the paper used; the pipeline then reproduces the reported results exactly in the tested software configuration (R 4.5.3, the package versions recorded in each run manifest's session information, the seeds fixed in the code) and, across other R, BLAS or package versions, up to floating-point differences that the manifests let you measure.
 
-   for example `1_1_bin.png`, `1_2_bin.png`, ..., `100_8_bin.png` (800 files).
+The sensitivity experiment additionally needs the six enhancement variants (`preprocess.py --param KEY=VALUE`, overrides listed in `Code/sensitivity/score_perturbed.R`) under `Data/FVC2000_binary_variant/<condition>/`, and the four calibrated degradations of the raw DB1 images (`Code/sensitivity/calibrate_degradations.py`, `degrade_raw.py`, then `preprocess.py` on each `Data/FVC2000_raw_degraded/<condition>/` into `Data/FVC2000_binary_degraded/<condition>/`); the README's step 7 gives the order.
 
-The loader (`read_binary_fingerprint`) reads every `*.png` here, infers the finger identity from the filename prefix before the first underscore, and treats ridge pixels as the minority class (inverting the labeling automatically if more than half the pixels are flagged as ridge).
-
-Note: exact bit-for-bit reproduction of the binary images depends on the enhancement library version. Given a fixed set of binary images, the downstream topological pipeline is exactly reproducible (all seeds and iteration counts are fixed).
+The loader reads every `*_bin.png` of a binary directory, infers the finger identity from the file-name prefix before the first underscore, and inverts an image whose white fraction exceeds one half (none of the canonical images does).

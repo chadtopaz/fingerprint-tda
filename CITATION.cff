@@ -16,8 +16,9 @@ authors:
 license: MIT
 repository-code: "https://github.com/chadtopaz/fingerprint-tda"
 doi: "10.5281/zenodo.20772749"
-version: 1.0.0
-date-released: 2026-06-20
+version: 1.1.0
+date-released: 2026-11-01
+abstract: "Replication code for the revised manuscript: preprocessing, the topological verification pipeline (eight methods on FVC2000 DB1 and FVC2002 DB3), the NBIS reference matcher, finger-level bootstrap intervals, the DB1-to-DB3 transfer, the fixed-model sensitivity experiment, the cubical-construction comparison, and the scripts that regenerate every table and figure. The DOI above is the Zenodo concept DOI, which resolves to the latest version; the version-specific DOI of release 1.1.0 is minted by Zenodo when the GitHub release is published."
 preferred-citation:
   type: article
   title: "Topological summaries of fingerprint ridge patterns carry identity information"
@@ -33,4 +34,4 @@ preferred-citation:
     - family-names: Ziegelmeier
       given-names: Lori
   year: 2026
-  notes: "Manuscript in submission."
+  notes: "Manuscript under revision, Pattern Recognition."

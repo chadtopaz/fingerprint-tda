@@ -1,0 +1,7 @@
+# Python environment for the sensitivity experiment's image operators and calibration
+# (Code/sensitivity/degrade_raw.py, calibrate_degradations.py) and for the NBIS wrapper
+# (Code/reference_matcher/run_nbis_matcher.py). Install into the preprocessing environment
+# (requirements-preprocess.txt or requirements-preprocess-py314.txt), which pins the enhancer:
+#     .venv-preprocess/bin/pip install -r Code/requirements-sensitivity.txt
+Pillow>=10
+scikit-image>=0.22

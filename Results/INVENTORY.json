@@ -1,0 +1,1628 @@
+{
+ "created": "2026-11-02T06:42:47-0500",
+ "scope": "final",
+ "n_files": 270,
+ "policy": "(release step 5, 1 Nov 2026): nothing derived from the licensed images at the pixel or pair level is\nshipped \u2014 no image, binary map, degraded image, feature bank, fold cache, pair-score file, bootstrap replicate\nfile or NBIS template/score file. Only files of the kinds below, each of which carries estimates, counts, settings,\nhashes or per-image scalar descriptors. The inventory records each file's sha256, size and source run, and\n`check` fails on any missing, altered or unlisted file and on any forbidden file kind anywhere under the target.",
+ "files": [
+  {
+   "path": "Outputs_regen_v2/fold_metrics_auc_eer.csv",
+   "sha256": "4787a008e921c07359e1231f664e82ab03de58b48236527966055b878a33fff6",
+   "bytes": 4417,
+   "source": "canonical DB1 run (17 methods)"
+  },
+  {
+   "path": "Outputs_regen_v2/fold_metrics_tar.csv",
+   "sha256": "b06849b9f0f6471be0510349b2f287c64f0cd9909d1a36bb9de7747f1bea67f7",
+   "bytes": 12613,
+   "source": "canonical DB1 run (17 methods)"
+  },
+  {
+   "path": "Outputs_regen_v2/summary_auc_eer_mean_sd.csv",
+   "sha256": "954f8932ba6ec43ab8258583b823df72e5ade208b6887a2f6040687a9644b33b",
+   "bytes": 1592,
+   "source": "canonical DB1 run (17 methods)"
+  },
+  {
+   "path": "Outputs_regen_v2/summary_tar_mean_sd.csv",
+   "sha256": "20022fdbd5fd7b12a45a0b6aedb7a2db87c9b4f985b0efcf9064fa08bb4fb524",
+   "bytes": 3788,
+   "source": "canonical DB1 run (17 methods)"
+  },
+  {
+   "path": "Outputs_regen_v2/fusion_weights_per_fold.csv",
+   "sha256": "8c5c1be0369dcb268f1fd4b32be1bcbbbd2280abf040c767d8eefb93d0d948f2",
+   "bytes": 47,
+   "source": "canonical DB1 run (17 methods)"
+  },
+  {
+   "path": "Outputs_regen_v2/aligned_boundary_rates.csv",
+   "sha256": "a423b008f927cb50a6fb1fb5b4b94231858394f05ca7c2ef91d9fc53fe8d9dab",
+   "bytes": 585,
+   "source": "canonical DB1 run (17 methods)"
+  },
+  {
+   "path": "Outputs_regen_v2/aligned_runtime.csv",
+   "sha256": "9e0a1fd56784972d44a7b460dd6685294c1684ddb8b83ee7a7b5a36d8d3b6f26",
+   "bytes": 473,
+   "source": "canonical DB1 run (17 methods)"
+  },
+  {
+   "path": "Outputs_regen_v2/fold_runtimes_seconds.csv",
+   "sha256": "b6fe71cac6e98e4b0773a45bdcaeaea409b5b6b421c32ab5ee5db8ca1e9e24ad",
+   "bytes": 7212,
+   "source": "canonical DB1 run (17 methods)"
+  },
+  {
+   "path": "Outputs_regen_v2/summary_runtime_mean_sd.csv",
+   "sha256": "3baa095741879a4be348b5ddbc7aff47574d29e085fb3268581532a8138ff6d3",
+   "bytes": 1867,
+   "source": "canonical DB1 run (17 methods)"
+  },
+  {
+   "path": "Outputs_regen_v2/fold_cache_index.csv",
+   "sha256": "007d83b9b879bfc071e35c9469a87c22ccd26a72d1dc3b18361341c6cb0b7e90",
+   "bytes": 5694,
+   "source": "canonical DB1 run (17 methods)"
+  },
+  {
+   "path": "Outputs_regen_v2/analysis/ci_metrics.csv",
+   "sha256": "81400fed5cce4938afc58d9519a9243e9996388b6cb2611e536c0cad1afab84b",
+   "bytes": 18647,
+   "source": "canonical DB1 run (17 methods)"
+  },
+  {
+   "path": "Outputs_regen_v2/analysis/ci_paired_differences.csv",
+   "sha256": "b2d0d0ccf7b5b64455a41999bfa186cff9d46c92d424c1b03a71b950a7b70606",
+   "bytes": 28154,
+   "source": "canonical DB1 run (17 methods)"
+  },
+  {
+   "path": "Outputs_regen_v2/analysis/ci_metrics_per_fold.csv",
+   "sha256": "c0b6efe31eb5a11302d24316a75d052f844025430031af2c2b41aedc52a83180",
+   "bytes": 68620,
+   "source": "canonical DB1 run (17 methods)"
+  },
+  {
+   "path": "Outputs_regen_v2/analysis/acceptance_counts.csv",
+   "sha256": "ca327db4b646a9b99700c53f5960f2f098b6a5ed47cab8d29b603a1c1c648fa7",
+   "bytes": 20718,
+   "source": "canonical DB1 run (17 methods)"
+  },
+  {
+   "path": "Outputs_regen_v2/analysis/endpoint_stability.csv",
+   "sha256": "8735fcf7b37fbc95bb819c50c95a758797a7998d41e7e1fdeb5732e02a3244a4",
+   "bytes": 24666,
+   "source": "canonical DB1 run (17 methods)"
+  },
+  {
+   "path": "Outputs_regen_v2/analysis/bootstrap_settings.txt",
+   "sha256": "34ab0aed79e10514855312a75b4c8e4d32b36705656718388e46b614270bf8ac",
+   "bytes": 1247,
+   "source": "canonical DB1 run (17 methods)"
+  },
+  {
+   "path": "Outputs_regen_v2/analysis/fusion_eq_fold_metrics.csv",
+   "sha256": "fe6239c4e4f1edde10f09f2fc6a5fcd5a7230468ba0bfdf5db6dc79ad2ece7d5",
+   "bytes": 1113,
+   "source": "canonical DB1 run (17 methods)"
+  },
+  {
+   "path": "Outputs_regen_v2/analysis/fusion_weights.csv",
+   "sha256": "8c5c1be0369dcb268f1fd4b32be1bcbbbd2280abf040c767d8eefb93d0d948f2",
+   "bytes": 47,
+   "source": "canonical DB1 run (17 methods)"
+  },
+  {
+   "path": "Outputs_regen_v2/analysis/selfcheck_point_estimates.csv",
+   "sha256": "a75ec91d5fde21fe4d1352660b7eb9888171e75a0b91ff44d2fd02d816f2db46",
+   "bytes": 28368,
+   "source": "canonical DB1 run (17 methods)"
+  },
+  {
+   "path": "Outputs_db3_v2/fold_metrics_auc_eer.csv",
+   "sha256": "62ec6168e18a86bf900284b694a91e239447051dc4d1b72ba238ddeafcfffb02",
+   "bytes": 4323,
+   "source": "canonical DB3 run (17 methods)"
+  },
+  {
+   "path": "Outputs_db3_v2/fold_metrics_tar.csv",
+   "sha256": "9589f685effbac2c3ce4e6570236d954bd01fd8d20bedaace85321c095b467ac",
+   "bytes": 12767,
+   "source": "canonical DB3 run (17 methods)"
+  },
+  {
+   "path": "Outputs_db3_v2/summary_auc_eer_mean_sd.csv",
+   "sha256": "03626804bc9589857eb8329360a8d0ae01376070568e9de727a65cd987a5e2d1",
+   "bytes": 1585,
+   "source": "canonical DB3 run (17 methods)"
+  },
+  {
+   "path": "Outputs_db3_v2/summary_tar_mean_sd.csv",
+   "sha256": "d8237e6cef49ecb36e3ee3a0aacbc6d2b80cb174fe3faeeca2f7ef42fc7b18ac",
+   "bytes": 3861,
+   "source": "canonical DB3 run (17 methods)"
+  },
+  {
+   "path": "Outputs_db3_v2/fusion_weights_per_fold.csv",
+   "sha256": "d6dcb64da145a9aad1000be5709e5b5a90af6b0df98b292176025e20adf0fc0a",
+   "bytes": 47,
+   "source": "canonical DB3 run (17 methods)"
+  },
+  {
+   "path": "Outputs_db3_v2/aligned_boundary_rates.csv",
+   "sha256": "a435d518da78ca6d2c60904cd471bf2441afaaf23ead79efe9cb14f1ecb34e83",
+   "bytes": 591,
+   "source": "canonical DB3 run (17 methods)"
+  },
+  {
+   "path": "Outputs_db3_v2/aligned_runtime.csv",
+   "sha256": "aebc6e86ecbaf106bfe23646025ac79d37248462cba84755d2a7fc5e53c8cf96",
+   "bytes": 473,
+   "source": "canonical DB3 run (17 methods)"
+  },
+  {
+   "path": "Outputs_db3_v2/fold_runtimes_seconds.csv",
+   "sha256": "c5167b971c585c5fe368a28387b065e138eece02f91811183fab84292160da28",
+   "bytes": 7208,
+   "source": "canonical DB3 run (17 methods)"
+  },
+  {
+   "path": "Outputs_db3_v2/summary_runtime_mean_sd.csv",
+   "sha256": "797e314bbce91ca518c6d46dfd0986739050629fefc66f960e4c5fb757efe32e",
+   "bytes": 1860,
+   "source": "canonical DB3 run (17 methods)"
+  },
+  {
+   "path": "Outputs_db3_v2/fold_cache_index.csv",
+   "sha256": "9868c0985834143df912c00c4fe2b9b48e6f28ef98d9d2d9eebb195a8d40d179",
+   "bytes": 5694,
+   "source": "canonical DB3 run (17 methods)"
+  },
+  {
+   "path": "Outputs_db3_v2/analysis/ci_metrics.csv",
+   "sha256": "01db0430482f5b899b9dda1955e9f3768306363624508b1462b843491545148b",
+   "bytes": 18651,
+   "source": "canonical DB3 run (17 methods)"
+  },
+  {
+   "path": "Outputs_db3_v2/analysis/ci_paired_differences.csv",
+   "sha256": "2e4f86a09fa0dedc3970b3c0a62593b869d4420d21f66802d1430324cdcd26c8",
+   "bytes": 28389,
+   "source": "canonical DB3 run (17 methods)"
+  },
+  {
+   "path": "Outputs_db3_v2/analysis/ci_metrics_per_fold.csv",
+   "sha256": "27a5823ea55b123eedfccf0a0ad4264eddcedf582225d1345fd440247df403c7",
+   "bytes": 68174,
+   "source": "canonical DB3 run (17 methods)"
+  },
+  {
+   "path": "Outputs_db3_v2/analysis/acceptance_counts.csv",
+   "sha256": "935b9b3bcc2c77de3322f09feaeefccd34e211a14bb7d656c6ccc04a05931cd5",
+   "bytes": 20622,
+   "source": "canonical DB3 run (17 methods)"
+  },
+  {
+   "path": "Outputs_db3_v2/analysis/endpoint_stability.csv",
+   "sha256": "c5354eebcfa37995b6acfbc29acb0272c192c41bdd88d2ed3e8159b9bc0ea682",
+   "bytes": 24522,
+   "source": "canonical DB3 run (17 methods)"
+  },
+  {
+   "path": "Outputs_db3_v2/analysis/bootstrap_settings.txt",
+   "sha256": "34ab0aed79e10514855312a75b4c8e4d32b36705656718388e46b614270bf8ac",
+   "bytes": 1247,
+   "source": "canonical DB3 run (17 methods)"
+  },
+  {
+   "path": "Outputs_db3_v2/analysis/fusion_eq_fold_metrics.csv",
+   "sha256": "5d3e2a1ae1894d0ae216fd469b9744d545e21fa076c6dc9f519b71a658492f2e",
+   "bytes": 1022,
+   "source": "canonical DB3 run (17 methods)"
+  },
+  {
+   "path": "Outputs_db3_v2/analysis/fusion_weights.csv",
+   "sha256": "d6dcb64da145a9aad1000be5709e5b5a90af6b0df98b292176025e20adf0fc0a",
+   "bytes": 47,
+   "source": "canonical DB3 run (17 methods)"
+  },
+  {
+   "path": "Outputs_db3_v2/analysis/selfcheck_point_estimates.csv",
+   "sha256": "8af298b23d3aac66eaf53e64eabb56f142843bc57a93a5c8104f16b7fd1e77e8",
+   "bytes": 28749,
+   "source": "canonical DB3 run (17 methods)"
+  },
+  {
+   "path": "Outputs_reference_db1_v2/fold_metrics_auc_eer.csv",
+   "sha256": "cc2261feb27d9dacbab026d7def8b971af1dbd3967607d3484cd69b59f03d518",
+   "bytes": 5510,
+   "source": "DB1 run + NBIS reference matcher + two NBIS fusions"
+  },
+  {
+   "path": "Outputs_reference_db1_v2/fold_metrics_tar.csv",
+   "sha256": "b92eda13281730ff8527edcd6b71b617a0822b9fdc8888a05d5364f81ec245ac",
+   "bytes": 15829,
+   "source": "DB1 run + NBIS reference matcher + two NBIS fusions"
+  },
+  {
+   "path": "Outputs_reference_db1_v2/reference_fold_metrics.csv",
+   "sha256": "97ded878fd38c7ca3a82a105b2160351c8b1969e36de9f9fd4da7ba64bd3fd3e",
+   "bytes": 4341,
+   "source": "DB1 run + NBIS reference matcher + two NBIS fusions"
+  },
+  {
+   "path": "Outputs_reference_db1_v2/fold_cache_index.csv",
+   "sha256": "0f093e793f25aaa3b3209ceb3734cc1274ee6dd6820843eae80ff89c8f234cee",
+   "bytes": 7084,
+   "source": "DB1 run + NBIS reference matcher + two NBIS fusions"
+  },
+  {
+   "path": "Outputs_reference_db1_v2/REFERENCE_README.txt",
+   "sha256": "305fec12feadf5d119a4e83cc525137b73e77ef7ba6e45d0f61f3b13865b9544",
+   "bytes": 512,
+   "source": "DB1 run + NBIS reference matcher + two NBIS fusions"
+  },
+  {
+   "path": "Outputs_reference_db1_v2/analysis/ci_metrics.csv",
+   "sha256": "9995777c63efe6a697173a7afdd64b52581ce135d94efd379e39d0be10c05a78",
+   "bytes": 23127,
+   "source": "DB1 run + NBIS reference matcher + two NBIS fusions"
+  },
+  {
+   "path": "Outputs_reference_db1_v2/analysis/ci_paired_differences.csv",
+   "sha256": "94308c98f2da8e2e379442c95a54dc9039b1f6457eb90aa877ce32e42f8f24ea",
+   "bytes": 35938,
+   "source": "DB1 run + NBIS reference matcher + two NBIS fusions"
+  },
+  {
+   "path": "Outputs_reference_db1_v2/analysis/ci_metrics_per_fold.csv",
+   "sha256": "b60b125e59d16521a87ac74e35d0e925f6257b8212ca9ca6af1df75bd35d8497",
+   "bytes": 85413,
+   "source": "DB1 run + NBIS reference matcher + two NBIS fusions"
+  },
+  {
+   "path": "Outputs_reference_db1_v2/analysis/acceptance_counts.csv",
+   "sha256": "f9eed0b5ffc10a6c776fc76866a384c44d4f539fba857de73fcf4aa424a3a72a",
+   "bytes": 25251,
+   "source": "DB1 run + NBIS reference matcher + two NBIS fusions"
+  },
+  {
+   "path": "Outputs_reference_db1_v2/analysis/endpoint_stability.csv",
+   "sha256": "3b82fc461a9ea9e2d2d409ba3e08a0024ba8ee16f629dd1a54dc417299030ad6",
+   "bytes": 30542,
+   "source": "DB1 run + NBIS reference matcher + two NBIS fusions"
+  },
+  {
+   "path": "Outputs_reference_db1_v2/analysis/bootstrap_settings.txt",
+   "sha256": "34ab0aed79e10514855312a75b4c8e4d32b36705656718388e46b614270bf8ac",
+   "bytes": 1247,
+   "source": "DB1 run + NBIS reference matcher + two NBIS fusions"
+  },
+  {
+   "path": "Outputs_reference_db1_v2/analysis/fusion_eq_fold_metrics.csv",
+   "sha256": "fe6239c4e4f1edde10f09f2fc6a5fcd5a7230468ba0bfdf5db6dc79ad2ece7d5",
+   "bytes": 1113,
+   "source": "DB1 run + NBIS reference matcher + two NBIS fusions"
+  },
+  {
+   "path": "Outputs_reference_db1_v2/analysis/fusion_weights.csv",
+   "sha256": "8c5c1be0369dcb268f1fd4b32be1bcbbbd2280abf040c767d8eefb93d0d948f2",
+   "bytes": 47,
+   "source": "DB1 run + NBIS reference matcher + two NBIS fusions"
+  },
+  {
+   "path": "Outputs_reference_db1_v2/analysis/selfcheck_point_estimates.csv",
+   "sha256": "7f9b5d0aaf8224824deb0f5cfb0ac0076786546c1085fad0227f0179ce70b6ae",
+   "bytes": 34293,
+   "source": "DB1 run + NBIS reference matcher + two NBIS fusions"
+  },
+  {
+   "path": "Outputs_reference_db3_v2/fold_metrics_auc_eer.csv",
+   "sha256": "b63a1d72bc2336b1d917dcefaf12865ffd11890a9229617abe5052b234d37990",
+   "bytes": 5395,
+   "source": "DB3 run + NBIS reference matcher + two NBIS fusions"
+  },
+  {
+   "path": "Outputs_reference_db3_v2/fold_metrics_tar.csv",
+   "sha256": "f293ead52e5986cd54d127bf8fb348f044be1ae40add5b08df852e6f8ddb252f",
+   "bytes": 15912,
+   "source": "DB3 run + NBIS reference matcher + two NBIS fusions"
+  },
+  {
+   "path": "Outputs_reference_db3_v2/reference_fold_metrics.csv",
+   "sha256": "47c52c888a35c448c81b5b7c0b683f46dc5181ede3866710bfc3ed271704322c",
+   "bytes": 4274,
+   "source": "DB3 run + NBIS reference matcher + two NBIS fusions"
+  },
+  {
+   "path": "Outputs_reference_db3_v2/fold_cache_index.csv",
+   "sha256": "c6d889dcc8ac32f72c8c65d754fecea43df27d7217a76dd65e434685bc8457f2",
+   "bytes": 7084,
+   "source": "DB3 run + NBIS reference matcher + two NBIS fusions"
+  },
+  {
+   "path": "Outputs_reference_db3_v2/REFERENCE_README.txt",
+   "sha256": "f4b4ed96d4a2cc6d491a1decc5ae59e33727aab039a557acdd46f88c47312814",
+   "bytes": 510,
+   "source": "DB3 run + NBIS reference matcher + two NBIS fusions"
+  },
+  {
+   "path": "Outputs_reference_db3_v2/analysis/ci_metrics.csv",
+   "sha256": "0e61192e3f1234f12d67721d5b0f38e3e4381105b9715eb183dd9cc4f886c09e",
+   "bytes": 23159,
+   "source": "DB3 run + NBIS reference matcher + two NBIS fusions"
+  },
+  {
+   "path": "Outputs_reference_db3_v2/analysis/ci_paired_differences.csv",
+   "sha256": "c986b58ebe665323190f8d45599e6ec6854724ec1d702adddd5686670c165e2d",
+   "bytes": 36147,
+   "source": "DB3 run + NBIS reference matcher + two NBIS fusions"
+  },
+  {
+   "path": "Outputs_reference_db3_v2/analysis/ci_metrics_per_fold.csv",
+   "sha256": "4331eb10ce288fc877f0e742f5457800cca02966815c029c4044ebd3952593ae",
+   "bytes": 85218,
+   "source": "DB3 run + NBIS reference matcher + two NBIS fusions"
+  },
+  {
+   "path": "Outputs_reference_db3_v2/analysis/acceptance_counts.csv",
+   "sha256": "545c1c586d030b1797ec0778dcfd0b1ebd52d7ebde1635ebe8d11dc0a75b8c63",
+   "bytes": 25186,
+   "source": "DB3 run + NBIS reference matcher + two NBIS fusions"
+  },
+  {
+   "path": "Outputs_reference_db3_v2/analysis/endpoint_stability.csv",
+   "sha256": "5591db540855d8576e0a09c1fc6e91bda1ea4cbbf706291208dc324e418edf9b",
+   "bytes": 30404,
+   "source": "DB3 run + NBIS reference matcher + two NBIS fusions"
+  },
+  {
+   "path": "Outputs_reference_db3_v2/analysis/bootstrap_settings.txt",
+   "sha256": "34ab0aed79e10514855312a75b4c8e4d32b36705656718388e46b614270bf8ac",
+   "bytes": 1247,
+   "source": "DB3 run + NBIS reference matcher + two NBIS fusions"
+  },
+  {
+   "path": "Outputs_reference_db3_v2/analysis/fusion_eq_fold_metrics.csv",
+   "sha256": "5d3e2a1ae1894d0ae216fd469b9744d545e21fa076c6dc9f519b71a658492f2e",
+   "bytes": 1022,
+   "source": "DB3 run + NBIS reference matcher + two NBIS fusions"
+  },
+  {
+   "path": "Outputs_reference_db3_v2/analysis/fusion_weights.csv",
+   "sha256": "d6dcb64da145a9aad1000be5709e5b5a90af6b0df98b292176025e20adf0fc0a",
+   "bytes": 47,
+   "source": "DB3 run + NBIS reference matcher + two NBIS fusions"
+  },
+  {
+   "path": "Outputs_reference_db3_v2/analysis/selfcheck_point_estimates.csv",
+   "sha256": "a5041636fe73666fac3d6c98510aeff19c51c06a41c6f7bc8fca0b6f5d1836b0",
+   "bytes": 34576,
+   "source": "DB3 run + NBIS reference matcher + two NBIS fusions"
+  },
+  {
+   "path": "Outputs_regen/summary_runtime_mean_sd.csv",
+   "sha256": "a29cca2be929390f2dd1441327d0bcac33722330a0c8f5d86a8584fe22a75608",
+   "bytes": 1754,
+   "source": "canonical DB1 run that measured the runtimes and performed the alignment search (bit-identical scores to Outputs_regen_v2)"
+  },
+  {
+   "path": "Outputs_regen/fold_runtimes_seconds.csv",
+   "sha256": "7751fe5db8cdc5e38e821b18356981dc9ccddfe0248e73b6848c353a52b30c25",
+   "bytes": 6766,
+   "source": "canonical DB1 run that measured the runtimes and performed the alignment search (bit-identical scores to Outputs_regen_v2)"
+  },
+  {
+   "path": "Outputs_regen/aligned_runtime.csv",
+   "sha256": "eb1214f3300f4821371a19690c3808cefc082b1a872fad060891f1a74e7882d8",
+   "bytes": 472,
+   "source": "canonical DB1 run that measured the runtimes and performed the alignment search (bit-identical scores to Outputs_regen_v2)"
+  },
+  {
+   "path": "Outputs_sensitivity/summary/ci_perturbed_minus_clean.csv",
+   "sha256": "58aa5d891f125e01e933692fba8dd64055f63586123353426143a1f33c0cd8e4",
+   "bytes": 241077,
+   "source": "fixed-model sensitivity, six enhancement-parameter variants (both images re-processed)"
+  },
+  {
+   "path": "Outputs_sensitivity/summary/point_estimates_by_condition.csv",
+   "sha256": "bbb9cc583a0470122e46ef6736a93591e56ee209a75a7e1ef7e5638cfde612c9",
+   "bytes": 18932,
+   "source": "fixed-model sensitivity, six enhancement-parameter variants (both images re-processed)"
+  },
+  {
+   "path": "Outputs_sensitivity/filter_m2/sensitivity_fold_metrics.csv",
+   "sha256": "91ca70fb9627ec8c5f7003df1704577e4823aa5ec740f22a530d4169df87c391",
+   "bytes": 36329,
+   "source": "fixed-model sensitivity, per condition"
+  },
+  {
+   "path": "Outputs_sensitivity/filter_m4/sensitivity_fold_metrics.csv",
+   "sha256": "dd7d05aee0251c2e9bf029734066632706cb161de81f0a676575e9f57152750a",
+   "bytes": 36300,
+   "source": "fixed-model sensitivity, per condition"
+  },
+  {
+   "path": "Outputs_sensitivity/scale_055/sensitivity_fold_metrics.csv",
+   "sha256": "af25e0675ffe61c0c7edc71888426c22182c0ad39f1b08de80af62ced6c27941",
+   "bytes": 36283,
+   "source": "fixed-model sensitivity, per condition"
+  },
+  {
+   "path": "Outputs_sensitivity/scale_075/sensitivity_fold_metrics.csv",
+   "sha256": "0b48e05ca5e39bcf4fd53d258325532fb111f13e202648796774e62ec270183b",
+   "bytes": 36161,
+   "source": "fixed-model sensitivity, per condition"
+  },
+  {
+   "path": "Outputs_sensitivity/segment_020/sensitivity_fold_metrics.csv",
+   "sha256": "fc40bb4ccfac564758d5d661c0f76b57197e5362350940ee5fcbce2ea16a8c24",
+   "bytes": 36751,
+   "source": "fixed-model sensitivity, per condition"
+  },
+  {
+   "path": "Outputs_sensitivity/segment_040/sensitivity_fold_metrics.csv",
+   "sha256": "d19b27d93937adbea928127b63cea3bb95ad183848aadab54715555a0fb1ff9e",
+   "bytes": 36617,
+   "source": "fixed-model sensitivity, per condition"
+  },
+  {
+   "path": "Outputs_sensitivity/filter_m2/fold_metrics_auc_eer.csv",
+   "sha256": "1b479c8558973f3a4aab9c81eb8ee1a6ec0f357e98e743e0e84269d80ce10f4e",
+   "bytes": 3829,
+   "source": "fixed-model sensitivity, per condition"
+  },
+  {
+   "path": "Outputs_sensitivity/filter_m4/fold_metrics_auc_eer.csv",
+   "sha256": "6388d6c1412176d66954f8e7f546857e308c289fbd539232a3b22aa9f6432696",
+   "bytes": 3848,
+   "source": "fixed-model sensitivity, per condition"
+  },
+  {
+   "path": "Outputs_sensitivity/scale_055/fold_metrics_auc_eer.csv",
+   "sha256": "5ee8076af45d8b2d13de004306cf40ebe4a7937d5157b6744c3be23d032d7e30",
+   "bytes": 3794,
+   "source": "fixed-model sensitivity, per condition"
+  },
+  {
+   "path": "Outputs_sensitivity/scale_075/fold_metrics_auc_eer.csv",
+   "sha256": "fdcdee01b1c7bc1736ba2ae27a956e6d706d47a690d4fdbe654bcdde5b3c2bfb",
+   "bytes": 3835,
+   "source": "fixed-model sensitivity, per condition"
+  },
+  {
+   "path": "Outputs_sensitivity/segment_020/fold_metrics_auc_eer.csv",
+   "sha256": "8c1ecf8de4d8c66501832d57c4b96108b3e27f29b61f4ce2ace800933231c262",
+   "bytes": 3851,
+   "source": "fixed-model sensitivity, per condition"
+  },
+  {
+   "path": "Outputs_sensitivity/segment_040/fold_metrics_auc_eer.csv",
+   "sha256": "f0bc912f1d27789c8e58fe43e71233dbe4e2509ecf009f49f23bc7cd7c2289db",
+   "bytes": 3871,
+   "source": "fixed-model sensitivity, per condition"
+  },
+  {
+   "path": "Outputs_sensitivity/filter_m2/fold_metrics_tar.csv",
+   "sha256": "38c6a2745bd6094bcf01fdac8dd5f4089db88d717b6927ed6e4076e10900c0d9",
+   "bytes": 11042,
+   "source": "fixed-model sensitivity, per condition"
+  },
+  {
+   "path": "Outputs_sensitivity/filter_m4/fold_metrics_tar.csv",
+   "sha256": "4fbe43c324d64f486bf7229483d7bb9f3a06f42f5b8173ce0082b55ee7673b24",
+   "bytes": 11007,
+   "source": "fixed-model sensitivity, per condition"
+  },
+  {
+   "path": "Outputs_sensitivity/scale_055/fold_metrics_tar.csv",
+   "sha256": "d7357831665c19dfa17ec2296f5b8cadf7e882b0e0818b30125a15dbef1e882e",
+   "bytes": 11181,
+   "source": "fixed-model sensitivity, per condition"
+  },
+  {
+   "path": "Outputs_sensitivity/scale_075/fold_metrics_tar.csv",
+   "sha256": "ac1c10c39ae4c3131e0f38ba98740129b111fb86e3ba7929c81628e2f0b762b2",
+   "bytes": 10970,
+   "source": "fixed-model sensitivity, per condition"
+  },
+  {
+   "path": "Outputs_sensitivity/segment_020/fold_metrics_tar.csv",
+   "sha256": "c005681481d147681d79e08958496dc75e456fade039de59a5a3036fe9ad32a8",
+   "bytes": 11056,
+   "source": "fixed-model sensitivity, per condition"
+  },
+  {
+   "path": "Outputs_sensitivity/segment_040/fold_metrics_tar.csv",
+   "sha256": "e09003b6a35e7c221956d7a517b17f36ecfbcbd8f8c5dccb3e663db1ef45f5e7",
+   "bytes": 10996,
+   "source": "fixed-model sensitivity, per condition"
+  },
+  {
+   "path": "Outputs_sensitivity/filter_m2/analysis/ci_metrics.csv",
+   "sha256": "8fb9514bc6416a482d8147f30cb2aae153dff25315b67cae2d9501901723fd21",
+   "bytes": 16353,
+   "source": "fixed-model sensitivity, per-condition bootstrap"
+  },
+  {
+   "path": "Outputs_sensitivity/filter_m2/analysis/ci_paired_differences.csv",
+   "sha256": "7f3587ee53cabd67f37fe5d0f8c62d3872a09d75d36afcf6c96533d3cf7dd97f",
+   "bytes": 12314,
+   "source": "fixed-model sensitivity, per-condition bootstrap"
+  },
+  {
+   "path": "Outputs_sensitivity/filter_m2/analysis/ci_metrics_per_fold.csv",
+   "sha256": "12ba048808b9839375934d48305c6580ab83f15a0e78610814c9c30f63ef645f",
+   "bytes": 59851,
+   "source": "fixed-model sensitivity, per-condition bootstrap"
+  },
+  {
+   "path": "Outputs_sensitivity/filter_m2/analysis/acceptance_counts.csv",
+   "sha256": "c5addc98287c627714807c6ca258bdf4664c527b485ba0a6095f9b2979fe81f7",
+   "bytes": 18143,
+   "source": "fixed-model sensitivity, per-condition bootstrap"
+  },
+  {
+   "path": "Outputs_sensitivity/filter_m2/analysis/endpoint_stability.csv",
+   "sha256": "97ee10ea50c252327eec12267568816cc2c7dd35ab4b3727725ad587b08686d9",
+   "bytes": 21584,
+   "source": "fixed-model sensitivity, per-condition bootstrap"
+  },
+  {
+   "path": "Outputs_sensitivity/filter_m2/analysis/bootstrap_settings.txt",
+   "sha256": "34ab0aed79e10514855312a75b4c8e4d32b36705656718388e46b614270bf8ac",
+   "bytes": 1247,
+   "source": "fixed-model sensitivity, per-condition bootstrap"
+  },
+  {
+   "path": "Outputs_sensitivity/filter_m2/analysis/fusion_eq_fold_metrics.csv",
+   "sha256": "1258485d7b76cb708bd8c5b67eee8f04a4129d4f8aa909fc644135986e4e33b6",
+   "bytes": 1064,
+   "source": "fixed-model sensitivity, per-condition bootstrap"
+  },
+  {
+   "path": "Outputs_sensitivity/filter_m2/analysis/fusion_weights.csv",
+   "sha256": "8c5c1be0369dcb268f1fd4b32be1bcbbbd2280abf040c767d8eefb93d0d948f2",
+   "bytes": 47,
+   "source": "fixed-model sensitivity, per-condition bootstrap"
+  },
+  {
+   "path": "Outputs_sensitivity/filter_m2/analysis/selfcheck_point_estimates.csv",
+   "sha256": "0e6d5ba5ff7c1204a718e8bed52b0a44be0fa100ab75c8c298cba0515de5daa7",
+   "bytes": 25333,
+   "source": "fixed-model sensitivity, per-condition bootstrap"
+  },
+  {
+   "path": "Outputs_sensitivity/filter_m4/analysis/ci_metrics.csv",
+   "sha256": "511afd4a65403e9768d7a5c982320303230e355690411630c4340d6e97728696",
+   "bytes": 16386,
+   "source": "fixed-model sensitivity, per-condition bootstrap"
+  },
+  {
+   "path": "Outputs_sensitivity/filter_m4/analysis/ci_paired_differences.csv",
+   "sha256": "2357392601dc79cdfaadf43df42a11edb0c3e5813f1d568f680e355363ca82c8",
+   "bytes": 12369,
+   "source": "fixed-model sensitivity, per-condition bootstrap"
+  },
+  {
+   "path": "Outputs_sensitivity/filter_m4/analysis/ci_metrics_per_fold.csv",
+   "sha256": "031ab9fc48eb7bbde6fae7ec8e4b4d52f9b1ac9fa4c6021109551e8abffdca1c",
+   "bytes": 59930,
+   "source": "fixed-model sensitivity, per-condition bootstrap"
+  },
+  {
+   "path": "Outputs_sensitivity/filter_m4/analysis/acceptance_counts.csv",
+   "sha256": "9808313279a3d91b2d0ee4e19814d0081ea961aaae822a618581aee18d89b915",
+   "bytes": 18080,
+   "source": "fixed-model sensitivity, per-condition bootstrap"
+  },
+  {
+   "path": "Outputs_sensitivity/filter_m4/analysis/endpoint_stability.csv",
+   "sha256": "852399ec6b338a9efea6ad4dae6b448be3e3c899579ba4c746ae13448d5f5446",
+   "bytes": 21536,
+   "source": "fixed-model sensitivity, per-condition bootstrap"
+  },
+  {
+   "path": "Outputs_sensitivity/filter_m4/analysis/bootstrap_settings.txt",
+   "sha256": "34ab0aed79e10514855312a75b4c8e4d32b36705656718388e46b614270bf8ac",
+   "bytes": 1247,
+   "source": "fixed-model sensitivity, per-condition bootstrap"
+  },
+  {
+   "path": "Outputs_sensitivity/filter_m4/analysis/fusion_eq_fold_metrics.csv",
+   "sha256": "6a8cb31a545affa275f77ea44103bc654840a1c5c738d05c556d5dc2f0fa8004",
+   "bytes": 1055,
+   "source": "fixed-model sensitivity, per-condition bootstrap"
+  },
+  {
+   "path": "Outputs_sensitivity/filter_m4/analysis/fusion_weights.csv",
+   "sha256": "8c5c1be0369dcb268f1fd4b32be1bcbbbd2280abf040c767d8eefb93d0d948f2",
+   "bytes": 47,
+   "source": "fixed-model sensitivity, per-condition bootstrap"
+  },
+  {
+   "path": "Outputs_sensitivity/filter_m4/analysis/selfcheck_point_estimates.csv",
+   "sha256": "a4a4ee1cd321dcde5190d0029f31e39d103bf38a2f3fb8f5011fdc276a301330",
+   "bytes": 25354,
+   "source": "fixed-model sensitivity, per-condition bootstrap"
+  },
+  {
+   "path": "Outputs_sensitivity/scale_055/analysis/ci_metrics.csv",
+   "sha256": "c94fbd89bb2a7359ff57ea7801c88b914ae495f605878227960022ffc1906a3f",
+   "bytes": 16278,
+   "source": "fixed-model sensitivity, per-condition bootstrap"
+  },
+  {
+   "path": "Outputs_sensitivity/scale_055/analysis/ci_paired_differences.csv",
+   "sha256": "7ba75da0fd9718359fbd1f3407f41eaaa88d5c7e4e8ca23135e3039bc4a58ccc",
+   "bytes": 12269,
+   "source": "fixed-model sensitivity, per-condition bootstrap"
+  },
+  {
+   "path": "Outputs_sensitivity/scale_055/analysis/ci_metrics_per_fold.csv",
+   "sha256": "b6bf24dcd07134e9a11077f8efc38b718c5111cb301d52bda2a2f47c354f1636",
+   "bytes": 59441,
+   "source": "fixed-model sensitivity, per-condition bootstrap"
+  },
+  {
+   "path": "Outputs_sensitivity/scale_055/analysis/acceptance_counts.csv",
+   "sha256": "e84d46e2ca91df22a46ec7fae065981e968111aa6351512bbe1f75380df5a83e",
+   "bytes": 18140,
+   "source": "fixed-model sensitivity, per-condition bootstrap"
+  },
+  {
+   "path": "Outputs_sensitivity/scale_055/analysis/endpoint_stability.csv",
+   "sha256": "870e31bcc4ab999274daf6d625c3b0231382ecadc3f426acc9648f46d0379517",
+   "bytes": 21484,
+   "source": "fixed-model sensitivity, per-condition bootstrap"
+  },
+  {
+   "path": "Outputs_sensitivity/scale_055/analysis/bootstrap_settings.txt",
+   "sha256": "34ab0aed79e10514855312a75b4c8e4d32b36705656718388e46b614270bf8ac",
+   "bytes": 1247,
+   "source": "fixed-model sensitivity, per-condition bootstrap"
+  },
+  {
+   "path": "Outputs_sensitivity/scale_055/analysis/fusion_eq_fold_metrics.csv",
+   "sha256": "30a33b315872ba30fe050032733fda486cd2512a4087b5e0585781a24fc3849d",
+   "bytes": 1082,
+   "source": "fixed-model sensitivity, per-condition bootstrap"
+  },
+  {
+   "path": "Outputs_sensitivity/scale_055/analysis/fusion_weights.csv",
+   "sha256": "8c5c1be0369dcb268f1fd4b32be1bcbbbd2280abf040c767d8eefb93d0d948f2",
+   "bytes": 47,
+   "source": "fixed-model sensitivity, per-condition bootstrap"
+  },
+  {
+   "path": "Outputs_sensitivity/scale_055/analysis/selfcheck_point_estimates.csv",
+   "sha256": "433fc419c51ae98505d107cd35d2a9e830844fef7e2648785f125e23819f6714",
+   "bytes": 25255,
+   "source": "fixed-model sensitivity, per-condition bootstrap"
+  },
+  {
+   "path": "Outputs_sensitivity/scale_075/analysis/ci_metrics.csv",
+   "sha256": "7723c849a4276bd535953090d3cd9c9995ae4e8884076b2309d803f824235caf",
+   "bytes": 16276,
+   "source": "fixed-model sensitivity, per-condition bootstrap"
+  },
+  {
+   "path": "Outputs_sensitivity/scale_075/analysis/ci_paired_differences.csv",
+   "sha256": "57647d26f909a2fcbb4a18854c5651e5ea6cd271a7bf03fef7bd1fff5b1f0be0",
+   "bytes": 12429,
+   "source": "fixed-model sensitivity, per-condition bootstrap"
+  },
+  {
+   "path": "Outputs_sensitivity/scale_075/analysis/ci_metrics_per_fold.csv",
+   "sha256": "0075ac2f0cce256c28adb7640809d987a0664842b239363577d48505121eb686",
+   "bytes": 60041,
+   "source": "fixed-model sensitivity, per-condition bootstrap"
+  },
+  {
+   "path": "Outputs_sensitivity/scale_075/analysis/acceptance_counts.csv",
+   "sha256": "3f80444b75dbb7a14ef09505abddc501342f4f2780ae0fe04ce4a8bac290f138",
+   "bytes": 18196,
+   "source": "fixed-model sensitivity, per-condition bootstrap"
+  },
+  {
+   "path": "Outputs_sensitivity/scale_075/analysis/endpoint_stability.csv",
+   "sha256": "b28c1d2702740e41e378df1233a5ccea30b307a43026bb281303ed0b774388ed",
+   "bytes": 21521,
+   "source": "fixed-model sensitivity, per-condition bootstrap"
+  },
+  {
+   "path": "Outputs_sensitivity/scale_075/analysis/bootstrap_settings.txt",
+   "sha256": "34ab0aed79e10514855312a75b4c8e4d32b36705656718388e46b614270bf8ac",
+   "bytes": 1247,
+   "source": "fixed-model sensitivity, per-condition bootstrap"
+  },
+  {
+   "path": "Outputs_sensitivity/scale_075/analysis/fusion_eq_fold_metrics.csv",
+   "sha256": "bcb5b900793ecc8e85899453075ed500f5e4811637a60e7765c463fc25f7ce75",
+   "bytes": 1054,
+   "source": "fixed-model sensitivity, per-condition bootstrap"
+  },
+  {
+   "path": "Outputs_sensitivity/scale_075/analysis/fusion_weights.csv",
+   "sha256": "8c5c1be0369dcb268f1fd4b32be1bcbbbd2280abf040c767d8eefb93d0d948f2",
+   "bytes": 47,
+   "source": "fixed-model sensitivity, per-condition bootstrap"
+  },
+  {
+   "path": "Outputs_sensitivity/scale_075/analysis/selfcheck_point_estimates.csv",
+   "sha256": "4871aa8bfca0f49c18c72acebabcfd940213c614fb5d3171234eeef28e8bfbe8",
+   "bytes": 25453,
+   "source": "fixed-model sensitivity, per-condition bootstrap"
+  },
+  {
+   "path": "Outputs_sensitivity/segment_020/analysis/ci_metrics.csv",
+   "sha256": "fc561d96a8a868bd08b45241040746bdb1990114efa3a8fd10b17b66c2d72de6",
+   "bytes": 16328,
+   "source": "fixed-model sensitivity, per-condition bootstrap"
+  },
+  {
+   "path": "Outputs_sensitivity/segment_020/analysis/ci_paired_differences.csv",
+   "sha256": "bdab7a98fe544462b4e11c1093827ca377f5eb8a98b4cd93d86b887585f82b8b",
+   "bytes": 12398,
+   "source": "fixed-model sensitivity, per-condition bootstrap"
+  },
+  {
+   "path": "Outputs_sensitivity/segment_020/analysis/ci_metrics_per_fold.csv",
+   "sha256": "17e361046cb6caa40740ba3c3982b0213925ae044145fdd7a5a9d75b30cdf54f",
+   "bytes": 60124,
+   "source": "fixed-model sensitivity, per-condition bootstrap"
+  },
+  {
+   "path": "Outputs_sensitivity/segment_020/analysis/acceptance_counts.csv",
+   "sha256": "bc5c8588e1964bbb31b2ce20b905ed37de61db1584145d0bc3e903787ef4b88d",
+   "bytes": 18099,
+   "source": "fixed-model sensitivity, per-condition bootstrap"
+  },
+  {
+   "path": "Outputs_sensitivity/segment_020/analysis/endpoint_stability.csv",
+   "sha256": "e1dfd17f281d8cac0eca71716d1ea9f962bb7f75bc1ae6ece3da493f16b650d1",
+   "bytes": 21597,
+   "source": "fixed-model sensitivity, per-condition bootstrap"
+  },
+  {
+   "path": "Outputs_sensitivity/segment_020/analysis/bootstrap_settings.txt",
+   "sha256": "34ab0aed79e10514855312a75b4c8e4d32b36705656718388e46b614270bf8ac",
+   "bytes": 1247,
+   "source": "fixed-model sensitivity, per-condition bootstrap"
+  },
+  {
+   "path": "Outputs_sensitivity/segment_020/analysis/fusion_eq_fold_metrics.csv",
+   "sha256": "78ac16fed8913c39267a971052e74885bca143488665afdc6b6be4a2c3012180",
+   "bytes": 1064,
+   "source": "fixed-model sensitivity, per-condition bootstrap"
+  },
+  {
+   "path": "Outputs_sensitivity/segment_020/analysis/fusion_weights.csv",
+   "sha256": "8c5c1be0369dcb268f1fd4b32be1bcbbbd2280abf040c767d8eefb93d0d948f2",
+   "bytes": 47,
+   "source": "fixed-model sensitivity, per-condition bootstrap"
+  },
+  {
+   "path": "Outputs_sensitivity/segment_020/analysis/selfcheck_point_estimates.csv",
+   "sha256": "0db52e037e1c700440c776c7670293c784a98472fe7233f6a7cf7a23d94c2dbe",
+   "bytes": 25438,
+   "source": "fixed-model sensitivity, per-condition bootstrap"
+  },
+  {
+   "path": "Outputs_sensitivity/segment_040/analysis/ci_metrics.csv",
+   "sha256": "24787dd8d2a25b35d2a807900c51c059d4bad2e9d5060068162027fb38407bbd",
+   "bytes": 16287,
+   "source": "fixed-model sensitivity, per-condition bootstrap"
+  },
+  {
+   "path": "Outputs_sensitivity/segment_040/analysis/ci_paired_differences.csv",
+   "sha256": "d1741191f1b2cd754fad96e2ad0adee9e08990f7939b4b8c2dcd9444c8e388f4",
+   "bytes": 12376,
+   "source": "fixed-model sensitivity, per-condition bootstrap"
+  },
+  {
+   "path": "Outputs_sensitivity/segment_040/analysis/ci_metrics_per_fold.csv",
+   "sha256": "e6535bab5a333834b79c462df89f874bfbfde2dafebabde0057009c71cf5a6b6",
+   "bytes": 60082,
+   "source": "fixed-model sensitivity, per-condition bootstrap"
+  },
+  {
+   "path": "Outputs_sensitivity/segment_040/analysis/acceptance_counts.csv",
+   "sha256": "0cbefed5f88d90ae15126628fa068f89baf6143433f486c267d0c76cacb84e0e",
+   "bytes": 18123,
+   "source": "fixed-model sensitivity, per-condition bootstrap"
+  },
+  {
+   "path": "Outputs_sensitivity/segment_040/analysis/endpoint_stability.csv",
+   "sha256": "83cc403ab712bdd14ef79dce383731c0597de8f75cfd85d1044ae5dd59512d4b",
+   "bytes": 21439,
+   "source": "fixed-model sensitivity, per-condition bootstrap"
+  },
+  {
+   "path": "Outputs_sensitivity/segment_040/analysis/bootstrap_settings.txt",
+   "sha256": "34ab0aed79e10514855312a75b4c8e4d32b36705656718388e46b614270bf8ac",
+   "bytes": 1247,
+   "source": "fixed-model sensitivity, per-condition bootstrap"
+  },
+  {
+   "path": "Outputs_sensitivity/segment_040/analysis/fusion_eq_fold_metrics.csv",
+   "sha256": "1d890662bef631965e309e02ba9b6d8df82106c19a29b98087737c8b4e4d9a58",
+   "bytes": 1055,
+   "source": "fixed-model sensitivity, per-condition bootstrap"
+  },
+  {
+   "path": "Outputs_sensitivity/segment_040/analysis/fusion_weights.csv",
+   "sha256": "8c5c1be0369dcb268f1fd4b32be1bcbbbd2280abf040c767d8eefb93d0d948f2",
+   "bytes": 47,
+   "source": "fixed-model sensitivity, per-condition bootstrap"
+  },
+  {
+   "path": "Outputs_sensitivity/segment_040/analysis/selfcheck_point_estimates.csv",
+   "sha256": "d287964c355b9d3dffec779a090c2c3f9f25d64b355f42527baa9f21be8d033f",
+   "bytes": 25625,
+   "source": "fixed-model sensitivity, per-condition bootstrap"
+  },
+  {
+   "path": "Outputs_sensitivity_realistic/summary/ci_perturbed_minus_clean.csv",
+   "sha256": "3b8e4c2161804c3d8a98ea759fe03e65fd38ce4b0b4711d283126e53e890a6e0",
+   "bytes": 161980,
+   "source": "fixed-model sensitivity, four calibrated degradations of the probe"
+  },
+  {
+   "path": "Outputs_sensitivity_realistic/summary/point_estimates_by_condition.csv",
+   "sha256": "0455638e0f5c950fd9b6223e7fd27bf33393eab5348e373fecd4f0f7b3a1dcc3",
+   "bytes": 12746,
+   "source": "fixed-model sensitivity, four calibrated degradations of the probe"
+  },
+  {
+   "path": "Outputs_sensitivity_realistic/dry_typ/sensitivity_fold_metrics.csv",
+   "sha256": "12bad9854325ea0f682ac75c28230acf58b7707ebf57bd7b731b94c28e7cb230",
+   "bytes": 35963,
+   "source": "fixed-model sensitivity, per condition"
+  },
+  {
+   "path": "Outputs_sensitivity_realistic/wet_typ/sensitivity_fold_metrics.csv",
+   "sha256": "309c24de22fe5ab8bb4d04befff99fed0570fc8d318f7d1fac45fdc9fc55f33b",
+   "bytes": 35940,
+   "source": "fixed-model sensitivity, per condition"
+  },
+  {
+   "path": "Outputs_sensitivity_realistic/noise_typ/sensitivity_fold_metrics.csv",
+   "sha256": "035e21c987ca4eb6d13195922d73ca4a31e718df4118db074708033343d72953",
+   "bytes": 36343,
+   "source": "fixed-model sensitivity, per condition"
+  },
+  {
+   "path": "Outputs_sensitivity_realistic/blur_typ/sensitivity_fold_metrics.csv",
+   "sha256": "367cde3d5241cf1fa6a23d39b311707ed0044dada642e1a49f4c3abcd6d53c25",
+   "bytes": 36147,
+   "source": "fixed-model sensitivity, per condition"
+  },
+  {
+   "path": "Outputs_sensitivity_realistic/dry_typ/fold_metrics_auc_eer.csv",
+   "sha256": "5890858d9508f23cb9a518bc4eb72a0fa5e31f4252d19ee8a3d99a138906886f",
+   "bytes": 3855,
+   "source": "fixed-model sensitivity, per condition"
+  },
+  {
+   "path": "Outputs_sensitivity_realistic/wet_typ/fold_metrics_auc_eer.csv",
+   "sha256": "30024c1195ef21ebcbd1c58c0b448f9c4baef5efa1ee11cfbd659c719aad89a3",
+   "bytes": 3806,
+   "source": "fixed-model sensitivity, per condition"
+  },
+  {
+   "path": "Outputs_sensitivity_realistic/noise_typ/fold_metrics_auc_eer.csv",
+   "sha256": "71cebc76489c6919106dddcb1e1b3bf62e6f5c1cb25f371d629ec240569351b7",
+   "bytes": 3844,
+   "source": "fixed-model sensitivity, per condition"
+  },
+  {
+   "path": "Outputs_sensitivity_realistic/blur_typ/fold_metrics_auc_eer.csv",
+   "sha256": "47dc5cdc7475679e5f75a003a8a2d82e5c768f83140350791601fb6bd96d40e2",
+   "bytes": 3844,
+   "source": "fixed-model sensitivity, per condition"
+  },
+  {
+   "path": "Outputs_sensitivity_realistic/dry_typ/fold_metrics_tar.csv",
+   "sha256": "7421410a9c89560f9aa472eb0f18f4043eddf0e78370831050bf1c6c50a85268",
+   "bytes": 10966,
+   "source": "fixed-model sensitivity, per condition"
+  },
+  {
+   "path": "Outputs_sensitivity_realistic/wet_typ/fold_metrics_tar.csv",
+   "sha256": "86c6f6284ef815c996ef58ed7d743897e9b945895cb11f554141bff9486b0ef3",
+   "bytes": 10979,
+   "source": "fixed-model sensitivity, per condition"
+  },
+  {
+   "path": "Outputs_sensitivity_realistic/noise_typ/fold_metrics_tar.csv",
+   "sha256": "18244ab97d3e15f800745a0b34f49bd96e85490318cc02c522aa3b5de5c62e3e",
+   "bytes": 11039,
+   "source": "fixed-model sensitivity, per condition"
+  },
+  {
+   "path": "Outputs_sensitivity_realistic/blur_typ/fold_metrics_tar.csv",
+   "sha256": "4da36b1e70772e9a9a3ac115ccec4c390aeef57c64af986b1db2a4f8fbb61e7b",
+   "bytes": 10926,
+   "source": "fixed-model sensitivity, per condition"
+  },
+  {
+   "path": "Outputs_sensitivity_realistic/dry_typ/analysis/ci_metrics.csv",
+   "sha256": "2469b28e501e21e83745a27fb34e137a6bc6010dcdaf2d678cd11e9bd5213bf4",
+   "bytes": 16401,
+   "source": "fixed-model sensitivity, per-condition bootstrap"
+  },
+  {
+   "path": "Outputs_sensitivity_realistic/dry_typ/analysis/ci_paired_differences.csv",
+   "sha256": "e944e214b56d2bde688ac383597e10936d1fc231d7aedd3e6d618a1ce954b4b4",
+   "bytes": 12393,
+   "source": "fixed-model sensitivity, per-condition bootstrap"
+  },
+  {
+   "path": "Outputs_sensitivity_realistic/dry_typ/analysis/ci_metrics_per_fold.csv",
+   "sha256": "a2907b20c210fa3cdc7e8be5e6e43e22ceb8a3ab5506b4e5448401ac9e6fe710",
+   "bytes": 59676,
+   "source": "fixed-model sensitivity, per-condition bootstrap"
+  },
+  {
+   "path": "Outputs_sensitivity_realistic/dry_typ/analysis/acceptance_counts.csv",
+   "sha256": "b14288aada2c7adda29b0300544bcfcb29fe72afc0afcb1a05a52a3d7d412f04",
+   "bytes": 17907,
+   "source": "fixed-model sensitivity, per-condition bootstrap"
+  },
+  {
+   "path": "Outputs_sensitivity_realistic/dry_typ/analysis/endpoint_stability.csv",
+   "sha256": "862e88496cbbbc238e2d00c1ab8869bc0d22a0a71347f433dfec6ccdf4dbf945",
+   "bytes": 21645,
+   "source": "fixed-model sensitivity, per-condition bootstrap"
+  },
+  {
+   "path": "Outputs_sensitivity_realistic/dry_typ/analysis/bootstrap_settings.txt",
+   "sha256": "34ab0aed79e10514855312a75b4c8e4d32b36705656718388e46b614270bf8ac",
+   "bytes": 1247,
+   "source": "fixed-model sensitivity, per-condition bootstrap"
+  },
+  {
+   "path": "Outputs_sensitivity_realistic/dry_typ/analysis/fusion_eq_fold_metrics.csv",
+   "sha256": "bfa0128ac6530f608ddd334a82bbb58853417d1b298fa43a6735c6185127c08b",
+   "bytes": 1095,
+   "source": "fixed-model sensitivity, per-condition bootstrap"
+  },
+  {
+   "path": "Outputs_sensitivity_realistic/dry_typ/analysis/fusion_weights.csv",
+   "sha256": "8c5c1be0369dcb268f1fd4b32be1bcbbbd2280abf040c767d8eefb93d0d948f2",
+   "bytes": 47,
+   "source": "fixed-model sensitivity, per-condition bootstrap"
+  },
+  {
+   "path": "Outputs_sensitivity_realistic/dry_typ/analysis/selfcheck_point_estimates.csv",
+   "sha256": "c16d041bd2a5acf9dcbf76c1b8dd25aa73bf1d6769b94297284dac55c6e7a027",
+   "bytes": 25515,
+   "source": "fixed-model sensitivity, per-condition bootstrap"
+  },
+  {
+   "path": "Outputs_sensitivity_realistic/wet_typ/analysis/ci_metrics.csv",
+   "sha256": "6c17bfc03a2651d5e22c6eb6f8abde4351348ec7f44b0ae689ee0b5f4f086cac",
+   "bytes": 16442,
+   "source": "fixed-model sensitivity, per-condition bootstrap"
+  },
+  {
+   "path": "Outputs_sensitivity_realistic/wet_typ/analysis/ci_paired_differences.csv",
+   "sha256": "be667f234d720189931e3f2d8f60d4eaf737e271833798d172ebd3fd87df3b22",
+   "bytes": 12367,
+   "source": "fixed-model sensitivity, per-condition bootstrap"
+  },
+  {
+   "path": "Outputs_sensitivity_realistic/wet_typ/analysis/ci_metrics_per_fold.csv",
+   "sha256": "99f0373718c74780e34b9dbd71ffa7b5df9fbbe1e3e5ceab022dcebc2de31dba",
+   "bytes": 59705,
+   "source": "fixed-model sensitivity, per-condition bootstrap"
+  },
+  {
+   "path": "Outputs_sensitivity_realistic/wet_typ/analysis/acceptance_counts.csv",
+   "sha256": "482c6060cf5f71749b2f66806315c11c00f99671fc37ed1a8ba753792cc17ed1",
+   "bytes": 17997,
+   "source": "fixed-model sensitivity, per-condition bootstrap"
+  },
+  {
+   "path": "Outputs_sensitivity_realistic/wet_typ/analysis/endpoint_stability.csv",
+   "sha256": "e1afbe30ea351185c2eda9bccd539645cc1878f825021837c798b79d9a8f57f8",
+   "bytes": 21674,
+   "source": "fixed-model sensitivity, per-condition bootstrap"
+  },
+  {
+   "path": "Outputs_sensitivity_realistic/wet_typ/analysis/bootstrap_settings.txt",
+   "sha256": "34ab0aed79e10514855312a75b4c8e4d32b36705656718388e46b614270bf8ac",
+   "bytes": 1247,
+   "source": "fixed-model sensitivity, per-condition bootstrap"
+  },
+  {
+   "path": "Outputs_sensitivity_realistic/wet_typ/analysis/fusion_eq_fold_metrics.csv",
+   "sha256": "93e765388c05e96d0690021309eff6e83adcb69e7a5ad09bd23882360c3d0fcd",
+   "bytes": 1067,
+   "source": "fixed-model sensitivity, per-condition bootstrap"
+  },
+  {
+   "path": "Outputs_sensitivity_realistic/wet_typ/analysis/fusion_weights.csv",
+   "sha256": "8c5c1be0369dcb268f1fd4b32be1bcbbbd2280abf040c767d8eefb93d0d948f2",
+   "bytes": 47,
+   "source": "fixed-model sensitivity, per-condition bootstrap"
+  },
+  {
+   "path": "Outputs_sensitivity_realistic/wet_typ/analysis/selfcheck_point_estimates.csv",
+   "sha256": "f612f641cd578ca5644ade5668c4a09aeef526802b45b4b9b1a85455a8d99bc8",
+   "bytes": 25280,
+   "source": "fixed-model sensitivity, per-condition bootstrap"
+  },
+  {
+   "path": "Outputs_sensitivity_realistic/noise_typ/analysis/ci_metrics.csv",
+   "sha256": "2663ffde9d210063346cef691c053c03f13ed27f47b3afa4106036a9f387b43a",
+   "bytes": 16339,
+   "source": "fixed-model sensitivity, per-condition bootstrap"
+  },
+  {
+   "path": "Outputs_sensitivity_realistic/noise_typ/analysis/ci_paired_differences.csv",
+   "sha256": "597c19d5c78e9ffdf4e653411f33aed5ad47fb2aea4081f3689b1f01687809e9",
+   "bytes": 12311,
+   "source": "fixed-model sensitivity, per-condition bootstrap"
+  },
+  {
+   "path": "Outputs_sensitivity_realistic/noise_typ/analysis/ci_metrics_per_fold.csv",
+   "sha256": "6b40f68f73bf52a44d7a37f9176ae900eff1a654346a72380bda630121880895",
+   "bytes": 59712,
+   "source": "fixed-model sensitivity, per-condition bootstrap"
+  },
+  {
+   "path": "Outputs_sensitivity_realistic/noise_typ/analysis/acceptance_counts.csv",
+   "sha256": "7998393fe0672aee1fe3b8282de0ed962eb584570675cdf702e2c2112885015f",
+   "bytes": 18038,
+   "source": "fixed-model sensitivity, per-condition bootstrap"
+  },
+  {
+   "path": "Outputs_sensitivity_realistic/noise_typ/analysis/endpoint_stability.csv",
+   "sha256": "477f6510258e1cbd983919bace59bbdc86d01da64d1c0534d4e89f2a7284e4a7",
+   "bytes": 21658,
+   "source": "fixed-model sensitivity, per-condition bootstrap"
+  },
+  {
+   "path": "Outputs_sensitivity_realistic/noise_typ/analysis/bootstrap_settings.txt",
+   "sha256": "34ab0aed79e10514855312a75b4c8e4d32b36705656718388e46b614270bf8ac",
+   "bytes": 1247,
+   "source": "fixed-model sensitivity, per-condition bootstrap"
+  },
+  {
+   "path": "Outputs_sensitivity_realistic/noise_typ/analysis/fusion_eq_fold_metrics.csv",
+   "sha256": "c712590ec0998be318f429db074d6da65459d074a94078901c5bec96d07d0d94",
+   "bytes": 1097,
+   "source": "fixed-model sensitivity, per-condition bootstrap"
+  },
+  {
+   "path": "Outputs_sensitivity_realistic/noise_typ/analysis/fusion_weights.csv",
+   "sha256": "8c5c1be0369dcb268f1fd4b32be1bcbbbd2280abf040c767d8eefb93d0d948f2",
+   "bytes": 47,
+   "source": "fixed-model sensitivity, per-condition bootstrap"
+  },
+  {
+   "path": "Outputs_sensitivity_realistic/noise_typ/analysis/selfcheck_point_estimates.csv",
+   "sha256": "11c5acb99795aa66512092705d9b284e918020a424251a89c7acffe733a74b4b",
+   "bytes": 25355,
+   "source": "fixed-model sensitivity, per-condition bootstrap"
+  },
+  {
+   "path": "Outputs_sensitivity_realistic/blur_typ/analysis/ci_metrics.csv",
+   "sha256": "7ae2e2e3f186e61dc56479911441349a36e22780f66e892627decb375442c307",
+   "bytes": 16372,
+   "source": "fixed-model sensitivity, per-condition bootstrap"
+  },
+  {
+   "path": "Outputs_sensitivity_realistic/blur_typ/analysis/ci_paired_differences.csv",
+   "sha256": "a3f685d20f3b73acdd9d3bdbaf0f1dc3515ec0791b88a5881e5df3cdd8b14c86",
+   "bytes": 12414,
+   "source": "fixed-model sensitivity, per-condition bootstrap"
+  },
+  {
+   "path": "Outputs_sensitivity_realistic/blur_typ/analysis/ci_metrics_per_fold.csv",
+   "sha256": "9637bcb0d856387ca678ad815717fed406799e8dc33ed1c1977383dd80bbaa91",
+   "bytes": 59635,
+   "source": "fixed-model sensitivity, per-condition bootstrap"
+  },
+  {
+   "path": "Outputs_sensitivity_realistic/blur_typ/analysis/acceptance_counts.csv",
+   "sha256": "365bda5db6ff975eb58f024978640fe66c8a45175ad348c6365d33c131c1849a",
+   "bytes": 17910,
+   "source": "fixed-model sensitivity, per-condition bootstrap"
+  },
+  {
+   "path": "Outputs_sensitivity_realistic/blur_typ/analysis/endpoint_stability.csv",
+   "sha256": "bd3638e9587a5c714a777f173476f7a13037992115f7bbe2b9a83d899d995e21",
+   "bytes": 21671,
+   "source": "fixed-model sensitivity, per-condition bootstrap"
+  },
+  {
+   "path": "Outputs_sensitivity_realistic/blur_typ/analysis/bootstrap_settings.txt",
+   "sha256": "34ab0aed79e10514855312a75b4c8e4d32b36705656718388e46b614270bf8ac",
+   "bytes": 1247,
+   "source": "fixed-model sensitivity, per-condition bootstrap"
+  },
+  {
+   "path": "Outputs_sensitivity_realistic/blur_typ/analysis/fusion_eq_fold_metrics.csv",
+   "sha256": "642178c01418ce197fee3fe7af2b6e92dfa9d2c9aff03926a7be8911b65c971c",
+   "bytes": 1044,
+   "source": "fixed-model sensitivity, per-condition bootstrap"
+  },
+  {
+   "path": "Outputs_sensitivity_realistic/blur_typ/analysis/fusion_weights.csv",
+   "sha256": "8c5c1be0369dcb268f1fd4b32be1bcbbbd2280abf040c767d8eefb93d0d948f2",
+   "bytes": 47,
+   "source": "fixed-model sensitivity, per-condition bootstrap"
+  },
+  {
+   "path": "Outputs_sensitivity_realistic/blur_typ/analysis/selfcheck_point_estimates.csv",
+   "sha256": "496418d3b1f6ce1da0f94079ecf9107696ea121e0ff035bf06f8eb7c02be0157",
+   "bytes": 25419,
+   "source": "fixed-model sensitivity, per-condition bootstrap"
+  },
+  {
+   "path": "Outputs_cubical/analysis/ci_cubical_minus_triangulated.csv",
+   "sha256": "fad5bd5b316fb9b397f6501ec66accebf11cbc7d4d240931fa9bb29f89be63e3",
+   "bytes": 32728,
+   "source": "cubical construction, DB1"
+  },
+  {
+   "path": "Outputs_cubical/analysis/diagram_comparison.csv",
+   "sha256": "a73a2ee3c62ce0febae28031be0049825e2c864dd3baad310417f0bad9749656",
+   "bytes": 222796,
+   "source": "cubical construction, DB1"
+  },
+  {
+   "path": "Outputs_cubical/analysis/diagram_comparison_summary.txt",
+   "sha256": "6260320ae37c1302a40d3cd7e53a5df0149841c373c2562a6b570f44ecba39bb",
+   "bytes": 1495,
+   "source": "cubical construction, DB1"
+  },
+  {
+   "path": "Outputs_cubical/fold_metrics_auc_eer.csv",
+   "sha256": "381d4e09e846ccb6f034d44aa9778fc02793b77e0475eeaf5397b85cff89e493",
+   "bytes": 4163,
+   "source": "cubical construction, DB1"
+  },
+  {
+   "path": "Outputs_cubical/fold_metrics_tar.csv",
+   "sha256": "f6a6951c9853c7b8d45bd1bab6b443f8784d9ff7896260069eab6efddd76e6d9",
+   "bytes": 11825,
+   "source": "cubical construction, DB1"
+  },
+  {
+   "path": "Outputs_cubical/analysis/ci_metrics.csv",
+   "sha256": "88bafb719a43747dacfd8edaccf5a0302eaa5d9847d719dd67b70a0c3f6565f4",
+   "bytes": 17532,
+   "source": "cubical construction, DB1"
+  },
+  {
+   "path": "Outputs_cubical/analysis/ci_paired_differences.csv",
+   "sha256": "8ff46475ba0135426ed58bb830fa3a18708139d5d808a61b1e53147cc11a5a29",
+   "bytes": 20278,
+   "source": "cubical construction, DB1"
+  },
+  {
+   "path": "Outputs_cubical/analysis/ci_metrics_per_fold.csv",
+   "sha256": "8038488c25c6eefbc11e11bd446ed837eb0d5a602fbff59facc6a5893a2d87e9",
+   "bytes": 64374,
+   "source": "cubical construction, DB1"
+  },
+  {
+   "path": "Outputs_cubical/analysis/acceptance_counts.csv",
+   "sha256": "944b5cc380a98b23d7248e2668b1bf471c78345d20c56cd846615641f6ef3829",
+   "bytes": 19435,
+   "source": "cubical construction, DB1"
+  },
+  {
+   "path": "Outputs_cubical/analysis/endpoint_stability.csv",
+   "sha256": "d499260101dc635707bef0882ef6a95d64fe5b95a51203e84349e3cbe4b6f32f",
+   "bytes": 23152,
+   "source": "cubical construction, DB1"
+  },
+  {
+   "path": "Outputs_cubical/analysis/bootstrap_settings.txt",
+   "sha256": "34ab0aed79e10514855312a75b4c8e4d32b36705656718388e46b614270bf8ac",
+   "bytes": 1247,
+   "source": "cubical construction, DB1"
+  },
+  {
+   "path": "Outputs_cubical/analysis/fusion_eq_fold_metrics.csv",
+   "sha256": "0e7c8b7ec9a1832d296ef2133acaf714f0b178c54d1a55942778894e17995334",
+   "bytes": 1105,
+   "source": "cubical construction, DB1"
+  },
+  {
+   "path": "Outputs_cubical/analysis/fusion_weights.csv",
+   "sha256": "1c6abe2fdf8dc46f181586bad8740eea3834ccee2fbf3fe2f20b5d7a34c200c5",
+   "bytes": 45,
+   "source": "cubical construction, DB1"
+  },
+  {
+   "path": "Outputs_cubical/analysis/selfcheck_point_estimates.csv",
+   "sha256": "fac7c1125787ce7fab53a54518b33614f0dcb1e266fefbec86c12bdfe207ecbc",
+   "bytes": 27261,
+   "source": "cubical construction, DB1"
+  },
+  {
+   "path": "Outputs_cubical_db3/analysis/ci_cubical_minus_triangulated.csv",
+   "sha256": "256ce83fcebdc1d4f1df4e2086cad139662b922585e8ca1dc60f0efab035ebe4",
+   "bytes": 32949,
+   "source": "cubical construction, DB3"
+  },
+  {
+   "path": "Outputs_cubical_db3/analysis/diagram_comparison.csv",
+   "sha256": "7e4f58fffba2029458b890bb09f8ab7344381abd0d5b545603b53c59c46568f7",
+   "bytes": 221210,
+   "source": "cubical construction, DB3"
+  },
+  {
+   "path": "Outputs_cubical_db3/analysis/diagram_comparison_summary.txt",
+   "sha256": "b5ddf40371c639a1d6b14a1698575df9364d04846365e95c2774cbaee9a88758",
+   "bytes": 1495,
+   "source": "cubical construction, DB3"
+  },
+  {
+   "path": "Outputs_cubical_db3/fold_metrics_auc_eer.csv",
+   "sha256": "4a800c4fcbca8f3c7d937e81f0ece5c65cd3819dd91f3c9e9150be31dc92006c",
+   "bytes": 4049,
+   "source": "cubical construction, DB3"
+  },
+  {
+   "path": "Outputs_cubical_db3/fold_metrics_tar.csv",
+   "sha256": "bb5efa8b8263b9e94ae7d7eb840e253c15f830443490d123d6fa75b944f63cf4",
+   "bytes": 11955,
+   "source": "cubical construction, DB3"
+  },
+  {
+   "path": "Outputs_cubical_db3/analysis/ci_metrics.csv",
+   "sha256": "802266dcefa1cecc606bde7e063d98d3d2c40daf76c76e6e4b475e3e2da98b0e",
+   "bytes": 17574,
+   "source": "cubical construction, DB3"
+  },
+  {
+   "path": "Outputs_cubical_db3/analysis/ci_paired_differences.csv",
+   "sha256": "dd212a199909135a0f8cebb292cf0d3a263b3fa8fcffa2d5c81f6566888cf2bd",
+   "bytes": 20321,
+   "source": "cubical construction, DB3"
+  },
+  {
+   "path": "Outputs_cubical_db3/analysis/ci_metrics_per_fold.csv",
+   "sha256": "a09e0f4e0472fe85d0873a7e4857d9f311ed63566416df9c4499ec15e3c057f7",
+   "bytes": 63760,
+   "source": "cubical construction, DB3"
+  },
+  {
+   "path": "Outputs_cubical_db3/analysis/acceptance_counts.csv",
+   "sha256": "cb7a4fc06112db51a1c030cc911896bb9de932540c0f2d9b978f715c7eea6d84",
+   "bytes": 19303,
+   "source": "cubical construction, DB3"
+  },
+  {
+   "path": "Outputs_cubical_db3/analysis/endpoint_stability.csv",
+   "sha256": "3de4608955c8248472f1ccf8004acd4a08d569a68cd33ba686e95d1c7c180c3f",
+   "bytes": 23117,
+   "source": "cubical construction, DB3"
+  },
+  {
+   "path": "Outputs_cubical_db3/analysis/bootstrap_settings.txt",
+   "sha256": "34ab0aed79e10514855312a75b4c8e4d32b36705656718388e46b614270bf8ac",
+   "bytes": 1247,
+   "source": "cubical construction, DB3"
+  },
+  {
+   "path": "Outputs_cubical_db3/analysis/fusion_eq_fold_metrics.csv",
+   "sha256": "82aab698e3b54d30775177a8cb7b313d9c607a8ed63f65c5bc2629918d422cbe",
+   "bytes": 1088,
+   "source": "cubical construction, DB3"
+  },
+  {
+   "path": "Outputs_cubical_db3/analysis/fusion_weights.csv",
+   "sha256": "b4dd8789a8a1ef636014fa61f54396839ccae24b42d5eade4220a8ca8d0a5ef8",
+   "bytes": 46,
+   "source": "cubical construction, DB3"
+  },
+  {
+   "path": "Outputs_cubical_db3/analysis/selfcheck_point_estimates.csv",
+   "sha256": "20c675e2e535aec2c8113482b27adbe098b3ec5a2dbee832364e10312a38c07d",
+   "bytes": 27151,
+   "source": "cubical construction, DB3"
+  },
+  {
+   "path": "Outputs_db3_transfer/analysis/ci_transfer_minus_replication.csv",
+   "sha256": "601889553fb813060615f721243b4b783b439040b6dbb70afd4e9fb84f44ec16",
+   "bytes": 64845,
+   "source": "DB1-fitted models applied to DB3, frozen thresholds"
+  },
+  {
+   "path": "Outputs_db3_transfer/transfer_fold_metrics.csv",
+   "sha256": "09df819f2360fc87869a54ab6d7e235afb81b4f0de13bef2a188e03dee17d4fb",
+   "bytes": 51751,
+   "source": "DB1-fitted models applied to DB3, frozen thresholds"
+  },
+  {
+   "path": "Outputs_db3_transfer/fold_metrics_auc_eer.csv",
+   "sha256": "a8b6ce21f344dffb95bb07aa81d5dea71a0fdbc16527d15a7ff6ea3c14250493",
+   "bytes": 4013,
+   "source": "DB1-fitted models applied to DB3, frozen thresholds"
+  },
+  {
+   "path": "Outputs_db3_transfer/fold_metrics_tar.csv",
+   "sha256": "ccf1accf836aed441edd9a8e9d7722412d6c027d07037a7293b96bd6f8bc7b47",
+   "bytes": 11671,
+   "source": "DB1-fitted models applied to DB3, frozen thresholds"
+  },
+  {
+   "path": "Outputs_db3_transfer/TRANSFER_README.txt",
+   "sha256": "69a4896ea803d6a3d0c6b6f93f08c0192e2d9916a315fe774ccb8071a14be892",
+   "bytes": 920,
+   "source": "DB1-fitted models applied to DB3, frozen thresholds"
+  },
+  {
+   "path": "Outputs_db3_transfer/analysis/ci_metrics.csv",
+   "sha256": "8db848f5dac725fe12f18f801cbffd4c5135740d39712e40959d81b96931a3ef",
+   "bytes": 17298,
+   "source": "DB1-fitted models applied to DB3, frozen thresholds"
+  },
+  {
+   "path": "Outputs_db3_transfer/analysis/ci_paired_differences.csv",
+   "sha256": "f1b70c195ee785b7dd1778b605d6e9945d6b90c7b54f5c7b56aaac31238c32f9",
+   "bytes": 20112,
+   "source": "DB1-fitted models applied to DB3, frozen thresholds"
+  },
+  {
+   "path": "Outputs_db3_transfer/analysis/ci_metrics_per_fold.csv",
+   "sha256": "c60a2f908dd2dd7aba09cc452ad8b951d9efc8a15877125dd973ae828a810dfa",
+   "bytes": 65140,
+   "source": "DB1-fitted models applied to DB3, frozen thresholds"
+  },
+  {
+   "path": "Outputs_db3_transfer/analysis/acceptance_counts.csv",
+   "sha256": "df260d08eb54d9c7abb144713085f4feed48abae4b02f959c875b15ae6384405",
+   "bytes": 20029,
+   "source": "DB1-fitted models applied to DB3, frozen thresholds"
+  },
+  {
+   "path": "Outputs_db3_transfer/analysis/endpoint_stability.csv",
+   "sha256": "462d410c307d05b29bab1520fffdd8db41afd02dbe94efc50f5c8115b6fb48d8",
+   "bytes": 22809,
+   "source": "DB1-fitted models applied to DB3, frozen thresholds"
+  },
+  {
+   "path": "Outputs_db3_transfer/analysis/bootstrap_settings.txt",
+   "sha256": "34ab0aed79e10514855312a75b4c8e4d32b36705656718388e46b614270bf8ac",
+   "bytes": 1247,
+   "source": "DB1-fitted models applied to DB3, frozen thresholds"
+  },
+  {
+   "path": "Outputs_db3_transfer/analysis/fusion_eq_fold_metrics.csv",
+   "sha256": "18558cb45b7ed3bf14ae93566b0bf5bec83f1cbf2b305d0e0ea34b2a03db7c94",
+   "bytes": 1048,
+   "source": "DB1-fitted models applied to DB3, frozen thresholds"
+  },
+  {
+   "path": "Outputs_db3_transfer/analysis/fusion_weights.csv",
+   "sha256": "8c5c1be0369dcb268f1fd4b32be1bcbbbd2280abf040c767d8eefb93d0d948f2",
+   "bytes": 47,
+   "source": "DB1-fitted models applied to DB3, frozen thresholds"
+  },
+  {
+   "path": "Outputs_db3_transfer/analysis/selfcheck_point_estimates.csv",
+   "sha256": "391041c9eef3023b715228b316d98848c3446455dfdaf073f8b6b7a79baf5967",
+   "bytes": 26479,
+   "source": "DB1-fitted models applied to DB3, frozen thresholds"
+  },
+  {
+   "path": "Outputs_db3_transfer_recal/fold_metrics_auc_eer.csv",
+   "sha256": "a8b6ce21f344dffb95bb07aa81d5dea71a0fdbc16527d15a7ff6ea3c14250493",
+   "bytes": 4013,
+   "source": "DB1-fitted models applied to DB3, thresholds re-estimated on DB3 training impostors"
+  },
+  {
+   "path": "Outputs_db3_transfer_recal/fold_metrics_tar.csv",
+   "sha256": "97cc723d9196c5292130f292b8a88534db7ff488fc099db81e8c01f9906ca351",
+   "bytes": 11876,
+   "source": "DB1-fitted models applied to DB3, thresholds re-estimated on DB3 training impostors"
+  },
+  {
+   "path": "Outputs_db3_transfer_recal/analysis/ci_metrics.csv",
+   "sha256": "da6db186e23d7465629528dfea72fb6cd9623236f559b36f8726f24a538f8641",
+   "bytes": 17542,
+   "source": "DB1-fitted models applied to DB3, thresholds re-estimated on DB3 training impostors"
+  },
+  {
+   "path": "Outputs_db3_transfer_recal/analysis/ci_paired_differences.csv",
+   "sha256": "21f751ed1e98c99c4a95d7f53a9c253124ef62c3aeeeb76184bad085efe5608c",
+   "bytes": 20308,
+   "source": "DB1-fitted models applied to DB3, thresholds re-estimated on DB3 training impostors"
+  },
+  {
+   "path": "Outputs_db3_transfer_recal/analysis/ci_metrics_per_fold.csv",
+   "sha256": "e60d0f2389b64fa2acffb8ea2334dda30bd1d747acb813f03ef6a97bb3cd46c0",
+   "bytes": 61878,
+   "source": "DB1-fitted models applied to DB3, thresholds re-estimated on DB3 training impostors"
+  },
+  {
+   "path": "Outputs_db3_transfer_recal/analysis/acceptance_counts.csv",
+   "sha256": "86a7b38dd152108fe8af3e62ebf6253e549f66ba4191a3de3e343dbaad2aff8c",
+   "bytes": 19134,
+   "source": "DB1-fitted models applied to DB3, thresholds re-estimated on DB3 training impostors"
+  },
+  {
+   "path": "Outputs_db3_transfer_recal/analysis/endpoint_stability.csv",
+   "sha256": "64b4120cf7179944fb86cf1ce6547336c2626905029ed3e0fd0f0cc04da56912",
+   "bytes": 23078,
+   "source": "DB1-fitted models applied to DB3, thresholds re-estimated on DB3 training impostors"
+  },
+  {
+   "path": "Outputs_db3_transfer_recal/analysis/bootstrap_settings.txt",
+   "sha256": "34ab0aed79e10514855312a75b4c8e4d32b36705656718388e46b614270bf8ac",
+   "bytes": 1247,
+   "source": "DB1-fitted models applied to DB3, thresholds re-estimated on DB3 training impostors"
+  },
+  {
+   "path": "Outputs_db3_transfer_recal/analysis/fusion_eq_fold_metrics.csv",
+   "sha256": "faca8a98166f62d40b3ff6de6eb06925516d61fe540292134a149bdb39ed717a",
+   "bytes": 1061,
+   "source": "DB1-fitted models applied to DB3, thresholds re-estimated on DB3 training impostors"
+  },
+  {
+   "path": "Outputs_db3_transfer_recal/analysis/fusion_weights.csv",
+   "sha256": "8c5c1be0369dcb268f1fd4b32be1bcbbbd2280abf040c767d8eefb93d0d948f2",
+   "bytes": 47,
+   "source": "DB1-fitted models applied to DB3, thresholds re-estimated on DB3 training impostors"
+  },
+  {
+   "path": "Outputs_db3_transfer_recal/analysis/selfcheck_point_estimates.csv",
+   "sha256": "df62f028b63495c0fbcad8f3f4d852a2d2be367644c4a3f4abcff55471e0979a",
+   "bytes": 26997,
+   "source": "DB1-fitted models applied to DB3, thresholds re-estimated on DB3 training impostors"
+  },
+  {
+   "path": "Data/FVC2000_raw_degraded/calibration.json",
+   "sha256": "87efe8061aeb505499e824180d176e965570e4a638bf874e6056bfc730253c2e",
+   "bytes": 48580,
+   "source": "calibration of the degradation strengths (descriptor statistics; no pixels)"
+  },
+  {
+   "path": "Data/FVC2000_raw_degraded/calibration_benchmark.json",
+   "sha256": "5469827b75a91578bd8a2c399fc5ef46041cc29ebe7fec05d65db62379420db9",
+   "bytes": 4297,
+   "source": "calibration of the degradation strengths (descriptor statistics; no pixels)"
+  },
+  {
+   "path": "Data/FVC2000_raw_degraded/calibration_scan.json",
+   "sha256": "d58579f5b8b033cc3064807669b14e2a9fc867eccf8fdd47807bf78eaecea9f9",
+   "bytes": 39028,
+   "source": "calibration of the degradation strengths (descriptor statistics; no pixels)"
+  },
+  {
+   "path": "Data/FVC2000_raw_degraded/calibration_distribution.json",
+   "sha256": "4cdc6e23a920c404dfcd866379825ef0746c23d55915f0bb6311e1b54ddb0019",
+   "bytes": 3547,
+   "source": "calibration of the degradation strengths (descriptor statistics; no pixels)"
+  },
+  {
+   "path": "Data/FVC2000_raw_degraded/calibration_nfiq.json",
+   "sha256": "9fec80a48ad8694f26be56b298de1ff0433fa5a66366fa3afd4c90271b508780",
+   "bytes": 760,
+   "source": "calibration of the degradation strengths (descriptor statistics; no pixels)"
+  },
+  {
+   "path": "Data/FVC2000_raw_degraded/calibration_verify.json",
+   "sha256": "7460e53809597b3bb97e9ce0cc2f63baadfee44d5018c22b00e0496be886b6d4",
+   "bytes": 1880,
+   "source": "calibration of the degradation strengths (descriptor statistics; no pixels)"
+  },
+  {
+   "path": "Data/FVC2000_raw_degraded/calibration_stats_clean.csv",
+   "sha256": "eb27ce459ab308f4686a518737c7dae847d4d9a3dfd5ec0152b2c1b31ec58dd0",
+   "bytes": 60109,
+   "source": "calibration of the degradation strengths (descriptor statistics; no pixels)"
+  },
+  {
+   "path": "Data/FVC2000_raw_degraded/dry_typ/degrade_manifest.json",
+   "sha256": "2f40a95d567c350ecf9e78759e2b7b67d21cc2fde7d9d064db17c45b1e462ae1",
+   "bytes": 238639,
+   "source": "degradation manifests (per-image hashes, seeds and scalar summaries; required by make_tables.py)"
+  },
+  {
+   "path": "Data/FVC2000_raw_degraded/wet_typ/degrade_manifest.json",
+   "sha256": "7bf31ef8b5c3d58e428b3f1293fbb3b81263f7aff4f8721b033e68028c2dbf89",
+   "bytes": 238432,
+   "source": "degradation manifests (per-image hashes, seeds and scalar summaries; required by make_tables.py)"
+  },
+  {
+   "path": "Data/FVC2000_raw_degraded/noise_typ/degrade_manifest.json",
+   "sha256": "2ff20e473e5d486f23efd31ba2705a27060effc35460a6014828894a1addaed9",
+   "bytes": 238245,
+   "source": "degradation manifests (per-image hashes, seeds and scalar summaries; required by make_tables.py)"
+  },
+  {
+   "path": "Data/FVC2000_raw_degraded/blur_typ/degrade_manifest.json",
+   "sha256": "08bc4436754ad1407b0f2d4dda17757080c90899e2c28b6823ca3627f5704983",
+   "bytes": 238641,
+   "source": "degradation manifests (per-image hashes, seeds and scalar summaries; required by make_tables.py)"
+  },
+  {
+   "path": "Data/FVC2000_binary_degraded/dry_typ/preprocess_manifest.json",
+   "sha256": "58398ad5c7a9b99e6b7f37e5eb973ef2e1d4c8550d6d9f70ffe509b6256df8dc",
+   "bytes": 330820,
+   "source": "preprocessing manifests of the sensitivity conditions"
+  },
+  {
+   "path": "Data/FVC2000_binary_degraded/wet_typ/preprocess_manifest.json",
+   "sha256": "9f92413872afe17c13f6f532246915bc09f26b0e3a422c575c75f482c5105732",
+   "bytes": 331405,
+   "source": "preprocessing manifests of the sensitivity conditions"
+  },
+  {
+   "path": "Data/FVC2000_binary_degraded/noise_typ/preprocess_manifest.json",
+   "sha256": "24ff9f0c4a00a8af6699fe74e4682a9fd16285d678ede90d36c2bd819e511af0",
+   "bytes": 331062,
+   "source": "preprocessing manifests of the sensitivity conditions"
+  },
+  {
+   "path": "Data/FVC2000_binary_degraded/blur_typ/preprocess_manifest.json",
+   "sha256": "ad7cfa16a678035b9c99a0e9c3896de08ee551fe0fc3099d7b109ec010878b18",
+   "bytes": 331002,
+   "source": "preprocessing manifests of the sensitivity conditions"
+  },
+  {
+   "path": "Data/FVC2000_binary_variant/filter_m2/preprocess_manifest.json",
+   "sha256": "b59eb927d6f1f28169c11e0e26386df343c603b6d26a94082522c4e4e7f31373",
+   "bytes": 331326,
+   "source": "preprocessing manifests of the sensitivity conditions"
+  },
+  {
+   "path": "Data/FVC2000_binary_variant/filter_m4/preprocess_manifest.json",
+   "sha256": "e789a30abdbb53fefe2317698559e0e56c825e068286d83ff51dffb793a25f4f",
+   "bytes": 331238,
+   "source": "preprocessing manifests of the sensitivity conditions"
+  },
+  {
+   "path": "Data/FVC2000_binary_variant/scale_055/preprocess_manifest.json",
+   "sha256": "bba97565be01fdec259e7a9561152dc77df9852d983212fb266ebff2b0d67ac2",
+   "bytes": 331229,
+   "source": "preprocessing manifests of the sensitivity conditions"
+  },
+  {
+   "path": "Data/FVC2000_binary_variant/scale_075/preprocess_manifest.json",
+   "sha256": "ce520a4931864683f6d35f5c072325e30336aee798a0d6d86ce51f282c173ccc",
+   "bytes": 331363,
+   "source": "preprocessing manifests of the sensitivity conditions"
+  },
+  {
+   "path": "Data/FVC2000_binary_variant/segment_020/preprocess_manifest.json",
+   "sha256": "15b5ebc4ef8bbd2e3f7679af2c581f0ef1ff89d6d38049eb06e5213e8622bd24",
+   "bytes": 331413,
+   "source": "preprocessing manifests of the sensitivity conditions"
+  },
+  {
+   "path": "Data/FVC2000_binary_variant/segment_040/preprocess_manifest.json",
+   "sha256": "2bff07d79efa81c22da437994112bc3d14701bf5194530ab0e0fc5b046368cb1",
+   "bytes": 331261,
+   "source": "preprocessing manifests of the sensitivity conditions"
+  },
+  {
+   "path": "Data/FVC2000_binary_regen/preprocess_manifest.json",
+   "sha256": "b6272bb7379929ea3477c0d7e6240b3b8ed32ed7232f3b9612f99cf8aaa96490",
+   "bytes": 330870,
+   "source": "preprocessing manifests of the canonical binaries (enhancer version, per-image hashes): the check for a reproduced preprocessing"
+  },
+  {
+   "path": "Data/FVC2002_DB3_binary/preprocess_manifest.json",
+   "sha256": "900e21504471fe61d8875f3bf41173c561a38c6c2f71816128b88e7b3ad64adb",
+   "bytes": 330416,
+   "source": "preprocessing manifests of the canonical binaries (enhancer version, per-image hashes): the check for a reproduced preprocessing"
+  },
+  {
+   "path": "Outputs_figures/fig_roc_pooled_auc.csv",
+   "sha256": "663f401ffbcbae0be9a5724ea81fe99ef2f81af68d37d20235425e0e525cf67d",
+   "bytes": 428,
+   "source": "pooled AUCs of the ROC figure legend"
+  }
+ ]
+}
