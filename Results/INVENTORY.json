@@ -1,5 +1,5 @@
 {
- "created": "2026-11-02T06:42:47-0500",
+ "created": "2026-11-12T06:57:17-0500",
  "scope": "final",
  "n_files": 270,
  "policy": "(release step 5, 1 Nov 2026): nothing derived from the licensed images at the pixel or pair level is\nshipped \u2014 no image, binary map, degraded image, feature bank, fold cache, pair-score file, bootstrap replicate\nfile or NBIS template/score file. Only files of the kinds below, each of which carries estimates, counts, settings,\nhashes or per-image scalar descriptors. The inventory records each file's sha256, size and source run, and\n`check` fails on any missing, altered or unlisted file and on any forbidden file kind anywhere under the target.",
@@ -1620,8 +1620,8 @@
   },
   {
    "path": "Outputs_figures/fig_roc_pooled_auc.csv",
-   "sha256": "663f401ffbcbae0be9a5724ea81fe99ef2f81af68d37d20235425e0e525cf67d",
-   "bytes": 428,
+   "sha256": "ffb3eee3d8214bed6de4aa203c1af473cc2f05fe0519bce2c3de95c6b6abfda3",
+   "bytes": 483,
    "source": "pooled AUCs of the ROC figure legend"
   }
  ]

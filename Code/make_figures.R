@@ -346,8 +346,9 @@ show_image(bin_ds,
 check_pixel_coordinates(bin_ds)        # numerical check: overlay coordinates == image() cell centres (patch 1b)
 axy <- pixel_xy(anchors[, 1], anchors[, 2], bin_ds)
 ax <- axy$x; ay <- axy$y
-points(ax, ay, pch = 21, bg = "#D55E00", col = "white",
-       cex = 0.9, lwd = 0.6)
+# Anchors lie on ridge pixels, which are drawn white: a black outline and a larger marker keep them visible.
+points(ax, ay, pch = 21, bg = "#E69F00", col = "black",
+       cex = 1.5, lwd = 0.9)
 # Highlight the three selected anchors with large white-filled circles
 # (dark blue border, dark blue bold letter) for high-contrast labels
 points(ax[sel_idx], ay[sel_idx],
@@ -499,15 +500,15 @@ if (!file.exists(scores_file)) {
 
 cat("Generating Figure 4: two-panel ROC...\n")
 
-roc_methods <- c("DT_L2_150", "DT_L2_150_aligned", "GlobalBetti_L1", "GlobalPI_L2",
+roc_methods <- c("DT_L2_150", "DT_L2_150_clamped", "DT_L2_150_aligned", "GlobalBetti_L1", "GlobalPI_L2",
                  "V23_full", "OT", "Fusion_eq", "NBIS_gray")
-roc_col <- c("DT_L2_150" = "#E69F00", "DT_L2_150_aligned" = "#E69F00",
+roc_col <- c("DT_L2_150" = "#E69F00", "DT_L2_150_clamped" = "#E69F00", "DT_L2_150_aligned" = "#E69F00",
              "GlobalBetti_L1" = "#56B4E9", "GlobalPI_L2" = "#009E73",
              "V23_full" = "#CC79A7", "OT" = "#0072B2", "Fusion_eq" = "#000000",
              "NBIS_gray" = "#D55E00")
-roc_lty <- c("DT_L2_150" = 1, "DT_L2_150_aligned" = 2, "GlobalBetti_L1" = 1, "GlobalPI_L2" = 1,
+roc_lty <- c("DT_L2_150" = 1, "DT_L2_150_clamped" = 4, "DT_L2_150_aligned" = 2, "GlobalBetti_L1" = 1, "GlobalPI_L2" = 1,
              "V23_full" = 1, "OT" = 1, "Fusion_eq" = 1, "NBIS_gray" = 1)
-roc_lwd <- c("DT_L2_150" = 1.3, "DT_L2_150_aligned" = 1.3, "GlobalBetti_L1" = 1.3, "GlobalPI_L2" = 1.3,
+roc_lwd <- c("DT_L2_150" = 1.3, "DT_L2_150_clamped" = 1.3, "DT_L2_150_aligned" = 1.3, "GlobalBetti_L1" = 1.3, "GlobalPI_L2" = 1.3,
              "V23_full" = 1.3, "OT" = 1.3, "Fusion_eq" = 1.9, "NBIS_gray" = 1.3)
 # Legend labels as plotmath expressions; the pooled AUCs of both databases are
 # filled in as "DB1 | DB3" so that one legend serves both panels.
@@ -515,6 +516,7 @@ roc_label <- function(m, auc1, auc3) {
   a <- sprintf("%.3f | %.3f", auc1, auc3)
   switch(m,
     "DT_L2_150"         = bquote(DT~L^2~(.(a))),
+    "DT_L2_150_clamped" = bquote(DT~L^2*", clamped"~(.(a))),
     "DT_L2_150_aligned" = bquote(DT~L^2*", aligned"~(.(a))),
     "GlobalBetti_L1"    = bquote(Betti~L^1~(.(a))),
     "GlobalPI_L2"       = bquote(PI~L^2~(.(a))),
